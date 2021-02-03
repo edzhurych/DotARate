@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/profile"
+    app:startDestination="@id/profileFragment">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.ez.dotarate.view.fragments.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_gameDetailFragment"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="com.ez.dotarate.view.fragments.GameDetailFragment"
+        android:label="GameDetailFragment" >
+        <action
+            android:id="@+id/action_gameDetailFragment_to_profileSearchFragment"
+            app:destination="@id/profileSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSearchFragment"
+        android:name="com.ez.dotarate.view.fragments.ProfileSearchFragment"
+        android:label="ProfileSearchFragment" />
+</navigation>

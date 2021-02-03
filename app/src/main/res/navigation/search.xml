@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/mph"
+    app:startDestination="@id/searchFragment">
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.ez.dotarate.view.fragments.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_searchFragment_to_searchUsersFragment"
+            app:destination="@id/searchUsersFragment" />
+        <action
+            android:id="@+id/action_searchFragment_to_profileSearchFragment2"
+            app:destination="@id/profileSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchUsersFragment"
+        android:name="com.ez.dotarate.view.fragments.SearchUsersFragment"
+        android:label="SearchUsersFragment" >
+        <action
+            android:id="@+id/action_searchUsersFragment_to_profileSearchFragment2"
+            app:destination="@id/profileSearchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileSearchFragment"
+        android:name="com.ez.dotarate.view.fragments.ProfileSearchFragment"
+        android:label="ProfileSearchFragment" >
+        <action
+            android:id="@+id/action_profileSearchFragment2_to_gameDetailFragment2"
+            app:destination="@id/gameDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailFragment"
+        android:name="com.ez.dotarate.view.fragments.GameDetailFragment"
+        android:label="GameDetailFragment" >
+        <action
+            android:id="@+id/action_gameDetailFragment2_to_profileSearchFragment2"
+            app:destination="@id/profileSearchFragment" />
+    </fragment>
+</navigation>

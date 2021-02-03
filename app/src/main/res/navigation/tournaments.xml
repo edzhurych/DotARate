@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first"
+    app:startDestination="@id/upcomingGamesFragment">
+    <fragment
+        android:id="@+id/upcomingGamesFragment"
+        android:name="com.ez.dotarate.view.fragments.UpcomingGamesFragment"
+        android:label="UpcomingGamesFragment">
+        <action
+            android:id="@+id/action_upcomingGamesFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.ez.dotarate.view.fragments.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team">
+        <argument
+            android:name="teamId"
+            app:argType="integer" />
+    </fragment>
+</navigation>

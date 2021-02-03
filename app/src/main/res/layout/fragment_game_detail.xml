@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.ez.dotarate.viewModel.GameDetailViewModel" />
+
+        <variable
+            name="gameDetail"
+            type="com.ez.dotarate.model.GameDetail" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bnv_height"
+        android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}">
+
+        <!--ToolBar-->
+        <TextView
+            android:id="@+id/tvRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineToolbar"
+            app:layout_constraintEnd_toStartOf="@+id/tvWinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:region="@{gameDetail.region}"
+            tools:text="Europe West" />
+
+        <TextView
+            android:id="@+id/tvWinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:winner="@{gameDetail.radiant_win}"
+            tools:text="Radiant Victory" />
+
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:textColor="@color/colorDarkGreen"
+            android:textStyle="bold"
+            app:duration="@{gameDetail.duration}"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineToolbar"
+            app:layout_constraintEnd_toEndOf="@+id/tvWinner"
+            app:layout_constraintStart_toStartOf="@+id/tvWinner"
+            app:layout_constraintTop_toBottomOf="@+id/tvWinner"
+            tools:text="38:16" />
+
+        <TextView
+            android:id="@+id/tvMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineToolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvWinner"
+            app:mode="@{gameDetail.game_mode}"
+            tools:text="All Pick" />
+
+        <!--GameStats-->
+        <com.ez.dotarate.customClasses.VScroll
+            android:id="@+id/vsvGameDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineToolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}">
+
+                <!--Radiant-->
+                <com.ez.dotarate.customClasses.HScroll
+                    android:id="@+id/hsvGameDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scrollbars="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        tools:ignore="RtlSymmetry, ContentDescription">
+
+                        <include
+                            android:id="@+id/radiantTitles"
+                            layout="@layout/player_title_item" />
+
+                        <com.ez.dotarate.customClasses.MyRecyclerView
+                            android:id="@+id/rvRadiantGameFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/gameScreenRecyclerViewHeight"
+                            android:layout_marginTop="0.5dp"
+                            android:layout_marginBottom="24dp" />
+
+                        <include
+                            android:id="@+id/direTitles"
+                            layout="@layout/player_title_item" />
+
+                        <com.ez.dotarate.customClasses.MyRecyclerView
+                            android:id="@+id/rvDireGameFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/gameScreenRecyclerViewHeight"/>
+                    </LinearLayout>
+
+                </com.ez.dotarate.customClasses.HScroll>
+
+                <TextView
+                    android:id="@+id/tvRadiant"
+                    style="@style/Side"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/radiant"
+                    android:textColor="@color/colorRadiant"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <!--Radiant score-->
+                <TextView
+                    android:id="@+id/tvRadiantScore"
+                    style="@style/Score"
+                    android:layout_marginStart="9dp"
+                    android:text="@string/score"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRadiant" />
+
+                <TextView
+                    android:id="@+id/tvRadiantScoreValue"
+                    style="@style/ScoreValue"
+                    android:text="@{String.valueOf(gameDetail.radiant_score)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvRadiantScore"
+                    app:layout_constraintStart_toEndOf="@+id/tvRadiantScore"
+                    app:layout_constraintTop_toTopOf="@+id/tvRadiantScore"
+                    tools:text="34" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivFirstPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="2.5dp"
+                    android:src="@{gameDetail.players[0].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRadiantScore"
+                    tools:src="@drawable/mirana" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivSecondPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[1].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFirstPlayerHero"
+                    tools:src="@drawable/meepo" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivThirdPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[2].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSecondPlayerHero"
+                    tools:src="@drawable/ogre" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivFourthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[3].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivThirdPlayerHero"
+                    tools:src="@drawable/grimstroke" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivFifthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[4].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFourthPlayerHero"
+                    tools:src="@drawable/wraith_king" />
+
+                <!--Dire-->
+                <TextView
+                    android:id="@+id/tvDire"
+                    style="@style/Side"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="34.6dp"
+                    android:text="@string/dire"
+                    android:textColor="@color/colorDire"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivFifthPlayerHero" />
+
+                <!--Dire score-->
+                <TextView
+                    android:id="@+id/tvDireScore"
+                    style="@style/Score"
+                    android:layout_marginStart="9dp"
+                    android:text="@string/score"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDire" />
+
+                <TextView
+                    android:id="@+id/tvDireScoreValue"
+                    style="@style/ScoreValue"
+                    android:text="@{String.valueOf(gameDetail.dire_score)}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDireScore"
+                    app:layout_constraintStart_toEndOf="@+id/tvDireScore"
+                    app:layout_constraintTop_toTopOf="@+id/tvDireScore"
+                    tools:text="17" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivSixthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="2.5dp"
+                    android:src="@{gameDetail.players[5].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDireScore"
+                    tools:src="@drawable/crystal_maiden" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivSeventhPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[6].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSixthPlayerHero"
+                    tools:src="@drawable/axe" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivEighthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[7].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSeventhPlayerHero"
+                    tools:src="@drawable/rubick" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivNinthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[8].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivEighthPlayerHero"
+                    tools:src="@drawable/bloodseeker" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivTenthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[9].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivNinthPlayerHero"
+                    tools:src="@drawable/io" />
+
+                <View
+                    android:id="@+id/vGameDetailFirst"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivFirstPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailSecond"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivSecondPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailThird"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivThirdPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailFourth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivFourthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailFifth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivFifthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailSixth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivSixthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailSeventh"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivSeventhPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailEighth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivEighthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailNinth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivNinthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailTenth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivTenthPlayerHero" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineRightHeroImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="88dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.ez.dotarate.customClasses.VScroll>
+
+        <ProgressBar
+            android:id="@+id/pbGame"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{vm.isLoaded() ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/toolbar_height" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

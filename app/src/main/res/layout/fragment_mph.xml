@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="adapter"
+            type="com.ez.dotarate.adapters.HeroesAdapter" />
+
+        <variable
+            name="vm"
+            type="com.ez.dotarate.viewModel.MphViewModel" />
+
+        <variable
+            name="isNeedPositionToStart"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="isDataReceivedMph"
+            type="androidx.databinding.ObservableBoolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.ez.dotarate.model.layouts.MphTablesLayout
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvMphHero"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="0.64"
+                android:text="@string/mph_screen_hero"
+                android:textColor="@color/colorDarkGreen"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvMphPlayedGames"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:text="@string/mph_screen_played_games"
+                android:textColor="@color/colorDarkGreen"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvMphWinRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="18dp"
+                android:layout_weight="0.2"
+                android:text="@string/mph_screen_win_rate"
+                android:textColor="@color/colorDarkGreen"
+                android:textSize="16sp" />
+        </com.ez.dotarate.model.layouts.MphTablesLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMphFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="28dp"
+            android:adapter="@{adapter}"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="@dimen/bnv_height"
+            android:visibility="@{isDataReceivedMph ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:scrollToStart="@{isNeedPositionToStart}" />
+
+        <TextView
+            android:id="@+id/tvMphEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mph_screen_empty"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="24sp"
+            android:visibility="@{vm.isHeroesEmpty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isDataReceivedMph ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

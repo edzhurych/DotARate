@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="loginListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tvLoginAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="220dp"
+            android:fontFamily="bold"
+            android:text="@string/app_name"
+            android:textColor="@color/colorGreen"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLoginWelcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:text="@string/greeting"
+            android:textColor="@color/colorGreen"
+            android:textSize="22sp"
+            app:layout_constraintBottom_toTopOf="@id/tvLoginSign"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+        <TextView
+            android:id="@+id/tvLoginSign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="32dp"
+            android:text="@string/enter_steam"
+            android:textColor="@color/colorGreen"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@id/enter"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+        <Button
+            android:id="@+id/enter"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/login_background_rectangle"
+            android:onClick="@{loginListener}"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

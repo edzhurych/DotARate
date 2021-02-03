@@ -1,0 +1,663 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.ez.dotarate.viewModel.GameDetailViewModel" />
+
+        <variable
+            name="gameDetail"
+            type="com.ez.dotarate.model.GameDetail" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/bnv_height"
+        tools:ignore="RtlSymmetry">
+
+        <!--ToolBar-->
+        <!--Region-->
+        <TextView
+            android:id="@+id/tvRegion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="16sp"
+            android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineToolbar"
+            app:layout_constraintEnd_toStartOf="@+id/tvWinner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:region="@{gameDetail.region}"
+            tools:text="Europe West" />
+
+        <!--Winner-->
+        <TextView
+            android:id="@+id/tvWinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:winner="@{gameDetail.radiant_win}"
+            tools:text="Radiant Victory" />
+
+        <!--Duration-->
+        <TextView
+            android:id="@+id/tvDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:textColor="@color/colorDarkGreen"
+            android:textStyle="bold"
+            android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}"
+            app:duration="@{gameDetail.duration}"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineToolbar"
+            app:layout_constraintEnd_toEndOf="@+id/tvWinner"
+            app:layout_constraintStart_toStartOf="@+id/tvWinner"
+            app:layout_constraintTop_toBottomOf="@+id/tvWinner"
+            tools:text="38:16" />
+
+        <!--Mode-->
+        <TextView
+            android:id="@+id/tvMode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="16sp"
+            android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/guidelineToolbar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvWinner"
+            app:mode="@{gameDetail.game_mode}"
+            tools:text="All Pick" />
+
+        <!--Radiant score-->
+        <TextView
+            android:id="@+id/tvRadiantScoreValue"
+            style="@style/ScoreValue"
+            android:paddingEnd="12dp"
+            android:text="@{String.valueOf(gameDetail.radiant_score)}"
+            android:textColor="@color/colorRadiant"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@id/tvDuration"
+            app:layout_constraintEnd_toStartOf="@id/tvDuration"
+            app:layout_constraintTop_toTopOf="@id/tvDuration"
+            tools:text="34" />
+
+        <!--Dire score-->
+        <TextView
+            android:id="@+id/tvDireScoreValue"
+            style="@style/ScoreValue"
+            android:paddingStart="12dp"
+            android:text="@{String.valueOf(gameDetail.dire_score)}"
+            android:textColor="@color/colorDire"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}"
+            app:layout_constraintBottom_toBottomOf="@+id/tvDuration"
+            app:layout_constraintStart_toEndOf="@+id/tvDuration"
+            app:layout_constraintTop_toTopOf="@+id/tvDuration"
+            tools:text="17" />
+
+        <com.ez.dotarate.customClasses.VScroll
+            android:id="@+id/vsvGameDetail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/guidelineToolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}">
+
+                <com.ez.dotarate.customClasses.HScroll
+                    android:id="@+id/hsvGameDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scrollbars="none"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        tools:ignore="RtlSymmetry, ContentDescription">
+
+                        <!--Radiant tabs-->
+                        <TextView
+                            android:id="@+id/tvRadiantTitles"
+                            style="@style/Score.CategoryKDA"
+                            android:layout_marginTop="3dp"
+                            android:paddingStart="236dp"
+                            android:text="@string/k"
+                            android:textColor="@color/colorText"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantDeaths"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="37dp"
+                            android:text="@string/d"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantTitles"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantTitles"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantTitles" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantAssists"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="38dp"
+                            android:text="@string/a"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantDeaths"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantDeaths"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantDeaths" />
+
+                        <ImageView
+                            android:id="@+id/ivRadiantNetWorth"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="32dp"
+                            android:src="@drawable/gold_coin"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantAssists"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantAssists"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantAssists" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantNetWorth"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="5dp"
+                            android:text="@string/new_worth"
+                            android:textColor="@color/colorGold"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivRadiantNetWorth"
+                            app:layout_constraintStart_toEndOf="@+id/ivRadiantNetWorth"
+                            app:layout_constraintTop_toTopOf="@+id/ivRadiantNetWorth" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantItems"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="44dp"
+                            android:text="@string/items"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantNetWorth"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantNetWorth"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantNetWorth" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantBackpack"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="296dp"
+                            android:text="@string/backpack"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantItems"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantItems"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantItems" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantGameDetailBuffs"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="116dp"
+                            android:paddingEnd="82dp"
+                            android:text="@string/buffs"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantBackpack"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantBackpack"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantBackpack" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantLH"
+                            style="@style/Score.CategoryKDA"
+                            android:text="@string/last_hits_and_denied"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantGameDetailBuffs"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantGameDetailBuffs"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantGameDetailBuffs" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantGpm"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="32dp"
+                            android:text="@string/gpm"
+                            android:textColor="@color/colorGold"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantLH"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantLH"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantLH" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantXpm"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="30dp"
+                            android:text="@string/xpm"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantGpm"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantGpm"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantGpm" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantHeal"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="42dp"
+                            android:text="@string/heals_heroes"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantXpm"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantXpm"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantXpm" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantHero"
+                            style="@style/Score.CategoryKDA"
+                            android:layout_marginStart="52dp"
+                            android:text="@string/hero"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantHeal"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantHeal"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantHeal" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantBuilding"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="32dp"
+                            android:text="@string/building"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantHero"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantHero"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantHero" />
+
+                        <TextView
+                            android:id="@+id/tvRadiantSupport"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="70dp"
+                            android:text="@string/support_contribution"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantBuilding"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantBuilding"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantBuilding" />
+
+                        <ImageView
+                            android:id="@+id/ivRadiantGameDetailSuppGold"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="65dp"
+                            android:src="@drawable/gold_coin"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantSupport"
+                            app:layout_constraintStart_toEndOf="@+id/tvRadiantSupport"
+                            app:layout_constraintTop_toTopOf="@+id/tvRadiantSupport" />
+
+                        <com.ez.dotarate.customClasses.MyRecyclerView
+                            android:id="@+id/rvRadiantGameFragment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/gameScreenRecyclerViewHeight"
+                            android:layout_marginTop="2.2dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvRadiantTitles" />
+
+                        <!--Dire tabs-->
+                        <TextView
+                            android:id="@+id/tvDireKills"
+                            style="@style/Score.CategoryKDA"
+                            android:layout_marginTop="14.5dp"
+                            android:paddingStart="236dp"
+                            android:text="@string/k"
+                            android:textColor="@color/colorText"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rvRadiantGameFragment" />
+
+                        <TextView
+                            android:id="@+id/tvDireDeaths"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="37dp"
+                            android:text="@string/d"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireKills"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireKills"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireKills" />
+
+                        <TextView
+                            android:id="@+id/tvDireAssists"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="38dp"
+                            android:text="@string/a"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireDeaths"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireDeaths"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireDeaths" />
+
+                        <ImageView
+                            android:id="@+id/ivDireNetWorth"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="32dp"
+                            android:src="@drawable/gold_coin"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireAssists"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireAssists"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireAssists" />
+
+                        <TextView
+                            android:id="@+id/tvDireNetWorth"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="5dp"
+                            android:text="@string/new_worth"
+                            android:textColor="@color/colorGold"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivDireNetWorth"
+                            app:layout_constraintStart_toEndOf="@+id/ivDireNetWorth"
+                            app:layout_constraintTop_toTopOf="@+id/ivDireNetWorth" />
+
+                        <TextView
+                            android:id="@+id/tvDireItems"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="44dp"
+                            android:text="@string/items"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireNetWorth"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireNetWorth"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireNetWorth" />
+
+                        <TextView
+                            android:id="@+id/tvDireBackpack"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="296dp"
+                            android:text="@string/backpack"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireItems"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireItems"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireItems" />
+
+                        <TextView
+                            android:id="@+id/tvDireGameDetailBuffs"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="116dp"
+                            android:paddingEnd="82dp"
+                            android:text="@string/buffs"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireBackpack"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireBackpack"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireBackpack" />
+
+                        <TextView
+                            android:id="@+id/tvDireLH"
+                            style="@style/Score.CategoryKDA"
+                            android:text="@string/last_hits_and_denied"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireGameDetailBuffs"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireGameDetailBuffs"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireGameDetailBuffs" />
+
+                        <TextView
+                            android:id="@+id/tvDireGpm"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="32dp"
+                            android:text="@string/gpm"
+                            android:textColor="@color/colorGold"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireLH"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireLH"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireLH" />
+
+                        <TextView
+                            android:id="@+id/tvDireXpm"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="30dp"
+                            android:text="@string/xpm"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireGpm"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireGpm"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireGpm" />
+
+                        <TextView
+                            android:id="@+id/tvDireHeal"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="42dp"
+                            android:text="@string/heals_heroes"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireXpm"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireXpm"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireXpm" />
+
+                        <TextView
+                            android:id="@+id/tvDireHero"
+                            style="@style/Score.CategoryKDA"
+                            android:layout_marginStart="52dp"
+                            android:text="@string/hero"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireHeal"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireHeal"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireHeal" />
+
+                        <TextView
+                            android:id="@+id/tvDireBuilding"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="32dp"
+                            android:text="@string/building"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireHero"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireHero"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireHero" />
+
+                        <TextView
+                            android:id="@+id/tvDireSupport"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="70dp"
+                            android:text="@string/support_contribution"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireBuilding"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireBuilding"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireBuilding" />
+
+                        <ImageView
+                            android:id="@+id/ivDireGameDetailSuppGold"
+                            style="@style/Score.CategoryKDA"
+                            android:paddingStart="65dp"
+                            android:src="@drawable/gold_coin"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvDireSupport"
+                            app:layout_constraintStart_toEndOf="@+id/tvDireSupport"
+                            app:layout_constraintTop_toTopOf="@+id/tvDireSupport" />
+
+                        <com.ez.dotarate.customClasses.MyRecyclerView
+                            android:id="@+id/rvDireGameFragment"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/gameScreenRecyclerViewHeight"
+                            android:layout_marginTop="2.2dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvDireKills" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </com.ez.dotarate.customClasses.HScroll>
+
+                <!--Radiant-->
+                <TextView
+                    android:id="@+id/tvRadiant"
+                    style="@style/Side"
+                    android:layout_marginStart="7dp"
+                    android:text="@string/radiant"
+                    android:textColor="@color/colorRadiant"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivFirstPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[0].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvRadiant"
+                    tools:src="@drawable/mirana" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivSecondPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[1].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFirstPlayerHero"
+                    tools:src="@drawable/meepo" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivThirdPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[2].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSecondPlayerHero"
+                    tools:src="@drawable/ogre" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivFourthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[3].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivThirdPlayerHero"
+                    tools:src="@drawable/grimstroke" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivFifthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[4].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivFourthPlayerHero"
+                    tools:src="@drawable/wraith_king" />
+
+                <!--Dire-->
+                <TextView
+                    android:id="@+id/tvDire"
+                    style="@style/Side"
+                    android:layout_marginStart="7dp"
+                    android:layout_marginTop="14.6dp"
+                    android:text="@string/dire"
+                    android:textColor="@color/colorDire"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ivFifthPlayerHero" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivSixthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[5].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDire"
+                    tools:src="@drawable/crystal_maiden" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivSeventhPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[6].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSixthPlayerHero"
+                    tools:src="@drawable/axe" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivEighthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[7].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivSeventhPlayerHero"
+                    tools:src="@drawable/rubick" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivNinthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[8].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivEighthPlayerHero"
+                    tools:src="@drawable/bloodseeker" />
+
+                <com.ez.dotarate.model.HeroImageView
+                    android:id="@+id/ivTenthPlayerHero"
+                    style="@style/PlayerHeroImage"
+                    android:layout_marginStart="7dp"
+                    android:src="@{gameDetail.players[9].hero_id}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ivNinthPlayerHero"
+                    tools:src="@drawable/io" />
+
+                <View
+                    android:id="@+id/vGameDetailFirst"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivFirstPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailSecond"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivSecondPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailThird"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivThirdPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailFourth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivFourthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailFifth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivFifthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailSixth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivSixthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailSeventh"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivSeventhPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailEighth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivEighthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailNinth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivNinthPlayerHero" />
+
+                <View
+                    android:id="@+id/vGameDetailTenth"
+                    style="@style/VerticalDivider"
+                    app:layout_constraintStart_toStartOf="@id/guidelineRightHeroImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivTenthPlayerHero" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineRightHeroImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="88dp" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.ez.dotarate.customClasses.VScroll>
+
+        <ProgressBar
+            android:id="@+id/pbGame"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="@{vm.isLoaded() ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="@dimen/toolbar_height" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

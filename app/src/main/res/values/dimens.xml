@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <dimen name="bnv_height" tools:override="true">48dp</dimen>
+    <dimen name="toolbar_height">48dp</dimen>
+    <dimen name="action_button_padding">6dp</dimen>
+
+    <!--Profile screen-->
+    <dimen name="profileScreenImageSize">90dp</dimen>
+
+    <!--Games Item-->
+    <dimen name="radiusCorner">4dp</dimen>
+    <dimen name="elevation">2dp</dimen>
+
+    <!--Game Screen-->
+    <dimen name="gameScreenRecyclerViewHeight">264dp</dimen>
+    <dimen name="gameScreenPlayersWidth">81dp</dimen>
+    <dimen name="gameScreenSideHeight">24dp</dimen>
+    <dimen name="gameScreenSideTextSize">20sp</dimen>
+    <dimen name="gameScreenHeroImageWidth">81dp</dimen>
+    <dimen name="gameScreenHeroImageHeight">52dp</dimen>
+    <dimen name="gameScreenThirdBuffPaddingSize">128dp</dimen>
+    <dimen name="gameScreenFourthBuffPaddingSize">174dp</dimen>
+    <dimen name="gameScreenFourthSuppItemPaddingSize">124dp</dimen>
+    <dimen name="gameScreenFifthSuppItemPaddingSize">184dp</dimen>
+    <dimen name="playerStatsScreenHeight">52dp</dimen>
+    <dimen name="playerStatsScreenRadiusCorner">0dp</dimen>
+    <dimen name="playerStatsScreenElevation">1.5dp</dimen>
+
+    <!--Search Screen-->
+    <dimen name="searchScreenelevation">1dp</dimen>
+
+</resources>

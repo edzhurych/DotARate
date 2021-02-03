@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ez.dotarate.constants.NumbersConstantsKt" />
+
+        <variable
+            name="upcomingGame"
+            type="com.ez.dotarate.model.UpcomingGame" />
+    </data>
+
+    <com.ez.dotarate.model.layouts.ConstraintLayoutWithBackground
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
+
+        <TextView
+            android:id="@+id/tvUpcomingGamesItemLeagueName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:maxLines="1"
+            android:text="@{upcomingGame.league.name}"
+            android:textColor="@color/colorTabsUnSelectedGreen"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUpcomingGamesItemLeague"
+            app:layout_constraintEnd_toStartOf="@+id/ivUpcomingGamesItemLeague"
+            app:layout_constraintStart_toEndOf="@+id/tvUpcomingGamesItemDate"
+            app:layout_constraintTop_toTopOf="@+id/ivUpcomingGamesItemLeague"
+            tools:text="DreamLeague" />
+
+        <TextView
+            android:id="@+id/tvUpcomingGamesItemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="0dp"
+            android:textColor="@color/colorTabsUnSelectedGreen"
+            android:textSize="18sp"
+            app:gameDate="@{upcomingGame.begin_at}"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUpcomingGamesItemLeague"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivUpcomingGamesItemLeague"
+            tools:text="22.01.20" />
+
+        <ImageView
+            android:id="@+id/ivUpcomingGamesItemLeague"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leagueLogo="@{upcomingGame.league.image_url}"
+            tools:src="@drawable/ic_dream_league" />
+
+        <ImageView
+            android:id="@+id/ivUpcomingGamesItemFirstTeam"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivUpcomingGamesItemSecondTeam"
+            app:teamLogo="@{upcomingGame.opponents}"
+            app:teamNumber="@{0}"
+            tools:src="@drawable/ic_second_team" />
+
+        <TextView
+            android:id="@+id/tvUpcomingGamesItemFirstTeamName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:maxLines="1"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUpcomingGamesItemFirstTeam"
+            app:layout_constraintEnd_toStartOf="@+id/tvUpcomingGamesItemTime"
+            app:layout_constraintStart_toEndOf="@+id/ivUpcomingGamesItemFirstTeam"
+            app:layout_constraintTop_toTopOf="@+id/ivUpcomingGamesItemFirstTeam"
+            app:teamName="@{upcomingGame.opponents}"
+            app:teamNumber="@{0}"
+            tools:text="Nigma" />
+
+        <TextView
+            android:id="@+id/tvUpcomingGamesItemTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:textColor="@color/colorGreen"
+            app:gameTime="@{upcomingGame.begin_at}"
+            app:layout_constraintBottom_toTopOf="@+id/tvUpcomingGamesItemNumberOfGames"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivUpcomingGamesItemFirstTeam"
+            tools:text="15:00" />
+
+        <TextView
+            android:id="@+id/tvUpcomingGamesItemNumberOfGames"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTabsUnSelectedGreen"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUpcomingGamesItemFirstTeam"
+            app:layout_constraintEnd_toEndOf="@+id/tvUpcomingGamesItemTime"
+            app:layout_constraintStart_toStartOf="@+id/tvUpcomingGamesItemTime"
+            app:layout_constraintTop_toBottomOf="@+id/tvUpcomingGamesItemTime"
+            app:numberOfGames="@{upcomingGame.number_of_games}"
+            tools:text="Bo3" />
+
+        <TextView
+            android:id="@+id/tvUpcomingGamesItemSecondTeamName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="end"
+            android:maxLines="1"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivUpcomingGamesItemSecondTeam"
+            app:layout_constraintEnd_toStartOf="@+id/ivUpcomingGamesItemSecondTeam"
+            app:layout_constraintStart_toEndOf="@+id/tvUpcomingGamesItemTime"
+            app:layout_constraintTop_toTopOf="@+id/ivUpcomingGamesItemSecondTeam"
+            app:teamName="@{upcomingGame.opponents}"
+            app:teamNumber="@{1}"
+            tools:text="BC" />
+
+        <ImageView
+            android:id="@+id/ivUpcomingGamesItemSecondTeam"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivUpcomingGamesItemLeague"
+            app:teamLogo="@{upcomingGame.opponents}"
+            app:teamNumber="@{1}"
+            tools:src="@drawable/ic_first_team" />
+
+    </com.ez.dotarate.model.layouts.ConstraintLayoutWithBackground>
+</layout>

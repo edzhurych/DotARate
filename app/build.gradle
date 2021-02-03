@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
+apply from: '../dependencies.gradle'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        applicationId "com.ez.dotarate"
+        minSdkVersion 23
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resConfigs "en", "ru"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // For Kotlin projects
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation kotlinDependencies
+    implementation coreAndroidDependencies
+    implementation diDependencies
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt diPlugins
+    implementation networkDependencies
+    implementation coroutinesDependencies
+    implementation coroutinesDependencies
+    implementation databaseDependencies
+    kapt databasePlugins
+    implementation pagingDependencies
+    implementation navigationDependencies
+    implementation viewPagerDependencies
+    implementation circleImageDependencies
+    implementation picassoDependencies
+    implementation lifecycleDependencies
+    kapt lifecyclePlugins
+    kapt databindingPlugins
+    implementation juntDependenciesOnly
+    implementation tatarkaDependencies
+}

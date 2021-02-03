@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.ez.dotarate.database.User" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layout_scrollFlags="scroll"
+        tools:ignore="RtlSymmetry">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:layout_width="@dimen/profileScreenImageSize"
+            android:layout_height="@dimen/profileScreenImageSize"
+            android:layout_marginTop="16dp"
+            app:civ_border_color="@color/colorGreen"
+            app:civ_border_width="2dp"
+            app:errorImage="@{@drawable/ic_empty_avatar}"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toTopOf="parent"
+            app:url="@{user.avatarUrl}"
+            tools:src="@drawable/ic_empty_avatar" />
+
+        <TextView
+            android:id="@+id/wins"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/profile_screen_wins"
+            android:textColor="@color/colorDarkGreen"
+            app:layout_constraintStart_toEndOf="@+id/avatar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.2"
+            tools:text="Wins" />
+
+        <TextView
+            android:id="@+id/winsCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(user.wins)}"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/wins"
+            app:layout_constraintStart_toStartOf="@+id/wins"
+            app:layout_constraintTop_toBottomOf="@+id/wins"
+            tools:text="3877" />
+
+        <TextView
+            android:id="@+id/losses"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/profile_screen_losses"
+            android:textColor="@color/colorDarkGreen"
+            app:layout_constraintEnd_toStartOf="@+id/winRate"
+            app:layout_constraintStart_toEndOf="@+id/wins"
+            app:layout_constraintTop_toTopOf="@+id/wins"
+            app:layout_constraintWidth_percent="0.2"
+            tools:text="Losses" />
+
+        <TextView
+            android:id="@+id/lossesCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(user.losses)}"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/losses"
+            app:layout_constraintStart_toStartOf="@+id/losses"
+            app:layout_constraintTop_toBottomOf="@+id/losses"
+            tools:text="3764" />
+
+        <TextView
+            android:id="@+id/winRate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/profile_screen_winrate"
+            android:textColor="@color/colorDarkGreen"
+            app:layout_constraintEnd_toStartOf="@+id/ivRank"
+            app:layout_constraintTop_toTopOf="@+id/wins"
+            app:layout_constraintWidth_percent="0.2"
+            tools:text="Winrate" />
+
+        <TextView
+            android:id="@+id/winRateCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorGreen"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/winRate"
+            app:layout_constraintStart_toStartOf="@+id/winRate"
+            app:layout_constraintTop_toBottomOf="@+id/winRate"
+            app:winRate="@{user}"
+            tools:text="52.74%" />
+
+        <ImageView
+            android:id="@+id/ivRank"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="@+id/avatar"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
+            app:layout_constraintTop_toTopOf="@+id/avatar"
+            app:rankTier="@{user.rankId}"
+            tools:src="@drawable/divine_3" />
+
+        <TextView
+            android:id="@+id/tvLeaderBoardRank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivRank"
+            app:layout_constraintEnd_toEndOf="@id/ivRank"
+            app:layout_constraintStart_toStartOf="@id/ivRank"
+            app:leaderboardRank="@{user.leaderboard_rank}"
+            tools:text="232" />
+
+        <ImageView
+            android:id="@+id/ivLive"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_live"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@id/guidelineStart"
+            app:layout_constraintTop_toBottomOf="@id/avatar" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/profile_screen_game"
+            android:textAllCaps="true"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="20sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/ivLive"
+            app:layout_constraintStart_toEndOf="@+id/ivLive"
+            app:layout_constraintTop_toTopOf="@+id/ivLive" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineStart"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.04" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.96" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

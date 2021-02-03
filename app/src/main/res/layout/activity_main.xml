@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        tools:context="com.ez.dotarate.view.activities.MainActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/fpToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/toolbar_height"
+            android:background="@color/white_tran"
+            android:minHeight="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            app:titleTextAppearance="@style/ToolbarTitle"
+            app:titleTextColor="@color/colorGreen" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/shadow_top"
+            app:layout_constraintTop_toBottomOf="@id/fpToolbar" />
+
+        <!---Nav Host Fragment-->
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/main_container"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_above="@id/bottom_navigation" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@drawable/shadow_bot"
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bnv_height"
+            android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom"
+            android:background="@color/white_tran"
+            app:itemBackground="@null"
+            app:itemIconSize="30dp"
+            app:itemIconTint="@drawable/bottom_navigation_icon_colors"
+            app:itemTextColor="@drawable/bottom_navigation_text_colors"
+            app:labelVisibilityMode="unlabeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navigation_menu" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

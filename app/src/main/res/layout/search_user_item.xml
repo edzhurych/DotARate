@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="com.ez.dotarate.database.SearchUser" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ivAvatarSearchUserItem"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:errorImage="@{@drawable/ic_empty_avatar}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:url="@{user.avatarfull}"
+            tools:src="@drawable/abbadon" />
+
+        <TextView
+            android:id="@+id/tvPlayerNameSearchUserItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:text="@{user.personaname}"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@id/tvLastTimeSearchUserItem"
+            app:layout_constraintStart_toEndOf="@id/ivAvatarSearchUserItem"
+            app:layout_constraintTop_toTopOf="@id/ivAvatarSearchUserItem"
+            tools:text="Trash" />
+
+        <TextView
+            android:id="@+id/tvLastTimeSearchUserItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="6dp"
+            app:lastGameTime="@{user.last_match_time}"
+            app:layout_constraintBottom_toBottomOf="@id/ivAvatarSearchUserItem"
+            app:layout_constraintStart_toEndOf="@id/ivAvatarSearchUserItem"
+            app:layout_constraintTop_toBottomOf="@id/tvPlayerNameSearchUserItem"
+            tools:text="Last game a day ago" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

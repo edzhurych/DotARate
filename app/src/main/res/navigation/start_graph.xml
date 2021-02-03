@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.ez.dotarate.view.fragments.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_steamFragment"
+            app:destination="@id/steamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/steamFragment"
+        android:name="com.ez.dotarate.view.fragments.SteamFragment"
+        android:label="SteamFragment" >
+        <action
+            android:id="@+id/action_steamFragment_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.ez.dotarate.view.activities.MainActivity"
+        android:label="activity_main"
+        tools:layout="@layout/activity_main" />
+</navigation>

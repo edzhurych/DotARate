@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="com.ez.dotarate.adapters.TopPlayersAdapter" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/ablProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <ImageView
+                    android:id="@+id/ivSearch"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_search_selected"
+                    app:layout_constraintBottom_toTopOf="@+id/guidelineToolbarFragmentSearch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/toolbar_height"
+                    android:gravity="center_vertical"
+                    android:paddingStart="12dp"
+                    android:text="@string/search_screen_title"
+                    android:textColor="?android:textColorHint"
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toTopOf="@+id/guidelineToolbarFragmentSearch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintStart_toEndOf="@id/ivSearch"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guidelineToolbarFragmentSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="@dimen/toolbar_height" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/tvProPlayers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/search_tab_background"
+                android:paddingStart="8dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="4dp"
+                android:text="@string/search_screen_top_players"
+                android:textColor="@color/colorDarkGreen"
+                android:textSize="16sp"
+                app:layout_scrollFlags="enterAlways"
+                tools:text="Top players" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFragmentSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bnv_height"
+            android:adapter="@{adapter}"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

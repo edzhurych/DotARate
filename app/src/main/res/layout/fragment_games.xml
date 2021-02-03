@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="adapter"
+            type="com.ez.dotarate.adapters.GamesAdapter" />
+
+        <variable
+            name="vm"
+            type="com.ez.dotarate.viewModel.GamesViewModel" />
+
+        <variable
+            name="isNeedPositionToStart"
+            type="androidx.databinding.ObservableBoolean" />
+
+        <variable
+            name="isDataReceived"
+            type="androidx.databinding.ObservableBoolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvGamesFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adapter="@{adapter}"
+            android:paddingStart="16dp"
+            android:paddingTop="2dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="@dimen/bnv_height"
+            android:visibility="@{isDataReceived ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:scrollToStart="@{isNeedPositionToStart}" />
+
+        <TextView
+            android:id="@+id/empty_search_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/games_screen_empty"
+            android:textColor="@color/colorDarkGreen"
+            android:textSize="24sp"
+            android:visibility="@{vm.isGamesEmpty ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{isDataReceived ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

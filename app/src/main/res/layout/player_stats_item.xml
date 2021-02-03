@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ez.dotarate.constants.NumbersConstantsKt" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="player"
+            type="com.ez.dotarate.model.Player" />
+
+        <variable
+            name="suppGold"
+            type="Integer" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/playerStatsScreenHeight"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        tools:ignore="ContentDescription,RtlSymmetry">
+
+        <!--Player-->
+        <com.ez.dotarate.model.layouts.PlayerItemLayout
+            android:id="@+id/player_group"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvPlayerName"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:maxLines="1"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:textColor="@color/colorText"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@id/first_player_rank_image_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:playerName="@{player.personaname}"
+                tools:text="Петяджойстик3000  " />
+
+            <TextView
+                android:id="@+id/first_player_lvl_text_view"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/lvl_circle"
+                android:gravity="center"
+                android:text="@{String.valueOf(player.level)}"
+                android:textColor="@color/colorText"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPlayerName"
+                tools:text="23" />
+
+            <TextView
+                android:id="@+id/first_player_hero_text_view"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:paddingStart="4dp"
+                android:paddingEnd="8dp"
+                android:textAllCaps="true"
+                android:textColor="@color/colorTextDark"
+                app:from="@{NumbersConstantsKt.GAME_FRAGMENT_DETAIL_ID}"
+                app:heroName="@{player.hero_id}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/first_player_rank_image_view"
+                app:layout_constraintStart_toEndOf="@id/first_player_lvl_text_view"
+                app:layout_constraintTop_toBottomOf="@+id/tvPlayerName"
+                tools:text="MIRANA" />
+
+            <ImageView
+                android:id="@+id/first_player_rank_image_view"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:rankTier="@{player.rank_tier}"
+                tools:src="@drawable/divine_3" />
+        </com.ez.dotarate.model.layouts.PlayerItemLayout>
+
+        <!--KDA/ITEMS-->
+        <com.ez.dotarate.model.layouts.PlayerStatsItemLayout
+            android:id="@+id/first_linear_layout_field"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/player_group"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/player_kills_text_view"
+                style="@style/PlayerCDA"
+                android:text="@{String.valueOf(player.kills)}"
+                android:textColor="@color/colorText"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="8" />
+
+            <TextView
+                android:id="@+id/player_deaths_text_view"
+                style="@style/PlayerCDA"
+                android:text="@{String.valueOf(player.deaths)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/player_kills_text_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="10" />
+
+            <TextView
+                android:id="@+id/player_assists_text_view"
+                style="@style/PlayerCDA"
+                android:text="@{String.valueOf(player.assists)}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/player_deaths_text_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="21" />
+
+            <TextView
+                android:id="@+id/player_net_worth_text_view"
+                android:layout_width="90dp"
+                android:layout_height="0dp"
+                android:gravity="center_vertical|end"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/colorGold"
+                android:textSize="18sp"
+                app:largeNumbers="@{player.total_gold}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/player_assists_text_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="14 771" />
+
+            <ImageView
+                android:id="@+id/first_slot_image_view"
+                style="@style/Item"
+                android:layout_marginStart="16dp"
+                app:itemIcon="@{player.item_0}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/player_net_worth_text_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/solar_crest" />
+
+            <ImageView
+                android:id="@+id/second_slot_image_view"
+                style="@style/Item"
+                app:itemIcon="@{player.item_1}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/first_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/bottle" />
+
+            <ImageView
+                android:id="@+id/third_slot_image_view"
+                style="@style/Item"
+                app:itemIcon="@{player.item_2}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/second_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/euls_scepter_of_divinity" />
+
+            <ImageView
+                android:id="@+id/four_slot_image_view"
+                style="@style/Item"
+                app:itemIcon="@{player.item_3}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/third_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/phase_boots" />
+
+            <ImageView
+                android:id="@+id/five_slot_image_view"
+                style="@style/Item"
+                app:itemIcon="@{player.item_4}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/four_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/magic_stick" />
+
+            <ImageView
+                android:id="@+id/six_slot_image_view"
+                style="@style/Item"
+                app:itemIcon="@{player.item_5}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/five_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/backpack_first_slot_image_view"
+                style="@style/Item"
+                android:layout_marginStart="32dp"
+                app:itemIcon="@{player.backpack_0}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/six_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/backpack_second_slot_image_view"
+                style="@style/Item"
+                app:itemIcon="@{player.backpack_1}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/backpack_first_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/backpack_third_slot_image_view"
+                style="@style/Item"
+                app:itemIcon="@{player.backpack_2}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/backpack_second_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/first_buff_image_view"
+                style="@style/Buff"
+                android:layout_marginStart="32dp"
+                app:buffIcon="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/backpack_third_slot_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:position="@{0}" />
+
+            <TextView
+                android:id="@+id/first_buff_text_view"
+                style="@style/BuffCount"
+                app:buffCount="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="@id/first_buff_image_view"
+                app:layout_constraintEnd_toEndOf="@id/first_buff_image_view"
+                app:layout_constraintStart_toStartOf="@id/first_buff_image_view"
+                app:layout_constraintTop_toTopOf="@id/first_buff_image_view"
+                app:position="@{0}" />
+
+            <ImageView
+                android:id="@+id/second_buff_image_view"
+                style="@style/Buff"
+                app:buffIcon="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/first_buff_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:position="@{1}" />
+
+            <TextView
+                android:id="@+id/second_buff_text_view"
+                style="@style/BuffCount"
+                app:buffCount="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="@id/second_buff_image_view"
+                app:layout_constraintEnd_toEndOf="@id/second_buff_image_view"
+                app:layout_constraintStart_toStartOf="@id/second_buff_image_view"
+                app:layout_constraintTop_toTopOf="@id/second_buff_image_view"
+                app:position="@{1}" />
+
+            <ImageView
+                android:id="@+id/third_buff_image_view"
+                style="@style/Buff"
+                app:buffIcon="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/second_buff_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:position="@{2}" />
+
+            <TextView
+                android:id="@+id/third_buff_text_view"
+                style="@style/BuffCount"
+                app:buffCount="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="@id/third_buff_image_view"
+                app:layout_constraintEnd_toEndOf="@id/third_buff_image_view"
+                app:layout_constraintStart_toStartOf="@id/third_buff_image_view"
+                app:layout_constraintTop_toTopOf="@id/third_buff_image_view"
+                app:position="@{2}" />
+
+            <ImageView
+                android:id="@+id/fourth_buff_image_view"
+                style="@style/Buff"
+                app:buffIcon="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/third_buff_image_view"
+                app:layout_constraintTop_toTopOf="parent"
+                app:position="@{3}" />
+
+            <TextView
+                android:id="@+id/fourth_buff_text_view"
+                style="@style/BuffCount"
+                app:buffCount="@{player.permanent_buffs}"
+                app:layout_constraintBottom_toBottomOf="@id/fourth_buff_image_view"
+                app:layout_constraintEnd_toEndOf="@id/fourth_buff_image_view"
+                app:layout_constraintStart_toStartOf="@id/fourth_buff_image_view"
+                app:layout_constraintTop_toTopOf="@id/fourth_buff_image_view"
+                app:position="@{3}" />
+
+            <TextView
+                android:id="@+id/last_hits_and_denied_text_view"
+                style="@style/PlayerCDA.PlayerValues"
+                android:layout_width="100dp"
+                app:denies="@{player.denies}"
+                app:lastHits="@{player.last_hits}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fourth_buff_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/gpm_text_view"
+                style="@style/PlayerCDA.PlayerValues"
+                android:textColor="@color/colorGold"
+                app:largeNumbers="@{player.gold_per_min}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/last_hits_and_denied_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/xpm_text_view"
+                style="@style/PlayerCDA.PlayerValues"
+                app:largeNumbers="@{player.xp_per_min}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/gpm_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/heal_text_view"
+                style="@style/PlayerCDA.PlayerValues"
+                android:gravity="center_vertical|end"
+                android:paddingEnd="16dp"
+                app:largeNumbers="@{player.hero_healing}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/xpm_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.ez.dotarate.model.layouts.PlayerStatsItemLayout>
+
+        <!--Damage-->
+        <com.ez.dotarate.model.layouts.PlayerStatsItemLayout
+            android:id="@+id/cl_damage"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/first_linear_layout_field"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/hero_damage_text_view"
+                style="@style/PlayerHeroDamage"
+                app:largeNumbers="@{player.hero_damage}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tower_damage_text_view"
+                style="@style/PlayerHeroDamage"
+                app:largeNumbers="@{player.tower_damage}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/hero_damage_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </com.ez.dotarate.model.layouts.PlayerStatsItemLayout>
+
+        <!--Support Contribution-->
+        <com.ez.dotarate.model.layouts.PlayerStatsItemLayout
+            android:id="@+id/root_support_item_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cl_damage"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/first_support_item_icon_image_view"
+                style="@style/SupportItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/first_support_item_count_text_view"
+                style="@style/PlayerHeroesKilledCount"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/first_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="@+id/first_support_item_icon_image_view" />
+
+            <ImageView
+                android:id="@+id/second_support_item_icon_image_view"
+                style="@style/SupportItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/first_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/second_support_item_count_text_view"
+                style="@style/PlayerHeroesKilledCount"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/second_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="@+id/second_support_item_icon_image_view" />
+
+            <ImageView
+                android:id="@+id/third_support_item_icon_image_view"
+                style="@style/SupportItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/second_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/third_support_item_count_text_view"
+                style="@style/PlayerHeroesKilledCount"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/third_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="@+id/third_support_item_icon_image_view" />
+
+            <ImageView
+                android:id="@+id/fourth_support_item_icon_image_view"
+                style="@style/SupportItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/third_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fourth_support_item_count_text_view"
+                style="@style/PlayerHeroesKilledCount"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/fourth_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="@+id/fourth_support_item_icon_image_view" />
+
+            <ImageView
+                android:id="@+id/fifth_support_item_icon_image_view"
+                style="@style/SupportItem"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fourth_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/fifth_support_item_count_text_view"
+                style="@style/PlayerHeroesKilledCount"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="@+id/fifth_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="@+id/fifth_support_item_icon_image_view" />
+
+            <TextView
+                android:id="@+id/gold_spent_for_support_item"
+                style="@style/PlayerCDA.PlayerValues"
+                android:gravity="center_vertical|end"
+                android:textColor="@color/colorGold"
+                app:largeNumbers="@{suppGold}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/fifth_support_item_icon_image_view"
+                app:layout_constraintTop_toTopOf="parent" />
+        </com.ez.dotarate.model.layouts.PlayerStatsItemLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

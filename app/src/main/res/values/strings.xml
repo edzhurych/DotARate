@@ -1,0 +1,309 @@
+<resources>
+    <string name="app_name">DotA Rate</string>
+
+    <string name="mph">Most played heroes</string>
+    <string name="statistics">Statistics</string>
+
+    <string name="minutes">%d minutes ago</string>
+    <string name="hours">%d hours ago</string>
+    <string name="days">%d days ago</string>
+    <string name="months">%d months ago</string>
+
+    <string name="minute">a minute ago</string>
+    <string name="hour">a hour ago</string>
+    <string name="day">a day ago</string>
+    <string name="month">a month ago</string>
+    <string name="year">a year ago</string>
+    <string name="two_years">2 years ago</string>
+    <string name="dont_play">no games</string>
+    <string name="won_game">Won</string>
+    <string name="lost_game">Lost</string>
+    <string name="unknown_result">Unknown</string>
+    <string name="ranked">Ranked</string>
+    <string name="normal">Normal</string>
+    <string name="low_priority">LP</string>
+
+    <string name="all_pick">All Pick</string>
+    <string name="single_draft">Single Draft</string>
+    <string name="all_random">All Random</string>
+    <string name="random_draft">Random Draft</string>
+    <string name="captains_mode">Captains Mode</string>
+    <string name="unknown_mode">Unknown Mode</string>
+
+    <string name="normal_skill">Normal Skill</string>
+    <string name="high_skill">High Skill</string>
+    <string name="very_high_skill">Very High Skill</string>
+    <string name="unknown_skill">Unknown Skill</string>
+
+    <string name="radiant">Radiant</string>
+    <string name="dire">Dire</string>
+
+    <string name="rate">Rate</string>
+
+    <string name="player">Player</string>
+    <string name="lvl">LVL</string>
+    <string name="k">K</string>
+    <string name="d">D</string>
+    <string name="a">A</string>
+    <string name="last_hits_and_denied">LH / DN</string>
+    <string name="gpm">GPM</string>
+    <string name="xpm">XPM</string>
+    <string name="hero">Hero</string>
+    <string name="building">Building</string>
+    <string name="heals_heroes">Heal</string>
+    <string name="new_worth">Net</string>
+    <string name="items">ITEMS</string>
+    <string name="buffs">BUFFS</string>
+    <string name="abandoned">Abandoned</string>
+    <string name="damage_dealt">Damage Dealt</string>
+    <string name="dire_heroes_killed">Dire heroes killed</string>
+    <string name="radiant_heroes_killed">Radiant heroes killed</string>
+    <string name="total">Total</string>
+    <string name="support_contribution">Support contribution</string>
+
+    <string name="herald_1">Herald 1</string>
+    <string name="herald_2">Herald 2</string>
+    <string name="herald_3">Herald 3</string>
+    <string name="herald_4">Herald 4</string>
+    <string name="herald_5">Herald 5</string>
+    <string name="herald_6">Herald 6</string>
+    <string name="herald_7">Herald 7</string>
+
+    <string name="guardian_1">Guardian 1</string>
+    <string name="guardian_2">Guardian 2</string>
+    <string name="guardian_3">Guardian 3</string>
+    <string name="guardian_4">Guardian 4</string>
+    <string name="guardian_5">Guardian 5</string>
+    <string name="guardian_6">Guardian 6</string>
+    <string name="guardian_7">Guardian 7</string>
+
+    <string name="crusader_1">Crusader 1</string>
+    <string name="crusader_2">Crusader 2</string>
+    <string name="crusader_3">Crusader 3</string>
+    <string name="crusader_4">Crusader 4</string>
+    <string name="crusader_5">Crusader 5</string>
+    <string name="crusader_6">Crusader 6</string>
+    <string name="crusader_7">Crusader 7</string>
+
+    <string name="archon_1">Archon 1</string>
+    <string name="archon_2">Archon 2</string>
+    <string name="archon_3">Archon 3</string>
+    <string name="archon_4">Archon 4</string>
+    <string name="archon_5">Archon 5</string>
+    <string name="archon_6">Archon 6</string>
+    <string name="archon_7">Archon 7</string>
+
+    <string name="legend_1">Legend 1</string>
+    <string name="legend_2">Legend 2</string>
+    <string name="legend_3">Legend 3</string>
+    <string name="legend_4">Legend 4</string>
+    <string name="legend_5">Legend 5</string>
+    <string name="legend_6">Legend 6</string>
+    <string name="legend_7">Legend 7</string>
+
+    <string name="ancient_1">Ancient 1</string>
+    <string name="ancient_2">Ancient 2</string>
+    <string name="ancient_3">Ancient 3</string>
+    <string name="ancient_4">Ancient 4</string>
+    <string name="ancient_5">Ancient 5</string>
+    <string name="ancient_6">Ancient 6</string>
+    <string name="ancient_7">Ancient 7</string>
+
+    <string name="divine_1">Divine 1</string>
+    <string name="divine_2">Divine 2</string>
+    <string name="divine_3">Divine 3</string>
+    <string name="divine_4">Divine 4</string>
+    <string name="divine_5">Divine 5</string>
+    <string name="divine_6">Divine 6</string>
+    <string name="divine_7">Divine 7</string>
+
+    <string name="immortal">Immortal</string>
+    <string name="unknown">Unknown</string>
+
+    <string name="anonym">Anonym</string>
+    <string name="score">Score:</string>
+
+    <!--Heroes-->
+    <string name="anti_mage">Anti-Mage</string>
+    <string name="axe">Axe</string>
+    <string name="bane">Bane</string>
+    <string name="bloodseeker">Bloodseeker</string>
+    <string name="crystal_maiden">Crystal Maiden</string>
+    <string name="drow_ranger">Drow Ranger</string>
+    <string name="earthshaker">Earthshaker</string>
+    <string name="juggernaut">Juggernaut</string>
+    <string name="mirana">Mirana</string>
+    <string name="morphling">Morphling</string>
+    <string name="shadow_fiend">Shadow Fiend</string>
+    <string name="nevermore">Nevermore</string>
+    <string name="phantom_lancer">Phantom Lancer</string>
+    <string name="puck">Puck</string>
+    <string name="pudge">Pudge</string>
+    <string name="razor">Razor</string>
+    <string name="sand_king">Sand King</string>
+    <string name="storm">Storm Spirit</string>
+    <string name="sven">Sven</string>
+    <string name="tiny">Tiny</string>
+    <string name="vengeful_spirit">Vengeful Spirit</string>
+    <string name="windranger">Windranger</string>
+    <string name="zeus">Zeus</string>
+    <string name="kunkka">Kunkka</string>
+    <string name="lina">Lina</string>
+    <string name="lion">Lion</string>
+    <string name="shadow_shaman">Shadow Shaman</string>
+    <string name="slardar">Slardar</string>
+    <string name="tidehunter">Tidehunter</string>
+    <string name="witch_doctor">Witch Doctor</string>
+    <string name="lich">Lich</string>
+    <string name="riki">Riki</string>
+    <string name="enigma">Enigma</string>
+    <string name="tinker">Tinker</string>
+    <string name="sniper">Sniper</string>
+    <string name="necrophos">Necrophos</string>
+    <string name="warlock">Warlock</string>
+    <string name="beastmaster">Beastmaster</string>
+    <string name="queen_of_pain">Queen of Pain</string>
+    <string name="queenofpain">queenofpain</string>
+    <string name="venomancer">Venomancer</string>
+    <string name="faceless_void">Faceless Void</string>
+    <string name="wraith_king">Wraith King</string>
+    <string name="skeleton_king">Skeleton King</string>
+    <string name="death_prophet">Death Prophet</string>
+    <string name="phantom_assassin">Phantom Assassin</string>
+    <string name="pugna">Pugna</string>
+    <string name="templar_assassin">Templar Assassin</string>
+    <string name="viper">Viper</string>
+    <string name="luna">Luna</string>
+    <string name="dragon_knight">Dragon Knight</string>
+    <string name="dazzle">Dazzle</string>
+    <string name="clockwerk">Clockwerk</string>
+    <string name="leshrac">Leshrac</string>
+    <string name="natures_prophet">Nature\'s Prophet</string>
+    <string name="lifestealer">Lifestealer</string>
+    <string name="dark_seer">Dark Seer</string>
+    <string name="clinkz">Clinkz</string>
+    <string name="omniknight">Omniknight</string>
+    <string name="enchantress">Enchantress</string>
+    <string name="huskar">Huskar</string>
+    <string name="night_stalker">Night Stalker</string>
+    <string name="broodmother">Broodmother</string>
+    <string name="bounty_hunter">Bounty Hunter</string>
+    <string name="weaver">Weaver</string>
+    <string name="jakiro">Jakiro</string>
+    <string name="batrider">Batrider</string>
+    <string name="chen">Chen</string>
+    <string name="spectre">Spectre</string>
+    <string name="ancient_apparition">Ancient Apparition</string>
+    <string name="doom">DOOM</string>
+    <string name="ursa">Ursa</string>
+    <string name="spirit_breaker">Spirit Breaker</string>
+    <string name="gyrocopter">Gyrocopter</string>
+    <string name="alchemist">Alchemist</string>
+    <string name="invoker">Invoker</string>
+    <string name="silencer">Silencer</string>
+    <string name="outworld_devourer">Outworld Devourer</string>
+    <string name="lycan">Lycan</string>
+    <string name="brewmaster">Brewmaster</string>
+    <string name="shadow_demon">Shadow Demon</string>
+    <string name="lone_druid">Lone Druid</string>
+    <string name="chaos_knight">Chaos Knight</string>
+    <string name="meepo">Meepo</string>
+    <string name="treant_protector">Treant Protector</string>
+    <string name="treant">Treant</string>
+    <string name="ogre_magi">Ogre Magi</string>
+    <string name="undying">Undying</string>
+    <string name="rubick">Rubick</string>
+    <string name="disruptor">Disruptor</string>
+    <string name="nyx_assassin">Nyx Assassin</string>
+    <string name="naga_siren">Naga Siren</string>
+    <string name="keeper_of_the_light">Keeper of the Light</string>
+    <string name="io">Io</string>
+    <string name="visage">Visage</string>
+    <string name="slark">Slark</string>
+    <string name="medusa">Medusa</string>
+    <string name="troll_warlord">Troll Warlord</string>
+    <string name="centaur_warrunner">Centaur Warrunner</string>
+    <string name="magnus">Magnus</string>
+    <string name="timbersaw">Timbersaw</string>
+    <string name="bristleback">Bristleback</string>
+    <string name="tuskar">Tuskar</string>
+    <string name="skywrath_mage">Skywrath Mage</string>
+    <string name="abaddon">Abaddon</string>
+    <string name="elder_titan">Elder Titan</string>
+    <string name="legion_commander">Legion Commander</string>
+    <string name="techies">Techies</string>
+    <string name="ember_spirit">Ember Spirit</string>
+    <string name="earth_spirit">Earth Spirit</string>
+    <string name="underlord">Underlord</string>
+    <string name="terrorblade">Terrorblade</string>
+    <string name="phoenix">Phoenix</string>
+    <string name="oracle">Oracle</string>
+    <string name="winter_wyvern">Winter Wyvern</string>
+    <string name="arc_warden">Arc Warden</string>
+    <string name="monkey_king">Monkey King</string>
+    <string name="dark_willow">Dark Willow</string>
+    <string name="pangolier">Pangolier</string>
+    <string name="grimstroke">Grimstroke</string>
+    <string name="void_spirit">Void Spirit</string>
+    <string name="snapfire">Snapfire</string>
+    <string name="mars">Mars</string>
+    <string name="unknown_hero">Unknown Hero</string>
+
+    <string name="backpack">Backpack</string>
+
+    <!--Login Screen-->
+    <string name="greeting">Welcome to DotA Rate</string>
+    <string name="enter_steam">Sign in with your Steam account to get started</string>
+    <string name="login">Log In</string>
+
+    <!--GamesResponse screen-->
+    <string name="games_screen_title">Games</string>
+    <string name="games_screen_empty">No games</string>
+
+    <!--Search screen-->
+    <string name="search_screen_title">Search</string>
+    <string name="search_screen_top_players">Top players</string>
+
+    <!--MPH screen-->
+    <string name="mph_screen_hero">Most played heroes</string>
+    <string name="mph_screen_played_games">Games</string>
+    <string name="mph_screen_win_rate">Win Rate</string>
+    <string name="mph_screen_empty">No results</string>
+
+    <!--Profile screen-->
+    <string name="profile_screen_title">Settings</string>
+    <string name="profile_screen_dialog_logout">Log out of DotA Rate?</string>
+    <string name="profile_screen_wins">Wins</string>
+    <string name="profile_screen_losses">Losses</string>
+    <string name="profile_screen_winrate">Winrate</string>
+    <string name="profile_screen_game">Game</string>
+
+    <!--Game Screen-->
+    <string name="gameScreenRadiantVictory">Radiant victory</string>
+    <string name="gameScreenDireVictory">Dire victory</string>
+
+    <!--General-->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="europeWest">Europe West</string>
+    <string name="europeEast">Europe East</string>
+    <string name="russia">Russia</string>
+
+    <!--SearchUsersScreen-->
+    <string name="minutes_search_users_screen">Last game %d minutes ago</string>
+    <string name="hours_search_users_screen">Last game %d hours ago</string>
+    <string name="days_search_users_screen">Last game %d days ago</string>
+    <string name="months_search_users_screen">Last game %d months ago</string>
+    <string name="minute_search_users_screen">Last game a minute ago</string>
+    <string name="hour_search_users_screen">Last game a hour ago</string>
+    <string name="day_search_users_screen">Last game a day ago</string>
+    <string name="month_search_users_screen">Last game a month ago</string>
+    <string name="year_search_users_screen">Last game a year ago</string>
+
+    <!--UpcomingGamesScreen-->
+    <string name="upcoming_games_screen_title">Upcoming Games</string>
+    <string name="upcoming_games_screen_bo">Bo %d</string>
+    <string name="upcoming_games_screen_tbd">TBD</string>
+
+    <!-- TeamScreen -->
+</resources>

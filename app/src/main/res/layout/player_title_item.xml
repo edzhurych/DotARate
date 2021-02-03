@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        tools:ignore="RtlSymmetry">
+
+        <TextView
+            android:id="@+id/tvRadiantTitles"
+            style="@style/Score.CategoryKDA"
+            android:layout_height="0dp"
+            android:layout_marginStart="216dp"
+            android:layout_marginTop="34dp"
+            android:text="@string/k"
+            android:textColor="@color/colorText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvRadiantDeaths"
+            style="@style/Score.CategoryKDA"
+            android:text="@string/d"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantTitles"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantTitles"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantTitles" />
+
+        <TextView
+            android:id="@+id/tvRadiantAssists"
+            style="@style/Score.CategoryKDA"
+            android:text="@string/a"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantDeaths"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantDeaths"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantDeaths" />
+
+        <ImageView
+            android:id="@+id/ivRadiantNetWorth"
+            android:layout_width="32dp"
+            android:layout_height="0dp"
+            android:paddingStart="16dp"
+            android:src="@drawable/gold_coin"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantAssists"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantAssists"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantAssists" />
+
+        <TextView
+            android:id="@+id/tvRadiantNetWorth"
+            style="@style/CategoryKDA"
+            android:layout_width="58dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="16dp"
+            android:text="@string/new_worth"
+            android:textColor="@color/colorGold"
+            app:layout_constraintBottom_toBottomOf="@+id/ivRadiantNetWorth"
+            app:layout_constraintStart_toEndOf="@+id/ivRadiantNetWorth"
+            app:layout_constraintTop_toTopOf="@+id/ivRadiantNetWorth" />
+
+        <TextView
+            android:id="@+id/tvRadiantItems"
+            style="@style/CategoryKDA"
+            android:layout_width="323dp"
+            android:paddingStart="16dp"
+            android:text="@string/items"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantNetWorth"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantNetWorth"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantNetWorth" />
+
+        <TextView
+            android:id="@+id/tvRadiantBackpack"
+            style="@style/CategoryKDA"
+            android:layout_width="183dp"
+            android:paddingStart="32dp"
+            android:text="@string/backpack"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantItems"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantItems"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantItems" />
+
+        <TextView
+            android:id="@+id/tvRadiantGameDetailBuffs"
+            style="@style/CategoryKDA"
+            android:layout_width="208dp"
+            android:paddingStart="32dp"
+            android:text="@string/buffs"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantBackpack"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantBackpack"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantBackpack" />
+
+        <TextView
+            android:id="@+id/tvRadiantLH"
+            style="@style/CategoryKDA"
+            android:layout_width="100dp"
+            android:gravity="center"
+            android:text="@string/last_hits_and_denied"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantGameDetailBuffs"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantGameDetailBuffs"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantGameDetailBuffs" />
+
+        <TextView
+            android:id="@+id/tvRadiantGpm"
+            style="@style/PlayerCDA.PlayerValues"
+            android:text="@string/gpm"
+            android:textColor="@color/colorGold"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantLH"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantLH"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantLH" />
+
+        <TextView
+            android:id="@+id/tvRadiantXpm"
+            style="@style/PlayerCDA.PlayerValues"
+            android:text="@string/xpm"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantGpm"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantGpm"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantGpm" />
+
+        <TextView
+            android:id="@+id/tvRadiantHeal"
+            style="@style/PlayerCDA.PlayerValues"
+            android:text="@string/heals_heroes"
+            android:textAllCaps="true"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantXpm"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantXpm"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantXpm" />
+
+        <TextView
+            android:id="@+id/tvRadiantDamageDealt"
+            android:layout_width="206dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="16dp"
+            android:text="@string/damage_dealt"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextDark"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/tvRadiantHero"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantHeal" />
+
+        <TextView
+            android:id="@+id/tvRadiantHero"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingStart="32dp"
+            android:text="@string/hero"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextDark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantHeal"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantHeal"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantHeal" />
+
+        <TextView
+            android:id="@+id/tvRadiantBuilding"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/building"
+            android:textAllCaps="true"
+            android:textColor="@color/colorTextDark"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantHero"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantHero"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantHero" />
+
+        <TextView
+            android:id="@+id/tvRadiantSupport"
+            style="@style/CategoryKDA"
+            android:layout_width="312dp"
+            android:paddingStart="32dp"
+            android:text="@string/support_contribution"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantBuilding"
+            app:layout_constraintStart_toEndOf="@+id/tvRadiantBuilding"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantBuilding" />
+
+        <ImageView
+            android:id="@+id/ivRadiantGameDetailSuppGold"
+            style="@style/CategoryKDA"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:src="@drawable/gold_coin"
+            app:layout_constraintBottom_toBottomOf="@+id/tvRadiantSupport"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvRadiantSupport" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
