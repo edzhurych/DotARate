@@ -5,18 +5,18 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ez.dotarate.model.GameDetail
-import com.ez.dotarate.model.repository.OpenDotaRepositoryImpl
+import com.ez.domain.model.GameDetail
+import com.ez.domain.repository.OpenDotaRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import javax.inject.Inject
 
-class GameDetailViewModel @Inject
-constructor(
-    application: Application, private val repository: OpenDotaRepositoryImpl
-    ) : AndroidViewModel(application) {
+class GameDetailViewModel @Inject constructor(
+    application: Application,
+    private val repository: OpenDotaRepository
+) : AndroidViewModel(application) {
 
     val liveGame = MutableLiveData<GameDetail>()
     val errorLiveData = MutableLiveData<String>()

@@ -9,13 +9,13 @@ import androidx.databinding.ObservableBoolean
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ez.domain.model.Game
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.GamesAdapter
 import com.ez.dotarate.constants.CONVERTER_NUMBER
 import com.ez.dotarate.constants.MATCH_ID_KEY
 import com.ez.dotarate.constants.REFRESH_OBSERVABLE_BOOLEAN_KEY
 import com.ez.dotarate.constants.USER_ID_KEY
-import com.ez.dotarate.database.Game
 import com.ez.dotarate.databinding.FragmentGamesBinding
 import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener

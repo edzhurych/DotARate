@@ -7,7 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ez.dotarate.R
-import com.ez.dotarate.database.SearchUser
+import com.ez.domain.model.SearchUser
 import com.ez.dotarate.databinding.SearchUserItemBinding
 
 class SearchUsersAdapter : PagedListAdapter<SearchUser, SearchUsersAdapter.UserHolder>(DIFF_CALLBACK) {

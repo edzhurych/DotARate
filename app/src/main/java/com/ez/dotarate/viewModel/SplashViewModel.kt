@@ -3,14 +3,14 @@ package com.ez.dotarate.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.liveData
-import com.ez.dotarate.model.repository.UserRepositoryImpl
+import com.ez.domain.repository.UserRepository
 import javax.inject.Inject
 
 
 class SplashViewModel
 @Inject constructor(
     application: Application,
-    private val repository: UserRepositoryImpl
+    private val repository: UserRepository
 ) : AndroidViewModel(application) {
 
     /**

@@ -4,12 +4,13 @@ import android.app.Application
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.ez.domain.model.User
 import com.ez.dotarate.customClasses.Event
-import com.ez.dotarate.database.User
-import com.ez.dotarate.model.UserResponse
-import com.ez.dotarate.model.WinsAndLosses
-import com.ez.dotarate.model.repository.UserRepositoryImpl
+import com.ez.domain.model.UserResponse
+import com.ez.domain.model.WinsAndLosses
+import com.ez.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
@@ -21,10 +22,12 @@ import javax.inject.Inject
 class ProfileViewModel
 @Inject constructor(
     application: Application,
-    private val repository: UserRepositoryImpl
+    private val repository: UserRepository
 ) : AndroidViewModel(application) {
 
-    val liveUser = repository.getUser()
+    val liveUser = liveData {
+        emit(repository.getUser())
+    }
 
     val isDataReceived = ObservableBoolean(false)
     val isNeedPositionToStartGames = ObservableBoolean(false)
@@ -74,13 +77,13 @@ class ProfileViewModel
     }
 
     fun saveUser(user: User) {
-        viewModelScope.launch {
+        viewModelScope.launch(IO) {
             repository.saveUser(user)
         }
     }
 
     fun logout() {
-        viewModelScope.launch {
+        viewModelScope.launch(IO) {
             repository.logout()
         }
     }

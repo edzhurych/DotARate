@@ -9,7 +9,7 @@
 
         <variable
             name="user"
-            type="com.ez.dotarate.database.User" />
+            type="com.ez.domain.model.User" />
 
         <variable
             name="vm"

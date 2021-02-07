@@ -10,12 +10,12 @@ import android.view.inputmethod.InputMethodManager
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.ez.domain.model.SearchUser
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.SearchUsersAdapter
 import com.ez.dotarate.constants.SEARCH_TAB
 import com.ez.dotarate.constants.TAB_KEY
 import com.ez.dotarate.constants.USER_ID_KEY
-import com.ez.dotarate.database.SearchUser
 import com.ez.dotarate.databinding.FragmentSearchUsersBinding
 import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener

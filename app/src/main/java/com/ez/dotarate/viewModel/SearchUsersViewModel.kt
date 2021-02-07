@@ -7,8 +7,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
-import com.ez.dotarate.database.SearchUser
-import com.ez.dotarate.model.repository.OpenDotaRepositoryImpl
+import com.ez.domain.model.SearchUser
+import com.ez.domain.repository.OpenDotaRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class SearchUsersViewModel
 @Inject constructor(
     application: Application,
-    private val repository: OpenDotaRepositoryImpl
+    private val repository: OpenDotaRepository
 ) : AndroidViewModel(application) {
 
     val liveSearchUsers: LiveData<PagedList<SearchUser>> by lazy {

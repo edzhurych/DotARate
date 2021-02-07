@@ -6,13 +6,13 @@ import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.ez.domain.model.User
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.ViewPagerAdapter
 import com.ez.dotarate.constants.PROFILE_TAB
 import com.ez.dotarate.constants.SEARCH_TAB
 import com.ez.dotarate.constants.TAB_KEY
 import com.ez.dotarate.constants.USER_ID_KEY
-import com.ez.dotarate.database.User
 import com.ez.dotarate.databinding.FragmentProfileSearchBinding
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.MainActivity

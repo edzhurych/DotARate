@@ -23,9 +23,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import com.ez.data.repository.DownloadState
+import com.ez.data.repository.Status
 import com.ez.dotarate.R
-import com.ez.dotarate.model.repository.DownloadState
-import com.ez.dotarate.model.repository.Status
 
 /**
  * A View Holder that can display a loading or have click action.

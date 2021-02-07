@@ -13,10 +13,9 @@ import androidx.paging.PagedList
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.UpcomingGamesAdapter
 import com.ez.dotarate.databinding.FragmentUpcomingGamesBinding
-import com.ez.dotarate.model.UpcomingGame
+import com.ez.domain.model.UpcomingGame
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.viewModel.UpcomingGamesViewModel
-import javax.inject.Inject
 
 
 class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcomingGamesBinding>() {

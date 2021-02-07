@@ -1,6 +1,9 @@
 package com.ez.dotarate
 
 import android.content.Context
+import com.ez.core_di.DaggerDiComponent
+import com.ez.core_di.DiComponent
+import com.ez.dotarate.di.AppComponent
 import com.ez.dotarate.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
@@ -12,6 +15,10 @@ class App : DaggerApplication() {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
+
+    val appComponent: AppComponent by lazy {
+        DaggerAppComponent.factory().create(this, provideDiComponent())
+    }
 
     companion object {
         lateinit var instance: App
@@ -25,14 +32,12 @@ class App : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        DaggerAppComponent.builder()
-            .applicationBind(this)
-            .build()
-            .inject(this)
+        DaggerAppComponent.factory().create(this, provideDiComponent())
     }
 
     override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> = DaggerAppComponent.builder()
-        .applicationBind(this)
-        .build()
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> = DaggerAppComponent.factory().create(this, provideDiComponent())
+
+    private fun provideDiComponent(): DiComponent =
+        DaggerDiComponent.factory().create(this)
 }

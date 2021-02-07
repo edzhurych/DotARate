@@ -9,9 +9,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
+import com.ez.domain.model.Game
 import com.ez.dotarate.customClasses.Event
-import com.ez.dotarate.database.Game
-import com.ez.dotarate.model.repository.OpenDotaRepositoryImpl
+import com.ez.domain.repository.OpenDotaRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,7 +22,7 @@ import javax.inject.Inject
 
 class GamesViewModel @Inject
 constructor(
-    application: Application, private val repository: OpenDotaRepositoryImpl
+    application: Application, private val repository: OpenDotaRepository
 ) : AndroidViewModel(application) {
 
     var id32: Int = 0

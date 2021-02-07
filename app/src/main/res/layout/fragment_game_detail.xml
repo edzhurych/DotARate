@@ -13,7 +13,7 @@
 
         <variable
             name="gameDetail"
-            type="com.ez.dotarate.model.GameDetail" />
+            type="com.ez.domain.model.GameDetail" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

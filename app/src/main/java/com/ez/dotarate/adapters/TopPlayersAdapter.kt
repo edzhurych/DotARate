@@ -3,14 +3,12 @@ package com.ez.dotarate.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.paging.PagedListAdapter
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ez.dotarate.R
-import com.ez.dotarate.database.SearchUser
+import com.ez.domain.model.SearchUser
 import com.ez.dotarate.databinding.SearchUserItemBinding
 
-class TopPlayersAdapter(private val listTopPlayers: ArrayList<SearchUser>) :
+class TopPlayersAdapter(private val listTopPlayers: List<SearchUser>) :
     RecyclerView.Adapter<TopPlayersAdapter.TopPlayerHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopPlayerHolder {

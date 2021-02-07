@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ez.dotarate.R
 import com.ez.dotarate.databinding.UpcomingGamesItemBinding
-import com.ez.dotarate.model.UpcomingGame
+import com.ez.domain.model.UpcomingGame
 
 class UpcomingGamesAdapter(
     private val block: (Int) -> Unit

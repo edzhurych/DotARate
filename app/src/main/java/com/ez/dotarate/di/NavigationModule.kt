@@ -11,10 +11,10 @@ import javax.inject.Singleton
 class NavigationModule {
 
     @Provides
-    @Singleton
+    @AppScope
     internal fun provideStack() = Stack<String>()
 
     @Provides
-    @Singleton
+    @AppScope
     internal fun provideLiveNavCOntroller() = MutableLiveData<NavController>()
 }

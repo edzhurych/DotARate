@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.collection.ArrayMap
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -13,11 +12,10 @@ import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.ez.dotarate.R
 import com.ez.dotarate.constants.PROFILE_TAB
-import com.ez.dotarate.constants.SEARCH_TAB
 import com.ez.dotarate.constants.TAB_KEY
 import com.ez.dotarate.constants.USER_ID_KEY
 import com.ez.dotarate.databinding.PlayerStatsItemBinding
-import com.ez.dotarate.model.Player
+import com.ez.domain.model.Player
 
 
 class PlayerAdapter(

@@ -7,7 +7,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ez.dotarate.R
-import com.ez.dotarate.database.Hero
+import com.ez.domain.model.Hero
 import com.ez.dotarate.databinding.HeroRecyclerItemBinding
 
 class HeroesAdapter : PagedListAdapter<Hero, HeroesAdapter.HeroesHolder>(DIFF_CALLBACK) {

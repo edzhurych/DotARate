@@ -7,7 +7,7 @@
 
         <variable
             name="user"
-            type="com.ez.dotarate.database.User" />
+            type="com.ez.domain.model.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

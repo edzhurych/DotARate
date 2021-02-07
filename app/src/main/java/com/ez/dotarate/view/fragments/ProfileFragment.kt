@@ -13,11 +13,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
+import com.ez.domain.model.User
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.ViewPagerAdapter
 import com.ez.dotarate.constants.CONVERTER_NUMBER
 import com.ez.dotarate.constants.USER_ID_KEY
-import com.ez.dotarate.database.User
 import com.ez.dotarate.databinding.FragmentProfileBinding
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.StartActivity

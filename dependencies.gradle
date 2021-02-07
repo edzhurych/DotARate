@@ -59,7 +59,7 @@ ext {
     ]
 
     databasePlugins = [
-            "androidx.room:room-compiler:${room}"
+            "androidx.room:room-compiler:${room}",
     ]
 
     pagingDependencies = [
@@ -101,6 +101,11 @@ ext {
 
     juntDependenciesOnly = [
             "junit:junit:${junit_version}"
+    ]
+
+    androidTestDependencies = [
+            'androidx.test.ext:junit:1.1.2',
+            'androidx.test.espresso:espresso-core:3.3.0'
     ]
 
     tatarkaDependencies = [

@@ -11,7 +11,7 @@
 
         <variable
             name="game"
-            type="com.ez.dotarate.database.Game" />
+            type="com.ez.domain.model.Game" />
 
     </data>
 

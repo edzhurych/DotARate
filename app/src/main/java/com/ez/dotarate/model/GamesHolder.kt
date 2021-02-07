@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ez.domain.model.Game
 import com.ez.dotarate.R
-import com.ez.dotarate.database.Game
 import com.ez.dotarate.databinding.GameListItemBinding
 
 class GamesHolder(private var binding: GameListItemBinding) :

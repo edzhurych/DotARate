@@ -13,7 +13,7 @@ import javax.inject.Provider
 import javax.inject.Singleton
 import kotlin.reflect.KClass
 
-@Singleton
+@AppScope
 class ViewModelFactory @Inject
 constructor(private val creators: MutableMap<Class<out ViewModel>, Provider<ViewModel>>) :
     ViewModelProvider.Factory {

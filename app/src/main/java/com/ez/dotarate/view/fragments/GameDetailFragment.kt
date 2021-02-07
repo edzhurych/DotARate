@@ -22,7 +22,7 @@ import com.ez.dotarate.customClasses.HScroll
 import com.ez.dotarate.customClasses.VScroll
 import com.ez.dotarate.databinding.FragmentGameDetailBinding
 import com.ez.dotarate.extensions.graphIdToTagMap
-import com.ez.dotarate.model.GameDetail
+import com.ez.domain.model.GameDetail
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.MainActivity
 import com.ez.dotarate.viewModel.GameDetailViewModel

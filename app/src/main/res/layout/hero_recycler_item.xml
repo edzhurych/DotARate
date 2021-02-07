@@ -9,7 +9,7 @@
 
         <variable
             name="hero"
-            type="com.ez.dotarate.database.Hero" />
+            type="com.ez.domain.model.Hero" />
     </data>
 
     <com.ez.dotarate.model.layouts.RecyclerViewItemLayout

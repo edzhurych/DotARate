@@ -9,7 +9,7 @@
 
         <variable
             name="upcomingGame"
-            type="com.ez.dotarate.model.UpcomingGame" />
+            type="com.ez.domain.model.UpcomingGame" />
     </data>
 
     <com.ez.dotarate.model.layouts.ConstraintLayoutWithBackground

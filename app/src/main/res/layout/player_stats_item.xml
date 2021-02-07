@@ -11,7 +11,7 @@
 
         <variable
             name="player"
-            type="com.ez.dotarate.model.Player" />
+            type="com.ez.domain.model.Player" />
 
         <variable
             name="suppGold"

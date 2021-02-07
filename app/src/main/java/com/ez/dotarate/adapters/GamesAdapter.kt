@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.ez.data.repository.DownloadState
 import com.ez.dotarate.R
-import com.ez.dotarate.database.Game
+import com.ez.domain.model.Game
 import com.ez.dotarate.model.DownloadStateItemViewHolder
 import com.ez.dotarate.model.GamesHolder
-import com.ez.dotarate.model.repository.DownloadState
 
 class GamesAdapter : PagedListAdapter<Game, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 

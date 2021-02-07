@@ -5,9 +5,9 @@ import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.ez.dotarate.model.UserResponse
-import com.ez.dotarate.model.WinsAndLosses
-import com.ez.dotarate.model.repository.UserRepositoryImpl
+import com.ez.domain.model.UserResponse
+import com.ez.domain.model.WinsAndLosses
+import com.ez.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
@@ -17,7 +17,7 @@ import javax.inject.Inject
 class ProfileSearchViewModel
 @Inject constructor(
     application: Application,
-    private val userRepository: UserRepositoryImpl
+    private val userRepository: UserRepository
 ) : AndroidViewModel(application) {
 
     val liveUser = MutableLiveData<UserResponse>()
