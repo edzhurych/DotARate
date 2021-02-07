@@ -12,7 +12,7 @@
 
         <variable
             name="vm"
-            type="com.ez.dotarate.viewModel.MphViewModel" />
+            type="com.ez.dotarate.viewmodel.MphViewModel" />
 
         <variable
             name="isNeedPositionToStart"

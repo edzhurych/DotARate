@@ -15,10 +15,10 @@ import com.ez.dotarate.adapters.UpcomingGamesAdapter
 import com.ez.dotarate.databinding.FragmentUpcomingGamesBinding
 import com.ez.domain.model.UpcomingGame
 import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.viewModel.UpcomingGamesViewModel
+import com.ez.dotarate.viewmodel.UpcomingGamesViewModel
 
 
-class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcomingGamesBinding>() {
+class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcomingGamesBinding>(UpcomingGamesViewModel::class) {
 
     private val adapter: UpcomingGamesAdapter by lazy {
         UpcomingGamesAdapter {

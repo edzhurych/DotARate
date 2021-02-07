@@ -16,12 +16,12 @@ import com.ez.dotarate.R
 import com.ez.dotarate.databinding.FragmentSteamBinding
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.MainActivity
-import com.ez.dotarate.viewModel.SteamViewModel
+import com.ez.dotarate.viewmodel.SteamViewModel
 
 
 // Убираем warning
 @SuppressLint("SetJavaScriptEnabled")
-class SteamFragment : BaseFragment<SteamViewModel, FragmentSteamBinding>() {
+class SteamFragment : BaseFragment<SteamViewModel, FragmentSteamBinding>(SteamViewModel::class) {
 
     private val REALM_PARAM = "DotA Rate"
 

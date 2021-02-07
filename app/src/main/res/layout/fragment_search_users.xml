@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <com.ez.dotarate.customClasses.MySearchEditText
+        <com.ez.dotarate.customclasses.MySearchEditText
             android:id="@+id/searchEditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <requestFocus />
-        </com.ez.dotarate.customClasses.MySearchEditText>
+        </com.ez.dotarate.customclasses.MySearchEditText>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFragmentSearch"

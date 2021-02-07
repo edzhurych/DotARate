@@ -11,10 +11,10 @@ import androidx.navigation.findNavController
 import com.ez.dotarate.R
 import com.ez.dotarate.databinding.FragmentLoginBinding
 import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.viewModel.LoginViewModel
+import com.ez.dotarate.viewmodel.LoginViewModel
 
 
-class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>() {
+class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginBinding>(LoginViewModel::class) {
 
     override fun layout() = R.layout.fragment_login
 

@@ -2,19 +2,13 @@ package com.ez.dotarate.di
 
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
-import dagger.Module
-import dagger.Provides
+import org.koin.dsl.module
 import java.util.*
-import javax.inject.Singleton
 
-@Module
-class NavigationModule {
 
-    @Provides
-    @AppScope
-    internal fun provideStack() = Stack<String>()
+val koinNavigationModule = module {
 
-    @Provides
-    @AppScope
-    internal fun provideLiveNavCOntroller() = MutableLiveData<NavController>()
+    factory { Stack<String>() }
+
+    factory { MutableLiveData<NavController>() }
 }

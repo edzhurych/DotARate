@@ -15,9 +15,9 @@ import com.ez.dotarate.databinding.FragmentSearchBinding
 import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener
 import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.viewModel.SearchViewModel
+import com.ez.dotarate.viewmodel.SearchViewModel
 
-class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>() {
+class SearchFragment : BaseFragment<SearchViewModel, FragmentSearchBinding>(SearchViewModel::class) {
 
     lateinit var adapter: TopPlayersAdapter
 

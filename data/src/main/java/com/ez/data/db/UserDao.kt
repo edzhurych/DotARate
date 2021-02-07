@@ -18,7 +18,7 @@ interface UserDao {
     fun getUserName(): LiveData<UserName?>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun saveUser(user: UserDb): Long
+    suspend fun saveUser(user: UserDb)
 
     @Query("DELETE FROM userDb")
     suspend fun clearUser()

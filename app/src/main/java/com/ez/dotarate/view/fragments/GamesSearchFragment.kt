@@ -19,11 +19,11 @@ import com.ez.dotarate.databinding.FragmentGamesBinding
 import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener
 import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.viewModel.GamesViewModel
+import com.ez.dotarate.viewmodel.GamesViewModel
 
 
 class GamesSearchFragment :
-    BaseFragment<GamesViewModel, FragmentGamesBinding>() {
+    BaseFragment<GamesViewModel, FragmentGamesBinding>(GamesViewModel::class) {
 
     private val adapter = GamesAdapter()
 

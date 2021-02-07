@@ -3,18 +3,10 @@ package com.ez.dotarate.view.activities
 import android.os.Bundle
 import android.util.Log
 import com.ez.dotarate.R
-import dagger.android.AndroidInjection
-import dagger.android.support.DaggerAppCompatActivity
+import com.ez.dotarate.databinding.ActivityStartBinding
+import com.ez.dotarate.view.BaseActivity
 
-class StartActivity : DaggerAppCompatActivity() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_start)
-
-        Log.d("MyLogs", "StartActivity. OnCreate")
-    }
+class StartActivity : BaseActivity<Nothing, ActivityStartBinding>(Nothing::class) {
 
     override fun onStart() {
         super.onStart()
@@ -39,5 +31,11 @@ class StartActivity : DaggerAppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("MyLogs", "StartActivity. onDestroy")
+    }
+
+    override fun layout(): Int = R.layout.activity_start
+
+    override fun afterCreate(savedInstanceState: Bundle?) {
+
     }
 }

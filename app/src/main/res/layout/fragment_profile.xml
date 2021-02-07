@@ -13,7 +13,7 @@
 
         <variable
             name="vm"
-            type="com.ez.dotarate.viewModel.ProfileViewModel" />
+            type="com.ez.dotarate.viewmodel.ProfileViewModel" />
 
     </data>
 

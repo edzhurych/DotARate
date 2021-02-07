@@ -16,11 +16,11 @@ import com.ez.dotarate.constants.USER_ID_KEY
 import com.ez.dotarate.databinding.FragmentProfileSearchBinding
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.MainActivity
-import com.ez.dotarate.viewModel.ProfileSearchViewModel
+import com.ez.dotarate.viewmodel.ProfileSearchViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
-class ProfileSearchFragment : BaseFragment<ProfileSearchViewModel, FragmentProfileSearchBinding>() {
+class ProfileSearchFragment : BaseFragment<ProfileSearchViewModel, FragmentProfileSearchBinding>(ProfileSearchViewModel::class) {
     private var mOldVerticalOffset = 0
 
     override fun layout() = R.layout.fragment_profile_search

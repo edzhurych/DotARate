@@ -40,13 +40,12 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(path: ':domain')
-    implementation project(path: ':core-di')
+    implementation project(path: ':infrastructure')
 
     implementation kotlinDependencies
     implementation coreAndroidDependencies
     implementation diDependencies
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt diPlugins
     implementation networkDependencies
     implementation coroutinesDependencies
     implementation coroutinesDependencies

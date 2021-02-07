@@ -2,22 +2,17 @@ package com.ez.dotarate.view
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import dagger.android.AndroidInjection
-import dagger.android.support.DaggerAppCompatActivity
-import java.lang.reflect.ParameterizedType
-import javax.inject.Inject
+import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.reflect.KClass
 
 
-abstract class BaseActivity<VM : ViewModel, VB : ViewDataBinding> : DaggerAppCompatActivity() {
+abstract class BaseActivity<VM : ViewModel, VB : ViewDataBinding>(clazz: KClass<VM>) : AppCompatActivity() {
 
-    @Inject
-    protected lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    protected lateinit var vm: VM
+    protected val vm: VM by viewModel(clazz = clazz)
     protected lateinit var vb: VB
 
     @LayoutRes
@@ -30,25 +25,6 @@ abstract class BaseActivity<VM : ViewModel, VB : ViewDataBinding> : DaggerAppCom
 
         vb = DataBindingUtil.setContentView(this, layout())
 
-        try {
-            vm = ViewModelProvider(this, viewModelFactory).get(vmTypeClass)
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-        }
-
         afterCreate(savedInstanceState)
     }
-
-    private val vmTypeClass: Class<VM>
-        get() {
-            try {
-                val className =
-                    (javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0].toString()
-                val clazz = Class.forName(className.replace("class ", ""))
-                @Suppress("UNCHECKED_CAST")
-                return clazz as Class<VM>
-            } catch (e: Exception) {
-                throw IllegalStateException(e.message)
-            }
-        }
 }

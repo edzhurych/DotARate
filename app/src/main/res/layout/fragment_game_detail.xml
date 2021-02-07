@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.ez.dotarate.viewModel.GameDetailViewModel" />
+            type="com.ez.dotarate.viewmodel.GameDetailViewModel" />
 
         <variable
             name="gameDetail"
@@ -77,7 +77,7 @@
             tools:text="All Pick" />
 
         <!--GameStats-->
-        <com.ez.dotarate.customClasses.VScroll
+        <com.ez.dotarate.customclasses.VScroll
             android:id="@+id/vsvGameDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -94,7 +94,7 @@
                 android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}">
 
                 <!--Radiant-->
-                <com.ez.dotarate.customClasses.HScroll
+                <com.ez.dotarate.customclasses.HScroll
                     android:id="@+id/hsvGameDetail"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -114,7 +114,7 @@
                             android:id="@+id/radiantTitles"
                             layout="@layout/player_title_item" />
 
-                        <com.ez.dotarate.customClasses.MyRecyclerView
+                        <com.ez.dotarate.customclasses.MyRecyclerView
                             android:id="@+id/rvRadiantGameFragment"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/gameScreenRecyclerViewHeight"
@@ -125,13 +125,13 @@
                             android:id="@+id/direTitles"
                             layout="@layout/player_title_item" />
 
-                        <com.ez.dotarate.customClasses.MyRecyclerView
+                        <com.ez.dotarate.customclasses.MyRecyclerView
                             android:id="@+id/rvDireGameFragment"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/gameScreenRecyclerViewHeight"/>
                     </LinearLayout>
 
-                </com.ez.dotarate.customClasses.HScroll>
+                </com.ez.dotarate.customclasses.HScroll>
 
                 <TextView
                     android:id="@+id/tvRadiant"
@@ -349,7 +349,7 @@
                     android:orientation="vertical"
                     app:layout_constraintGuide_begin="88dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.ez.dotarate.customClasses.VScroll>
+        </com.ez.dotarate.customclasses.VScroll>
 
         <ProgressBar
             android:id="@+id/pbGame"

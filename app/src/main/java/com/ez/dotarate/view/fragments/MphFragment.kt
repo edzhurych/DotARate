@@ -13,9 +13,9 @@ import com.ez.dotarate.constants.REFRESH_OBSERVABLE_BOOLEAN_KEY
 import com.ez.dotarate.constants.USER_ID_KEY
 import com.ez.dotarate.databinding.FragmentMphBinding
 import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.viewModel.MphViewModel
+import com.ez.dotarate.viewmodel.MphViewModel
 
-class MphFragment : BaseFragment<MphViewModel, FragmentMphBinding>() {
+class MphFragment : BaseFragment<MphViewModel, FragmentMphBinding>(MphViewModel::class) {
     private val adapter = HeroesAdapter()
 
     override fun layout() = R.layout.fragment_mph

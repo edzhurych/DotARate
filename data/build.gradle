@@ -45,7 +45,6 @@ dependencies {
     kapt databasePlugins
     api pagingDependencies
     api diDependencies
-    kapt diPlugins
     api networkDependencies
     implementation lifecycleDependencies
     kapt lifecyclePlugins

@@ -2,17 +2,11 @@ package com.ez.dotarate.di
 
 import com.ez.dotarate.adapters.GamesAdapter
 import com.ez.dotarate.adapters.SearchUsersAdapter
-import com.ez.dotarate.adapters.TopPlayersAdapter
-import com.ez.dotarate.adapters.UpcomingGamesAdapter
-import dagger.Module
-import dagger.Provides
+import org.koin.dsl.module
 
-@Module
-class AdapterModule {
+val koinAdapterModule = module {
 
-    @Provides
-    internal fun provideGamesAdapter() = GamesAdapter()
+    factory { GamesAdapter() }
 
-    @Provides
-    internal fun provideSearchUsersAdapter() = SearchUsersAdapter()
+    factory { SearchUsersAdapter() }
 }

@@ -4,12 +4,13 @@ import com.ez.data.constants.PANDASCORE_TOKEN
 import com.ez.domain.model.Team
 import com.ez.domain.model.UpcomingGame
 import com.ez.data.network.ServerApi
+import com.ez.domain.repository.PandaScoreRepository
 
 class PandaScoreRepositoryImpl(
     private val api: ServerApi
-) : com.ez.domain.repository.PandaScoreRepository {
+) : PandaScoreRepository {
 
-    override fun fetchUpcomingMatches(page: Int, loadSize: Int): ArrayList<UpcomingGame> {
+    override fun fetchUpcomingMatches(page: Int, loadSize: Int): List<UpcomingGame> {
         val call = api.fetchUpcomingGames(
             token = PANDASCORE_TOKEN,
             page = page,
@@ -19,8 +20,8 @@ class PandaScoreRepositoryImpl(
         val response = call.execute()
 
         return if (response.isSuccessful) {
-            response.body() ?: ArrayList()
-        } else ArrayList()
+            response.body() ?: emptyList()
+        } else emptyList()
     }
 
     override suspend fun fetchTeamById(teamId: Int): Team {

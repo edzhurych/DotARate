@@ -20,14 +20,13 @@ import com.ez.dotarate.databinding.FragmentGamesBinding
 import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener
 import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.viewModel.GamesViewModel
-import javax.inject.Inject
+import com.ez.dotarate.viewmodel.GamesViewModel
+import org.koin.android.ext.android.inject
 
 
-class GamesFragment : BaseFragment<GamesViewModel, FragmentGamesBinding>() {
+class GamesFragment : BaseFragment<GamesViewModel, FragmentGamesBinding>(GamesViewModel::class) {
 
-    @Inject
-    lateinit var adapter: GamesAdapter
+    val adapter: GamesAdapter by inject()
 
     private lateinit var pagedList: PagedList<Game>
 

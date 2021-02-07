@@ -2,28 +2,21 @@ package com.ez.dotarate.view.activities
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.ez.dotarate.constants.USER_ID_KEY
-import com.ez.dotarate.viewModel.SplashViewModel
-import dagger.android.AndroidInjection
-import dagger.android.support.DaggerAppCompatActivity
-import javax.inject.Inject
+import com.ez.dotarate.viewmodel.SplashViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class SplashActivity : DaggerAppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val vm: SplashViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-
         super.onCreate(savedInstanceState)
 
-        val vm = ViewModelProvider(this, viewModelFactory).get(SplashViewModel::class.java)
-
-        vm.liveData.observe(this, Observer {
+        vm.liveUserId.observe(this, Observer {
             if (it == null) {
                 val intent = Intent(this, StartActivity::class.java)
                 startActivity(intent)

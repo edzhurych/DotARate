@@ -17,18 +17,18 @@ import com.ez.dotarate.IOnTouchEvent
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.PlayerAdapter
 import com.ez.dotarate.constants.MATCH_ID_KEY
-import com.ez.dotarate.customClasses.DividerItemDecoration
-import com.ez.dotarate.customClasses.HScroll
-import com.ez.dotarate.customClasses.VScroll
+import com.ez.dotarate.customclasses.DividerItemDecoration
+import com.ez.dotarate.customclasses.HScroll
+import com.ez.dotarate.customclasses.VScroll
 import com.ez.dotarate.databinding.FragmentGameDetailBinding
 import com.ez.dotarate.extensions.graphIdToTagMap
 import com.ez.domain.model.GameDetail
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.MainActivity
-import com.ez.dotarate.viewModel.GameDetailViewModel
+import com.ez.dotarate.viewmodel.GameDetailViewModel
 
 
-class GameDetailFragment : BaseFragment<GameDetailViewModel, FragmentGameDetailBinding>(),
+class GameDetailFragment : BaseFragment<GameDetailViewModel, FragmentGameDetailBinding>(GameDetailViewModel::class),
     IOnTouchEvent {
 
     private var vScroll: VScroll? = null

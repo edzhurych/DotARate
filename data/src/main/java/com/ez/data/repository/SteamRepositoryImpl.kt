@@ -1,4 +1,6 @@
 package com.ez.data.repository
 
-class SteamRepositoryImpl : com.ez.domain.repository.SteamRepository {
+import com.ez.domain.repository.SteamRepository
+
+class SteamRepositoryImpl : SteamRepository {
 }

@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.ez.dotarate.viewModel.GameDetailViewModel" />
+            type="com.ez.dotarate.viewmodel.GameDetailViewModel" />
 
         <variable
             name="gameDetail"
@@ -114,7 +114,7 @@
             app:layout_constraintTop_toTopOf="@+id/tvDuration"
             tools:text="17" />
 
-        <com.ez.dotarate.customClasses.VScroll
+        <com.ez.dotarate.customclasses.VScroll
             android:id="@+id/vsvGameDetail"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -130,7 +130,7 @@
                 android:layout_height="match_parent"
                 android:visibility="@{vm.isLoaded() ? View.VISIBLE : View.INVISIBLE}">
 
-                <com.ez.dotarate.customClasses.HScroll
+                <com.ez.dotarate.customclasses.HScroll
                     android:id="@+id/hsvGameDetail"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -293,7 +293,7 @@
                             app:layout_constraintStart_toEndOf="@+id/tvRadiantSupport"
                             app:layout_constraintTop_toTopOf="@+id/tvRadiantSupport" />
 
-                        <com.ez.dotarate.customClasses.MyRecyclerView
+                        <com.ez.dotarate.customclasses.MyRecyclerView
                             android:id="@+id/rvRadiantGameFragment"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/gameScreenRecyclerViewHeight"
@@ -449,7 +449,7 @@
                             app:layout_constraintStart_toEndOf="@+id/tvDireSupport"
                             app:layout_constraintTop_toTopOf="@+id/tvDireSupport" />
 
-                        <com.ez.dotarate.customClasses.MyRecyclerView
+                        <com.ez.dotarate.customclasses.MyRecyclerView
                             android:id="@+id/rvDireGameFragment"
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/gameScreenRecyclerViewHeight"
@@ -458,7 +458,7 @@
                             app:layout_constraintTop_toBottomOf="@id/tvDireKills" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </com.ez.dotarate.customClasses.HScroll>
+                </com.ez.dotarate.customclasses.HScroll>
 
                 <!--Radiant-->
                 <TextView
@@ -639,7 +639,7 @@
                     app:layout_constraintGuide_begin="88dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.ez.dotarate.customClasses.VScroll>
+        </com.ez.dotarate.customclasses.VScroll>
 
         <ProgressBar
             android:id="@+id/pbGame"

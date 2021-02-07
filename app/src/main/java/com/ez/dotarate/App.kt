@@ -1,24 +1,29 @@
 package com.ez.dotarate
 
+import android.app.Application
 import android.content.Context
-import com.ez.core_di.DaggerDiComponent
-import com.ez.core_di.DiComponent
-import com.ez.dotarate.di.AppComponent
-import com.ez.dotarate.di.DaggerAppComponent
-import dagger.android.AndroidInjector
-import dagger.android.DaggerApplication
-import dagger.android.DispatchingAndroidInjector
-import javax.inject.Inject
+import com.ez.infrastructure.di.apiModule
+import com.ez.infrastructure.di.databaseModule
+import com.ez.infrastructure.di.upcomingGamesModule
+import com.ez.dotarate.di.koinAdapterModule
+import com.ez.dotarate.di.koinNavigationModule
+import com.ez.dotarate.di.observableFieldsModule
+import com.ez.dotarate.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 
 
-class App : DaggerApplication() {
+class App : Application() {
 
-    @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Any>
-
-    val appComponent: AppComponent by lazy {
-        DaggerAppComponent.factory().create(this, provideDiComponent())
-    }
+    private val koinModules = listOf(
+        koinAdapterModule,
+        koinNavigationModule,
+        observableFieldsModule,
+        viewModelModule,
+        apiModule,
+        databaseModule,
+        upcomingGamesModule,
+    )
 
     companion object {
         lateinit var instance: App
@@ -32,12 +37,9 @@ class App : DaggerApplication() {
     override fun onCreate() {
         super.onCreate()
         instance = this
-        DaggerAppComponent.factory().create(this, provideDiComponent())
+        startKoin {
+            androidContext(this@App)
+            modules(koinModules)
+        }
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = dispatchingAndroidInjector
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> = DaggerAppComponent.factory().create(this, provideDiComponent())
-
-    private fun provideDiComponent(): DiComponent =
-        DaggerDiComponent.factory().create(this)
 }

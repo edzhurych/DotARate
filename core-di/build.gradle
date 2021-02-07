@@ -40,7 +40,6 @@ dependencies {
     implementation project(path: ':domain')
     api project(path: ':data')
 
-    kapt diPlugins
     kapt databasePlugins
     implementation kotlinDependencies
     implementation coreAndroidDependencies

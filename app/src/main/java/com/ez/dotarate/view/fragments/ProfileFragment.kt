@@ -21,12 +21,12 @@ import com.ez.dotarate.constants.USER_ID_KEY
 import com.ez.dotarate.databinding.FragmentProfileBinding
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.StartActivity
-import com.ez.dotarate.viewModel.ProfileViewModel
+import com.ez.dotarate.viewmodel.ProfileViewModel
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>() {
+class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(ProfileViewModel::class) {
 
     private var mOldVerticalOffset = 0
 

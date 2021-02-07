@@ -21,14 +21,13 @@ import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.activities.MainActivity
-import com.ez.dotarate.viewModel.SearchUsersViewModel
-import javax.inject.Inject
+import com.ez.dotarate.viewmodel.SearchUsersViewModel
+import org.koin.android.ext.android.inject
 
 
-class SearchUsersFragment : BaseFragment<SearchUsersViewModel, FragmentSearchUsersBinding>() {
+class SearchUsersFragment : BaseFragment<SearchUsersViewModel, FragmentSearchUsersBinding>(SearchUsersViewModel::class) {
 
-    @Inject
-    lateinit var adapter: SearchUsersAdapter
+    val adapter: SearchUsersAdapter by inject()
     private lateinit var pagedList: PagedList<SearchUser>
 
     override fun layout() = R.layout.fragment_search_users

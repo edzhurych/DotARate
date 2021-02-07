@@ -2,9 +2,6 @@ package com.ez.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.liveData
-import androidx.lifecycle.switchMap
 import com.ez.data.constants.STEAM_API_KEY
 import com.ez.data.db.GameDao
 import com.ez.data.db.UserDao
@@ -14,13 +11,10 @@ import com.ez.data.model.toUserIdDb
 import com.ez.data.network.ServerApi
 import com.ez.domain.model.*
 import com.ez.domain.repository.UserRepository
-import javax.inject.Inject
-import javax.inject.Named
 
 
-class UserRepositoryImpl
-@Inject constructor(
-    @Named("OpendotaApi") private val api: ServerApi,
+class UserRepositoryImpl constructor(
+    private val api: ServerApi,
     private val userIdDao: UserIdDao,
     private val userDao: UserDao,
     private val gameDao: GameDao,
@@ -55,8 +49,7 @@ class UserRepositoryImpl
      */
     override suspend fun saveUser(user: User) {
         Log.d("MyLogs", "СОХРАНЯЕМ ПОЛЬЗОВАТЕЛЯ В БД")
-        val id = userDao.saveUser(user.toUserDb())
-        Log.d("MyLogs", "СОХРАНЯЕМ ПОЛЬЗОВАТЕЛЯ В БД. ID = $id")
+        userDao.saveUser(user.toUserDb())
     }
 
     /**

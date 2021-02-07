@@ -2,15 +2,14 @@ package com.ez.dotarate.view.fragments
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.ez.dotarate.R
 import com.ez.dotarate.databinding.FragmentTeamBinding
 import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.viewModel.TeamViewModel
+import com.ez.dotarate.viewmodel.TeamViewModel
 
 
-class TeamFragment : BaseFragment<TeamViewModel, FragmentTeamBinding>() {
+class TeamFragment : BaseFragment<TeamViewModel, FragmentTeamBinding>(TeamViewModel::class) {
 
     private val args by navArgs<TeamFragmentArgs>()
 

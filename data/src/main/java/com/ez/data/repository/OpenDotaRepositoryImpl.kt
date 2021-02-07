@@ -2,8 +2,9 @@ package com.ez.data.repository
 
 import android.util.Log
 import androidx.paging.DataSource
-import com.ez.data.dataSource.GamesDataSource
-import com.ez.data.dataSource.HeroesDataSource
+import com.ez.data.datasource.GamesDataSource
+import com.ez.data.datasource.HeroesDataSource
+import com.ez.data.db.AppDatabase
 import com.ez.data.model.*
 import com.ez.data.network.ServerApi
 import com.ez.domain.model.Game
@@ -12,14 +13,11 @@ import com.ez.domain.model.Hero
 import com.ez.domain.model.SearchUser
 import com.ez.domain.repository.OpenDotaRepository
 import kotlinx.coroutines.CoroutineScope
-import javax.inject.Inject
-import javax.inject.Named
 
 
-class OpenDotaRepositoryImpl
-@Inject constructor(
-    @Named("OpendotaApi") private val api: ServerApi,
-    private val db: com.ez.data.db.AppDatabase
+class OpenDotaRepositoryImpl constructor(
+    private val api: ServerApi,
+    private val db: AppDatabase
 ) : OpenDotaRepository {
 
     private fun createRemoteGamesDataSource(
@@ -108,8 +106,8 @@ class OpenDotaRepositoryImpl
         val response = api.getGames(id32)
 
         return if (response.isSuccessful) {
-            response.body() ?: listOf()
-        } else listOf()
+            response.body() ?: emptyList()
+        } else emptyList()
     }
 
     /**
@@ -136,8 +134,8 @@ class OpenDotaRepositoryImpl
         val response = api.fetchHeroes(id32)
 
         return if (response.isSuccessful) {
-            response.body() ?: listOf()
-        } else listOf()
+            response.body() ?: emptyList()
+        } else emptyList()
     }
 
     /**
@@ -154,8 +152,8 @@ class OpenDotaRepositoryImpl
         val response = api.fetchGames(id = id32, loadPosition = loadPosition, limit = limitSize)
 
         return if (response.isSuccessful) {
-            response.body() ?: listOf()
-        } else listOf()
+            response.body() ?: emptyList()
+        } else emptyList()
     }
 
     /**
@@ -167,8 +165,8 @@ class OpenDotaRepositoryImpl
         val response = api.searchUsersByName(name)
 
         return if (response.isSuccessful) {
-            response.body() ?: listOf()
-        } else listOf()
+            response.body() ?: emptyList()
+        } else emptyList()
     }
 
     /**
@@ -180,7 +178,7 @@ class OpenDotaRepositoryImpl
         val response = api.getTopPlayers()
 
         return if (response.isSuccessful) {
-            response.body() ?: listOf()
-        } else listOf()
+            response.body() ?: emptyList()
+        } else emptyList()
     }
 }

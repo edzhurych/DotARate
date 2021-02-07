@@ -17,7 +17,7 @@ import com.ez.dotarate.extensions.graphIdToTagMap
 import com.ez.dotarate.extensions.popMyBackStack
 import com.ez.dotarate.extensions.setupWithNavController
 import com.ez.dotarate.view.BaseActivity
-import com.ez.dotarate.viewModel.MainViewModel
+import com.ez.dotarate.viewmodel.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -25,7 +25,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
  * "Вкладка" - это NavHostFragment
  */
 
-class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>() {
+class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewModel::class) {
 
     private lateinit var mActionBar: ActionBar
     private val fm = supportFragmentManager
