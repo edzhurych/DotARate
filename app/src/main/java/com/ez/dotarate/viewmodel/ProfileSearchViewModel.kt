@@ -2,7 +2,6 @@ package com.ez.dotarate.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ez.domain.model.UserResponse
@@ -13,10 +12,10 @@ import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class ProfileSearchViewModel constructor(
+class ProfileSearchViewModel(
     application: Application,
     private val userRepository: UserRepository
-) : AndroidViewModel(application) {
+) : BaseViewModel(application) {
 
     val liveUser = MutableLiveData<UserResponse>()
     val liveWinsAndLosses = MutableLiveData<WinsAndLosses>()

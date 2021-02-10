@@ -9,7 +9,7 @@ interface UserRepository {
     suspend fun getUserId(): UserId?
     suspend fun logout()
     suspend fun saveUser(user: User)
-    suspend fun getUser(): User
+    suspend fun getUser(): User?
     fun getUserName(): LiveData<UserName?>
 
     // Network

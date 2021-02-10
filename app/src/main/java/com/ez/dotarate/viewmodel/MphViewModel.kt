@@ -3,7 +3,6 @@ package com.ez.dotarate.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
@@ -16,10 +15,10 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 
-class MphViewModel constructor(
+class MphViewModel(
     application: Application,
     private val repository: OpenDotaRepository
-) : AndroidViewModel(application) {
+) : BaseViewModel(application) {
 
     var id32: Int = 0
     var isLocal = false

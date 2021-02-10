@@ -8,7 +8,6 @@ import com.ez.domain.model.SearchUser
 import kotlinx.coroutines.CoroutineScope
 
 interface OpenDotaRepository {
-
     // Database
     suspend fun saveGames(listGames: List<Game>): List<Long>
     fun getGamesDataSourceFactory(

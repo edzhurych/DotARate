@@ -4,7 +4,7 @@ import com.ez.dotarate.customclasses.UpcomingGamesDataLoaded
 import org.koin.dsl.module
 
 
-val observableFieldsModule = module {
+val koinObservableFieldsModule = module {
 
     factory { UpcomingGamesDataLoaded(false) }
 }

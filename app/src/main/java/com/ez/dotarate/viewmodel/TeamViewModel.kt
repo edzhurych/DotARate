@@ -1,20 +1,21 @@
 package com.ez.dotarate.viewmodel
 
+import android.app.Application
 import androidx.databinding.ObservableArrayList
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.ez.dotarate.BR
-import com.ez.dotarate.R
 import com.ez.domain.model.Team
 import com.ez.domain.model.TeamPlayer
 import com.ez.domain.repository.PandaScoreRepository
+import com.ez.dotarate.BR
+import com.ez.dotarate.R
 import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 
-class TeamViewModel  constructor(
+class TeamViewModel(
+    application: Application,
     private val repository: PandaScoreRepository
-) : ViewModel() {
+) : BaseViewModel(application) {
 
     val itemBinding = ItemBinding.of<TeamPlayer>(BR.teamPlayer, R.layout.team_player_item)
 

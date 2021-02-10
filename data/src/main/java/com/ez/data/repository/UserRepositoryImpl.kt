@@ -55,9 +55,9 @@ class UserRepositoryImpl constructor(
     /**
      * Room
      */
-    override suspend fun getUser(): User {
+    override suspend fun getUser(): User? {
         Log.d("MyLogs", "ПОЛУЧАЕМ ПОЛЬЗОВАТЕЛЯ ИЗ БД")
-        return userDao.getUser().toUser()
+        return userDao.getUser()?.toUser()
     }
 
     /**

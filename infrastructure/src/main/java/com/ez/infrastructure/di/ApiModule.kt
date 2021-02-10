@@ -11,6 +11,7 @@ import com.ez.data.repository.UserRepositoryImpl
 import com.ez.domain.repository.OpenDotaRepository
 import com.ez.domain.repository.PandaScoreRepository
 import com.ez.domain.repository.UserRepository
+import kotlinx.coroutines.CoroutineScope
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.core.qualifier.named
@@ -22,7 +23,7 @@ import java.util.concurrent.TimeUnit
 class OpenDotaApi
 class PandaScoreApi
 
-val apiModule = module {
+val koinApiModule = module {
 
     single(named<OpenDotaApi>()) {
         Retrofit.Builder().baseUrl(BASE_URL_OPENDOTA)

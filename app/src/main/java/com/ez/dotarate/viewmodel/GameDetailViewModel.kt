@@ -12,10 +12,10 @@ import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class GameDetailViewModel constructor(
+class GameDetailViewModel(
     application: Application,
     private val repository: OpenDotaRepository
-) : AndroidViewModel(application) {
+) : BaseViewModel(application) {
 
     val liveGame = MutableLiveData<GameDetail>()
     val errorLiveData = MutableLiveData<String>()

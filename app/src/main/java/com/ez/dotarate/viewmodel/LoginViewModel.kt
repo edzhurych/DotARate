@@ -1,7 +1,7 @@
 package com.ez.dotarate.viewmodel
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
 
 
-class LoginViewModel constructor(): ViewModel() {
+class LoginViewModel(application: Application) : BaseViewModel(application) {
 }

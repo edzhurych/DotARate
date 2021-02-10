@@ -2,15 +2,15 @@ package com.ez.data.datasource
 
 import android.util.Log
 import androidx.paging.PositionalDataSource
-import com.ez.data.repository.OpenDotaRepositoryImpl
 import com.ez.domain.model.Hero
+import com.ez.domain.repository.OpenDotaRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
 class HeroesDataSource(
     private val scope: CoroutineScope,
-    private val repository: OpenDotaRepositoryImpl,
+    private val repository: OpenDotaRepository,
     private val id32: Int
 ) : PositionalDataSource<Hero>() {
 

@@ -2,15 +2,15 @@ package com.ez.dotarate.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.ez.domain.model.User
-import com.ez.dotarate.customclasses.Event
 import com.ez.domain.model.UserResponse
 import com.ez.domain.model.WinsAndLosses
 import com.ez.domain.repository.UserRepository
+import com.ez.dotarate.customclasses.Event
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
@@ -18,13 +18,15 @@ import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
 
-class ProfileViewModel constructor(
+class ProfileViewModel(
     application: Application,
     private val repository: UserRepository
-) : AndroidViewModel(application) {
+) : BaseViewModel(application) {
 
-    val liveUser = liveData {
-        emit(repository.getUser())
+    val liveUser: LiveData<User> by lazy {
+        liveData {
+            emit(repository.getUser() ?: return@liveData)
+        }
     }
 
     val isDataReceived = ObservableBoolean(false)

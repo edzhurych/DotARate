@@ -2,7 +2,6 @@ package com.ez.dotarate.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
@@ -15,10 +14,10 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 import java.util.concurrent.TimeoutException
 
-class SearchUsersViewModel constructor(
+class SearchUsersViewModel(
     application: Application,
     private val repository: OpenDotaRepository
-) : AndroidViewModel(application) {
+) : BaseViewModel(application) {
 
     val liveSearchUsers: LiveData<PagedList<SearchUser>> by lazy {
         val config = PagedList.Config.Builder()
@@ -39,7 +38,10 @@ class SearchUsersViewModel constructor(
                 val listSearchUsers = repository.searchUsersByName(name)
                 if (listSearchUsers.isNotEmpty()) {
                     repository.insertSearchUsers(listSearchUsers)
-                    Log.d("MyLogs", "SearchUsersViewModel. РЕЗУЛЬТАТ ЗАПРОСА ПУСТ = $listSearchUsers")
+                    Log.d(
+                        "MyLogs",
+                        "SearchUsersViewModel. РЕЗУЛЬТАТ ЗАПРОСА ПУСТ = $listSearchUsers"
+                    )
                 }
             } catch (e: UnknownHostException) {
                 // Нет интернета

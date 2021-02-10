@@ -19,6 +19,7 @@ ext {
     def junit_version = '4.13.1'
     def tatarka = '4.0.0'
     def koin_version = "2.2.2"
+    def koin_arch = "0.9.3"
 
     kotlinDependencies = [
             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}",
@@ -36,6 +37,7 @@ ext {
             "org.koin:koin-android:$koin_version",
             "org.koin:koin-android-scope:$koin_version",
             "org.koin:koin-android-viewmodel:$koin_version",
+            "org.koin:koin-android-architecture:$koin_arch",
     ]
 
     networkDependencies = [

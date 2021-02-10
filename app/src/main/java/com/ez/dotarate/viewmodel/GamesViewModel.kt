@@ -3,15 +3,14 @@ package com.ez.dotarate.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ez.domain.model.Game
-import com.ez.dotarate.customclasses.Event
 import com.ez.domain.repository.OpenDotaRepository
+import com.ez.dotarate.customclasses.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,11 +18,12 @@ import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
 
-class GamesViewModel constructor(
-    application: Application, private val repository: OpenDotaRepository
-) : AndroidViewModel(application) {
+class GamesViewModel(
+    application: Application,
+    private val repository: OpenDotaRepository
+) : BaseViewModel(application) {
 
-    var id32: Int = 0
+    var id32: Int? = null
     var isLocal = false
 
     val isGamesEmpty = ObservableBoolean(false)
@@ -45,7 +45,7 @@ class GamesViewModel constructor(
             repository.getGamesDataSourceFactory(
                 isLocal = isLocal,
                 scope = viewModelScope,
-                id32 = id32
+                id32 = id32 ?: 0
             ), config
         ).build()
     }

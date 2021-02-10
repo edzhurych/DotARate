@@ -4,13 +4,13 @@ import com.ez.dotarate.viewmodel.*
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-val viewModelModule = module {
+val koinViewModelModule = module {
 
     viewModel { GamesViewModel(get(), get()) }
 
-    viewModel { LoginViewModel() }
+    viewModel { LoginViewModel(get()) }
 
-    viewModel { MainViewModel(get(), get(), get()) }
+    viewModel { MainViewModel(get(), get(), get(), get()) }
 
     viewModel { MphViewModel(get(), get()) }
 
@@ -22,7 +22,7 @@ val viewModelModule = module {
 
     viewModel { GameDetailViewModel(get(), get()) }
 
-    viewModel { UpcomingGamesViewModel(get(), get(), get(), get()) }
+    viewModel { UpcomingGamesViewModel(get(), get(), get()) }
 
     viewModel { ProfileSearchViewModel(get(), get()) }
 
@@ -30,5 +30,5 @@ val viewModelModule = module {
 
     viewModel { SearchUsersViewModel(get(), get()) }
 
-    viewModel { TeamViewModel(get()) }
+    viewModel { TeamViewModel(get(), get()) }
 }

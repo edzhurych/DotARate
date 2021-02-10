@@ -1,15 +1,14 @@
 package com.ez.dotarate.viewmodel
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.liveData
 import com.ez.domain.repository.UserRepository
 
 
-class SplashViewModel constructor(
+class SplashViewModel(
     application: Application,
     private val repository: UserRepository
-) : AndroidViewModel(application) {
+) : BaseViewModel(application) {
 
     /**
      * LiveData’s building block already provides a Coroutine Scope where to call

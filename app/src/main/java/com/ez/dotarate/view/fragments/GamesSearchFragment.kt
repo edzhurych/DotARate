@@ -32,7 +32,6 @@ class GamesSearchFragment :
     override fun layout() = R.layout.fragment_games
 
     override fun afterCreateView(view: View, savedInstanceState: Bundle?) {
-
         Log.d("MyLogs", "GamesSearchFragment. AfterCreateView")
 
         val id32 = requireArguments().getInt(USER_ID_KEY)
@@ -101,6 +100,7 @@ class GamesSearchFragment :
                 override fun onChanged(position: Int, count: Int) {
                     Log.d("MyLogs", "GamesSearchFragment. onChanged")
                 }
+
                 override fun onInserted(position: Int, count: Int) {
                     Log.d("MyLogs", "GamesSearchFragment. onInserted")
                     vm.isGamesEmpty.set(false)

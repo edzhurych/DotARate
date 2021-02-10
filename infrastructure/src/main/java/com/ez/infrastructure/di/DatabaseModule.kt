@@ -8,7 +8,7 @@ import com.ez.data.db.UserIdDao
 import org.koin.dsl.module
 
 
-val databaseModule = module {
+val koinDatabaseModule = module {
 
     single<AppDatabase> {
         Room.databaseBuilder(get(), AppDatabase::class.java, "database")

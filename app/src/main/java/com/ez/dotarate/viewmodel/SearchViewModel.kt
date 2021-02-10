@@ -2,7 +2,6 @@ package com.ez.dotarate.viewmodel
 
 import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ez.domain.model.SearchUser
@@ -12,10 +11,10 @@ import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-class SearchViewModel constructor(
+class SearchViewModel(
     application: Application,
     private val repository: OpenDotaRepository
-) : AndroidViewModel(application) {
+) : BaseViewModel(application) {
 
     var isExistedFragment = false
     val liveTopPlayers = MutableLiveData<List<SearchUser>>()

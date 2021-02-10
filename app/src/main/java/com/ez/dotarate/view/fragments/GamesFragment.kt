@@ -111,7 +111,7 @@ class GamesFragment : BaseFragment<GamesViewModel, FragmentGamesBinding>(GamesVi
                 pagedList = it
             } else {
                 vm.isGamesEmpty.set(true)
-                Log.d("MyLogs", "GamesFragment. PagedList = $it")
+                Log.d("MyLogs", "GamesFragment. PagedList пустой = $it")
             }
             // Need to use submitList to set the PagedListAdapter value
             adapter.submitList(it)

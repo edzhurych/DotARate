@@ -31,6 +31,7 @@ class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcom
     override fun layout() = R.layout.fragment_upcoming_games
 
     override fun afterCreateView(view: View, savedInstanceState: Bundle?) {
+
         vb.adapter = adapter
         vb.isDataLoaded = vm.isDataLoaded
 
