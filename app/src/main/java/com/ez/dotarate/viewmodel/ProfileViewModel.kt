@@ -1,6 +1,7 @@
 package com.ez.dotarate.viewmodel
 
 import android.app.Application
+import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,11 +24,7 @@ class ProfileViewModel(
     private val repository: UserRepository
 ) : BaseViewModel(application) {
 
-    val liveUser: LiveData<User> by lazy {
-        liveData {
-            emit(repository.getUser() ?: return@liveData)
-        }
-    }
+    val liveUser: LiveData<User?> = repository.getUser()
 
     val isDataReceived = ObservableBoolean(false)
     val isNeedPositionToStartGames = ObservableBoolean(false)

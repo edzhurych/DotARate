@@ -12,7 +12,7 @@ import com.ez.domain.model.UserName
 interface UserDao {
 
     @Query("SELECT * FROM userDb")
-    suspend fun getUser(): UserDb?
+    fun getUser(): LiveData<UserDb?>
 
     @Query("SELECT name FROM userDb")
     fun getUserName(): LiveData<UserName?>

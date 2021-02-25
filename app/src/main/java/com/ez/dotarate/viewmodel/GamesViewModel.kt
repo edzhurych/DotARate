@@ -9,7 +9,9 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ez.domain.model.Game
-import com.ez.domain.repository.OpenDotaRepository
+import com.ez.domain.usecase.GetGamesDataSourceFactoryUseCase
+import com.ez.domain.usecase.GetMatchesUseCase
+import com.ez.domain.usecase.SaveGamesUseCase
 import com.ez.dotarate.customclasses.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +22,9 @@ import java.net.UnknownHostException
 
 class GamesViewModel(
     application: Application,
-    private val repository: OpenDotaRepository
+    private val getGamesDataSourceFactory: GetGamesDataSourceFactoryUseCase,
+    private val getMatches: GetMatchesUseCase,
+    private val saveGames: SaveGamesUseCase,
 ) : BaseViewModel(application) {
 
     var id32: Int? = null
@@ -42,7 +46,7 @@ class GamesViewModel(
         Log.d("MyLogs", "isLocal = $isLocal")
 
         LivePagedListBuilder<Int, Game>(
-            repository.getGamesDataSourceFactory(
+            getGamesDataSourceFactory(
                 isLocal = isLocal,
                 scope = viewModelScope,
                 id32 = id32 ?: 0
@@ -54,10 +58,10 @@ class GamesViewModel(
         viewModelScope.launch {
             try {
                 val listGames = withContext(Dispatchers.IO) {
-                    repository.getMatches(id32)
+                    getMatches(id32)
                 }
                 if (listGames.isNotEmpty()) {
-                    repository.saveGames(listGames)
+                    saveGames(listGames)
                     isLoaded.set(true)
                 } else {
                     isLoaded.set(true)

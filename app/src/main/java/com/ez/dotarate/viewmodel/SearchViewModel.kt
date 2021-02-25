@@ -22,7 +22,7 @@ class SearchViewModel(
     fun getTopPlayers() {
         viewModelScope.launch(IO) {
             try {
-                val listSearchUsers = repository.getTopPlayers()
+                val listSearchUsers = repository.fetchTopPlayers()
 
                 Log.d("MyLogs", "SearchViewModel. РЕЗУЛЬТАТ ЗАПРОСА = $listSearchUsers")
                 if (listSearchUsers.isNotEmpty()) {

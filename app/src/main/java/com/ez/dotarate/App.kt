@@ -3,9 +3,6 @@ package com.ez.dotarate
 import android.app.Application
 import android.content.Context
 import com.ez.dotarate.di.*
-import com.ez.infrastructure.di.koinApiModule
-import com.ez.infrastructure.di.koinDatabaseModule
-import com.ez.infrastructure.di.koinUpcomingGamesModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

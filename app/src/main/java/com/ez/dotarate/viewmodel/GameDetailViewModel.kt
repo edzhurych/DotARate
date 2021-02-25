@@ -2,7 +2,6 @@ package com.ez.dotarate.viewmodel
 
 import android.app.Application
 import androidx.databinding.ObservableBoolean
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.ez.domain.model.GameDetail
@@ -25,7 +24,7 @@ class GameDetailViewModel(
     fun getGameDetail(id: Long) {
         viewModelScope.launch(IO) {
             try {
-                val gameDetails = repository.getGameDetail(id)
+                val gameDetails = repository.fetchGameDetail(id)
 
                 //Log.d("MyLogs", "УСПЕШЕЫЙ ЗАПРОС = ${response.body()}")
                 if (gameDetails != null) {

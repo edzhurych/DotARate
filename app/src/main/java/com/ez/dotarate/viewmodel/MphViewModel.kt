@@ -9,6 +9,9 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.ez.domain.model.Hero
 import com.ez.domain.repository.OpenDotaRepository
+import com.ez.domain.usecase.GetHeroesDataSourceFactoryUseCase
+import com.ez.domain.usecase.GetHeroesUseCase
+import com.ez.domain.usecase.SaveHeroesUseCase
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import java.net.SocketTimeoutException
@@ -17,7 +20,9 @@ import java.net.UnknownHostException
 
 class MphViewModel(
     application: Application,
-    private val repository: OpenDotaRepository
+    private val getHeroesDataSourceFactory: GetHeroesDataSourceFactoryUseCase,
+    private val getHeroesUseCase: GetHeroesUseCase,
+    private val saveHeroesUseCase: SaveHeroesUseCase,
 ) : BaseViewModel(application) {
 
     var id32: Int = 0
@@ -35,7 +40,7 @@ class MphViewModel(
             .build()
 
         LivePagedListBuilder<Int, Hero>(
-            repository.getHeroesDataSourceFactory(
+            getHeroesDataSourceFactory(
                 isLocal = isLocal,
                 scope = viewModelScope,
                 id32 = id32
@@ -46,11 +51,11 @@ class MphViewModel(
     fun getHeroes(id32: Int) {
         viewModelScope.launch(IO) {
             try {
-                val listHeroes = repository.fetchHeroes(id32)
+                val listHeroes = getHeroesUseCase(id32)
 
                 Log.d("MyLogs", "MphViewModel. ПОЛУЧЕННЫЕ ДАННЫЕ = ${listHeroes}")
                 if (listHeroes.isNotEmpty()) {
-                    val inserts = repository.saveHeroes(listHeroes)
+                    val inserts = saveHeroesUseCase(listHeroes)
                     Log.d("MyLogs", "MphViewModel. ВСТАВЛЕННЫЕ ЗАПИСИ = ${inserts.size}")
                 }
             } catch (e: UnknownHostException) {

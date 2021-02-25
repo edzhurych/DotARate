@@ -6,13 +6,13 @@ import org.koin.dsl.module
 
 val koinViewModelModule = module {
 
-    viewModel { GamesViewModel(get(), get()) }
+    viewModel { GamesViewModel(get(), get(), get(), get()) }
 
     viewModel { LoginViewModel(get()) }
 
     viewModel { MainViewModel(get(), get(), get(), get()) }
 
-    viewModel { MphViewModel(get(), get()) }
+    viewModel { MphViewModel(get(), get(), get(), get()) }
 
     viewModel { ProfileViewModel(get(), get()) }
 

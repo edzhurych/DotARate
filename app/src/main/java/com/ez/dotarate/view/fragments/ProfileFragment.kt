@@ -53,7 +53,7 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(P
 
         vm.liveUser.observe(this, {
             Log.d("MyLogs", "ProfileFragment. liveUser.")
-            if (it != null) {
+            it?.let {
                 Log.d("MyLogs", "ProfileFragment. liveUser. УСТАНОВКА isDataReceived в true")
                 vm.isDataReceived.set(true)
                 vb.user = it
@@ -67,7 +67,6 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(P
 
         vm.userResponseLiveData.observe(this, {
             Log.d("MyLogs", "ProfileFragment. userResponseLiveData.")
-            //vb.userResponse = it
 
             user.name = it.profile.personaname
             user.avatarUrl = it.profile.avatarfull
@@ -79,7 +78,6 @@ class ProfileFragment : BaseFragment<ProfileViewModel, FragmentProfileBinding>(P
 
         vm.liveWinsAndLosses.observe(this, {
             Log.d("MyLogs", "ProfileFragment. wlLiveData.")
-            //vb.winsAndLosses = it
 
             user.wins = it.win
             user.losses = it.lose

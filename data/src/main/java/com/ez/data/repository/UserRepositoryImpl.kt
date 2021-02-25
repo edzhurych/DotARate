@@ -2,6 +2,8 @@ package com.ez.data.repository
 
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import com.ez.data.constants.STEAM_API_KEY
 import com.ez.data.db.GameDao
 import com.ez.data.db.UserDao
@@ -55,9 +57,12 @@ class UserRepositoryImpl constructor(
     /**
      * Room
      */
-    override suspend fun getUser(): User? {
-        Log.d("MyLogs", "ПОЛУЧАЕМ ПОЛЬЗОВАТЕЛЯ ИЗ БД")
-        return userDao.getUser()?.toUser()
+    override fun getUser(): LiveData<User?> {
+        val toUser = userDao.getUser().map {
+            it?.toUser()
+        }
+        Log.d("MyLogs", "ПОЛУЧАЕМ ПОЛЬЗОВАТЕЛЯ ИЗ БД = $toUser")
+        return toUser
     }
 
     /**
