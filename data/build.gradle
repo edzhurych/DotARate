@@ -9,13 +9,11 @@ apply from: '../dependencies.gradle'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -39,9 +37,23 @@ android {
 dependencies {
     implementation project(path: ':domain')
 
+    // The following Espresso dependency can be either "implementation"
+    // or "androidTestImplementation", depending on whether you want the
+    // dependency to appear on your APK's compile classpath or the test APK
+    // classpath.
+    androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
+    // Required -- JUnit 4 framework
+    testImplementation 'junit:junit:4.13.2'
+    // Optional -- Robolectric environment
+    testImplementation 'androidx.test:core:1.4.0'
+    // Optional -- Mockito framework
+    testImplementation 'org.mockito:mockito-core:3.9.0'
     implementation kotlinDependencies
     implementation coreAndroidDependencies
     api databaseDependencies
+    testImplementation juntDependenciesOnly
+    testImplementation mockitoDependencies
+    androidTestImplementation androidTestDependencies
     kapt databasePlugins
     api pagingDependencies
     api diDependencies

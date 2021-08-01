@@ -16,7 +16,7 @@ ext {
     def picasso = "2.71828"
     def lifecycle = '2.2.0-rc03'
     def databinding = '3.1.4'
-    def junit_version = '4.13.1'
+    def junit_version = '4.13.2'
     def tatarka = '4.0.0'
     def koin_version = "2.2.2"
     def koin_arch = "0.9.3"
@@ -101,9 +101,38 @@ ext {
             "junit:junit:${junit_version}"
     ]
 
+    robolectricDependencies = [
+            "androidx.test:core:1.3.0"
+    ]
+
+    mockitoDependencies = [
+            "org.mockito:mockito-core:1.10.19",
+            "org.mockito.kotlin:mockito-kotlin:3.2.0",
+    ]
+
+    testDependencies = [
+            'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.0',
+            'android.arch.core:core-testing:1.1.1',
+    ]
+
     androidTestDependencies = [
+            'androidx.test.espresso:espresso-core:3.3.0',
+            // Core library
+            'androidx.test:core:1.3.0',
+            // AndroidJUnitRunner and JUnit Rules
+            'androidx.test:runner:1.3.0',
+            'androidx.test:rules:1.3.0',
+            // Assertions
             'androidx.test.ext:junit:1.1.2',
-            'androidx.test.espresso:espresso-core:3.3.0'
+            'androidx.test.ext:truth:1.3.0',
+            'com.google.truth:truth:0.42',
+            // Espresso dependencies
+            'androidx.test.espresso:espresso-core:3.3.0',
+            'androidx.test.espresso:espresso-contrib:3.3.0',
+            'androidx.test.espresso:espresso-intents:3.3.0',
+            'androidx.test.espresso:espresso-accessibility:3.3.0',
+            'androidx.test.espresso:espresso-web:3.3.0',
+            'androidx.test.espresso.idling:idling-concurrent:3.3.0',
     ]
 
     tatarkaDependencies = [

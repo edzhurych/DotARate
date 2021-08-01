@@ -7,7 +7,7 @@ apply from: '../dependencies.gradle'
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "29.0.3"
+    buildToolsVersion "30.0.3"
     defaultConfig {
         applicationId "com.ez.dotarate"
         minSdkVersion 23
@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    testOptions {
+        unitTests.includeAndroidResources = true
+    }
 }
 
 
@@ -42,10 +45,11 @@ dependencies {
     implementation project(path: ':domain')
     api project(path: ':infrastructure')
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
     implementation kotlinDependencies
     implementation coreAndroidDependencies
     implementation diDependencies
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation networkDependencies
     implementation coroutinesDependencies
     implementation coroutinesDependencies
@@ -59,6 +63,11 @@ dependencies {
     implementation lifecycleDependencies
     kapt lifecyclePlugins
     kapt databindingPlugins
-    implementation juntDependenciesOnly
+
+    testImplementation testDependencies
+    testImplementation juntDependenciesOnly
+    testImplementation robolectricDependencies
+    testImplementation mockitoDependencies
+
     implementation tatarkaDependencies
 }
