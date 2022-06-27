@@ -5,7 +5,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.ez.dotarate.view.fragments.ProfileFragment"
+        android:name="com.ez.dotarate.view.profile.ProfileFragment"
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_gameDetailFragment"
@@ -13,7 +13,7 @@
     </fragment>
     <fragment
         android:id="@+id/gameDetailFragment"
-        android:name="com.ez.dotarate.view.fragments.GameDetailFragment"
+        android:name="com.ez.dotarate.view.gamedetail.GameDetailFragment"
         android:label="GameDetailFragment" >
         <action
             android:id="@+id/action_gameDetailFragment_to_profileSearchFragment"
@@ -21,6 +21,6 @@
     </fragment>
     <fragment
         android:id="@+id/profileSearchFragment"
-        android:name="com.ez.dotarate.view.fragments.ProfileSearchFragment"
+        android:name="com.ez.dotarate.view.profile.ProfileSearchFragment"
         android:label="ProfileSearchFragment" />
 </navigation>

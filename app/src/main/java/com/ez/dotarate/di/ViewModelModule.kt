@@ -1,6 +1,18 @@
 package com.ez.dotarate.di
 
-import com.ez.dotarate.viewmodel.*
+import com.ez.dotarate.view.gamedetail.GameDetailViewModel
+import com.ez.dotarate.view.games.GamesViewModel
+import com.ez.dotarate.view.login.LoginViewModel
+import com.ez.dotarate.view.main.MainViewModel
+import com.ez.dotarate.view.mph.MphViewModel
+import com.ez.dotarate.view.profile.ProfileSearchViewModel
+import com.ez.dotarate.view.profile.ProfileViewModel
+import com.ez.dotarate.view.search.SearchUsersViewModel
+import com.ez.dotarate.view.search.SearchViewModel
+import com.ez.dotarate.view.splash.SplashViewModel
+import com.ez.dotarate.view.steam.SteamViewModel
+import com.ez.dotarate.view.team.TeamViewModel
+import com.ez.dotarate.view.upcominggames.UpcomingGamesViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

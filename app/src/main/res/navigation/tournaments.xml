@@ -6,7 +6,7 @@
     app:startDestination="@id/upcomingGamesFragment">
     <fragment
         android:id="@+id/upcomingGamesFragment"
-        android:name="com.ez.dotarate.view.fragments.UpcomingGamesFragment"
+        android:name="com.ez.dotarate.view.upcominggames.UpcomingGamesFragment"
         android:label="UpcomingGamesFragment">
         <action
             android:id="@+id/action_upcomingGamesFragment_to_teamFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/teamFragment"
-        android:name="com.ez.dotarate.view.fragments.TeamFragment"
+        android:name="com.ez.dotarate.view.team.TeamFragment"
         android:label="fragment_team"
         tools:layout="@layout/fragment_team">
         <argument

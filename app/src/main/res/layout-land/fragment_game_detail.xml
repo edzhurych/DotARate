@@ -9,7 +9,7 @@
 
         <variable
             name="vm"
-            type="com.ez.dotarate.viewmodel.GameDetailViewModel" />
+            type="com.ez.dotarate.view.gamedetail.GameDetailViewModel" />
 
         <variable
             name="gameDetail"

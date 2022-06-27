@@ -1,10 +1,10 @@
 package com.ez.dotarate.viewmodel
 
 import android.app.Application
-import android.util.StateSet.NOTHING
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.ez.domain.model.GameDetail
 import com.ez.domain.repository.OpenDotaRepository
+import com.ez.dotarate.view.gamedetail.GameDetailViewModel
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

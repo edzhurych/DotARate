@@ -10,7 +10,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.ez.dotarate.view.activities.StartActivity">
+        tools:context="com.ez.dotarate.view.start.StartActivity">
 
         <!--Системная кнопка Back тоже работает и выполняет шаг назад. Это происходит благодаря атрибуту app:defaultNavHost="true"-->
         <fragment

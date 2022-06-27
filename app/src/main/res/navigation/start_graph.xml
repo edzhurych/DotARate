@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.ez.dotarate.view.fragments.LoginFragment"
+        android:name="com.ez.dotarate.view.login.LoginFragment"
         android:label="LoginFragment" >
         <action
             android:id="@+id/action_loginFragment_to_steamFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/steamFragment"
-        android:name="com.ez.dotarate.view.fragments.SteamFragment"
+        android:name="com.ez.dotarate.view.steam.SteamFragment"
         android:label="SteamFragment" >
         <action
             android:id="@+id/action_steamFragment_to_mainActivity"
@@ -23,7 +23,7 @@
     </fragment>
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.ez.dotarate.view.activities.MainActivity"
+        android:name="com.ez.dotarate.view.main.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
 </navigation>

@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.fragments.TeamFragment">
+    tools:context=".view.team.TeamFragment">
 
     <data>
 
         <variable
             name="vm"
-            type="com.ez.dotarate.viewmodel.TeamViewModel" />
+            type="com.ez.dotarate.view.team.TeamViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

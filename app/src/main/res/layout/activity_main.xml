@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:background="@color/white"
         android:fitsSystemWindows="true"
-        tools:context="com.ez.dotarate.view.activities.MainActivity">
+        tools:context="com.ez.dotarate.view.main.MainActivity">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/fpToolbar"

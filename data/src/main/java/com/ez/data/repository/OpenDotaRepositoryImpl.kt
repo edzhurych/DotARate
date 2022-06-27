@@ -14,7 +14,7 @@ import com.ez.domain.model.SearchUser
 import com.ez.domain.repository.OpenDotaRepository
 
 
-class OpenDotaRepositoryImpl constructor(
+class OpenDotaRepositoryImpl(
     private val api: ServerApi,
     private val db: AppDatabase
 ) : OpenDotaRepository {
