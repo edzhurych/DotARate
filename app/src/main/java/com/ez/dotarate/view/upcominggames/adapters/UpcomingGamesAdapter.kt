@@ -1,4 +1,4 @@
-package com.ez.dotarate.adapters
+package com.ez.dotarate.view.upcominggames.adapters
 
 import android.util.Log
 import android.view.LayoutInflater

@@ -8,6 +8,7 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
+import retrofit2.http.QueryMap
 
 
 /**
@@ -49,6 +50,15 @@ interface ServerApi {
     @GET("dota2/matches/upcoming")
     fun fetchUpcomingGames(
         @Query("token") token: String,
+        @Query("page") page: Int,
+        @Query("per_page") loadSize: Int
+    ): Call<ArrayList<UpcomingGame>>
+
+    @GET("dota2/matches/upcoming/")
+    @JvmSuppressWildcards
+    fun fetchUpcomingGamesByLeague(
+        @Query("token") token: String,
+        @QueryMap(encoded = true) filter: Map<String, List<Int>>,
         @Query("page") page: Int,
         @Query("per_page") loadSize: Int
     ): Call<ArrayList<UpcomingGame>>

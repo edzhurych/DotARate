@@ -12,7 +12,7 @@
 
         <variable
             name="adapter"
-            type="com.ez.dotarate.adapters.UpcomingGamesAdapter" />
+            type="com.ez.dotarate.view.upcominggames.adapters.UpcomingGamesAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +21,16 @@
         android:layout_marginTop="@dimen/toolbar_height"
         android:layout_marginBottom="@dimen/bnv_height"
         android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCategory"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvUpcomingGames"
@@ -34,7 +44,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/rvCategory" />
 
         <ProgressBar
             android:id="@+id/pbUpcomingGames"
