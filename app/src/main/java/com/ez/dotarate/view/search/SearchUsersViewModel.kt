@@ -4,8 +4,10 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.ez.domain.model.SearchUser
 import com.ez.domain.repository.OpenDotaRepository
 import com.ez.dotarate.view.BaseViewModel
@@ -20,17 +22,12 @@ class SearchUsersViewModel(
     private val repository: OpenDotaRepository
 ) : BaseViewModel(application) {
 
-    val liveSearchUsers: LiveData<PagedList<SearchUser>> by lazy {
-        val config = PagedList.Config.Builder()
-            .setPageSize(16)
-            .setEnablePlaceholders(false)
-            .setPrefetchDistance(10) // Количество до конца списка, при достижении которого происходит следующая подгрузка данных
-            .build()
-
-        LivePagedListBuilder<Int, SearchUser>(
-            repository.getRecentSearchUsers(),
-            config
-        ).build()
+    val liveSearchUsers: LiveData<PagingData<SearchUser>> by lazy {
+        Pager(
+            PagingConfig(20)
+        ) {
+            repository.getRecentSearchUsers()
+        }.liveData
     }
 
     fun searchUsersByName(name: String) {

@@ -1,13 +1,14 @@
 package com.ez.dotarate.view.games
 
 import android.app.Application
-import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.ez.domain.model.Game
 import com.ez.domain.usecase.GetGamesDataSourceFactoryUseCase
 import com.ez.domain.usecase.GetMatchesUseCase
@@ -37,22 +38,18 @@ class GamesViewModel(
 
     val errorLiveData = MutableLiveData<Event<String>>()
 
-    val liveGame: LiveData<PagedList<Game>> by lazy {
-        val config = PagedList.Config.Builder()
-            .setPageSize(16)
-            .setEnablePlaceholders(false)
-            .setPrefetchDistance(10) // Количество до конца списка, при достижении которого происходит следующая подгрузка данных
-            .build()
-
-        Log.d("MyLogs", "isLocal = $isLocal")
-
-        LivePagedListBuilder<Int, Game>(
+    val liveGame: LiveData<PagingData<Game>> by lazy {
+        Pager(
+            // Configure how data is loaded by passing additional properties to
+            // PagingConfig, such as prefetchDistance.
+            PagingConfig(pageSize = 20)
+        ) {
             getGamesDataSourceFactory(
                 isLocal = isLocal,
                 scope = viewModelScope,
                 id32 = id32 ?: 0
-            ), config
-        ).build()
+            )
+        }.liveData
     }
 
     fun getGames(id32: Int) {

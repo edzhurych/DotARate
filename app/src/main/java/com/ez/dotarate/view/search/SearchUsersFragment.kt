@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +22,7 @@ import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.main.MainActivity
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 
@@ -29,7 +31,7 @@ class SearchUsersFragment : BaseFragment<SearchUsersViewModel, FragmentSearchUse
 ) {
 
     val adapter: SearchUsersAdapter by inject()
-    private lateinit var pagedList: PagedList<SearchUser>
+    private lateinit var pagedList: List<SearchUser>
 
     override fun layout() = R.layout.fragment_search_users
 
@@ -75,11 +77,13 @@ class SearchUsersFragment : BaseFragment<SearchUsersViewModel, FragmentSearchUse
 
         // LiveData<PagedList<SearchUser>> subscriber
         vm.liveSearchUsers.observe(this) {
+            val searchUsers = adapter.snapshot().items
+
             Log.d("MyLogs", "SearchUsersFragment. ПОДПИСЧИК liveData. ДАННЫЕ = $it")
-            if (it.isNotEmpty()) {
-                pagedList = it
+            if (searchUsers.isNotEmpty()) {
+                pagedList = searchUsers
             }
-            adapter.submitList(it)
+            vm.viewModelScope.launch { adapter.submitData(it) }
         }
 
         searchEditText.setOnEditorActionListener { v, actionId, event ->

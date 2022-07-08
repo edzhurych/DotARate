@@ -2,16 +2,16 @@ package com.ez.dotarate.adapters
 
 import android.util.Log
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ez.data.repository.DownloadState
-import com.ez.dotarate.R
 import com.ez.domain.model.Game
+import com.ez.dotarate.R
 import com.ez.dotarate.model.DownloadStateItemViewHolder
 import com.ez.dotarate.model.GamesHolder
 
-class GamesAdapter : PagedListAdapter<Game, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
+class GamesAdapter : PagingDataAdapter<Game, RecyclerView.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
 
@@ -32,7 +32,7 @@ class GamesAdapter : PagedListAdapter<Game, RecyclerView.ViewHolder>(DIFF_CALLBA
 
     private var downloadState: DownloadState? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder{
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
             R.layout.game_list_item -> {
                 Log.d("MyLogs", "АДАПТЕР. onCreateViewHolder ДЛЯ ИГРЫ")
@@ -50,7 +50,8 @@ class GamesAdapter : PagedListAdapter<Game, RecyclerView.ViewHolder>(DIFF_CALLBA
         when (getItemViewType(position)) {
             R.layout.game_list_item -> (holder as GamesHolder).bind(getItem(position))
             R.layout.download_state_item -> (holder as DownloadStateItemViewHolder).bindTo(
-                downloadState)
+                downloadState
+            )
         }
     }
 
@@ -59,7 +60,8 @@ class GamesAdapter : PagedListAdapter<Game, RecyclerView.ViewHolder>(DIFF_CALLBA
     override fun onBindViewHolder(
         holder: RecyclerView.ViewHolder,
         position: Int,
-        payloads: MutableList<Any>) {
+        payloads: MutableList<Any>
+    ) {
         if (payloads.isNotEmpty()) {
 
         } else {

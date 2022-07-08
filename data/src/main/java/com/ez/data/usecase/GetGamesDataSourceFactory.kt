@@ -1,6 +1,6 @@
 package com.ez.data.usecase
 
-import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import com.ez.data.datasource.GamesDataSource
 import com.ez.domain.model.Game
 import com.ez.domain.repository.OpenDotaRepository
@@ -15,7 +15,7 @@ class GetGamesDataSourceFactory(
         isLocal: Boolean,
         scope: CoroutineScope,
         id32: Int
-    ): DataSource.Factory<Int, Game> {
+    ): PagingSource<Int, Game> {
         return if (isLocal) repository.getGamesDataSourceFactory()
         else createRemoteGamesDataSourceFactory(scope, id32)
     }
@@ -23,13 +23,10 @@ class GetGamesDataSourceFactory(
     private fun createRemoteGamesDataSourceFactory(
         scope: CoroutineScope,
         id32: Int
-    ): DataSource.Factory<Int, Game> = object : DataSource.Factory<Int, Game>() {
-        override fun create(): DataSource<Int, Game> {
-            return GamesDataSource(
-                scope = scope,
-                repository = repository,
-                id32 = id32
-            )
-        }
-    }
+    ): PagingSource<Int, Game> =
+        GamesDataSource(
+            scope = scope,
+            repository = repository,
+            id32 = id32
+        )
 }

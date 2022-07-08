@@ -37,4 +37,5 @@ dependencies {
     implementation coreAndroidDependencies
     implementation pagingDependencies
     implementation coroutinesDependencies
+    implementation databaseDependencies
 }

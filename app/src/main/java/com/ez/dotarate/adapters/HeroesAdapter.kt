@@ -3,14 +3,14 @@ package com.ez.dotarate.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ez.dotarate.R
 import com.ez.domain.model.Hero
+import com.ez.dotarate.R
 import com.ez.dotarate.databinding.HeroRecyclerItemBinding
 
-class HeroesAdapter : PagedListAdapter<Hero, HeroesAdapter.HeroesHolder>(DIFF_CALLBACK) {
+class HeroesAdapter : PagingDataAdapter<Hero, HeroesAdapter.HeroesHolder>(DIFF_CALLBACK) {
 
     companion object {
 

@@ -53,7 +53,8 @@ ext {
 
     databaseDependencies = [
             "androidx.room:room-ktx:${room}",
-            "androidx.room:room-runtime:${room}"
+            "androidx.room:room-runtime:${room}",
+            "androidx.room:room-paging:${room}"
     ]
 
     databasePlugins = [

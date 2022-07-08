@@ -3,6 +3,9 @@ package com.ez.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.ez.data.model.*
+import com.ez.domain.model.Game
+import com.ez.domain.model.Hero
+import com.ez.domain.model.SearchUser
 
 
 /**
@@ -11,7 +14,7 @@ import com.ez.data.model.*
  * В Database классе необходимо описать абстрактные методы для получения Dao объектов
  */
 @Database(
-    entities = [UserIdDb::class, GameDb::class, HeroDb::class, UserDb::class, SearchUserDb::class],
+    entities = [UserIdDb::class, Game::class, Hero::class, UserDb::class, SearchUser::class],
     version = 1,
     exportSchema = false
 )

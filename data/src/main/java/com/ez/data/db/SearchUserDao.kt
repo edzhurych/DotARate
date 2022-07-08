@@ -1,24 +1,27 @@
 package com.ez.data.db
 
-import androidx.paging.DataSource
-import androidx.room.*
-import com.ez.data.model.SearchUserDb
+import androidx.paging.PagingSource
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Transaction
+import com.ez.domain.model.SearchUser
 
 @Dao
 abstract class SearchUserDao {
 
     @Transaction
-    open suspend fun insertLastUsersAndDeleteRecent(listSearchUserDbs: List<SearchUserDb>) {
+    open suspend fun insertLastUsersAndDeleteRecent(listSearchUsers: List<SearchUser>) {
         deleteRecentUsers()
-        insertLastUsers(listSearchUserDbs)
+        insertLastUsers(listSearchUsers)
     }
 
     @Insert
-    abstract suspend fun insertLastUsers(listSearchUserDbs: List<SearchUserDb>)
+    abstract suspend fun insertLastUsers(listSearchUsers: List<SearchUser>)
 
     @Query("DELETE FROM recentSearchUsers")
     abstract suspend fun deleteRecentUsers()
 
     @Query("SELECT * FROM recentSearchUsers")
-    abstract fun getRecentSearchUsers(): DataSource.Factory<Int, SearchUserDb>
+    abstract fun getRecentSearchUsers(): PagingSource<Int, SearchUser>
 }

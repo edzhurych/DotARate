@@ -1,22 +1,21 @@
 package com.ez.domain.repository
 
-import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import com.ez.domain.model.Game
 import com.ez.domain.model.GameDetail
 import com.ez.domain.model.Hero
 import com.ez.domain.model.SearchUser
-import kotlinx.coroutines.CoroutineScope
 
 interface OpenDotaRepository {
     // Database
     suspend fun saveGames(listGames: List<Game>): List<Long>
-    fun getGamesDataSourceFactory(): DataSource.Factory<Int, Game>
+    fun getGamesDataSourceFactory(): PagingSource<Int, Game>
 
     suspend fun saveHeroes(listHeroes: List<Hero>): List<Long>
-    fun getHeroesDataSourceFactory(): DataSource.Factory<Int, Hero>
+    fun getHeroesDataSourceFactory(): PagingSource<Int, Hero>
 
     suspend fun insertSearchUsers(listSearchUsers: List<SearchUser>)
-    fun getRecentSearchUsers(): DataSource.Factory<Int, SearchUser>
+    fun getRecentSearchUsers(): PagingSource<Int, SearchUser>
 
     // Network
     suspend fun fetchMatches(id32: Int): List<Game>

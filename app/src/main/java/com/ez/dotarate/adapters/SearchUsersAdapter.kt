@@ -3,14 +3,15 @@ package com.ez.dotarate.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ez.dotarate.R
 import com.ez.domain.model.SearchUser
+import com.ez.dotarate.R
 import com.ez.dotarate.databinding.SearchUserItemBinding
 
-class SearchUsersAdapter : PagedListAdapter<SearchUser, SearchUsersAdapter.UserHolder>(DIFF_CALLBACK) {
+class SearchUsersAdapter :
+    PagingDataAdapter<SearchUser, SearchUsersAdapter.UserHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SearchUser>() {
@@ -43,7 +44,8 @@ class SearchUsersAdapter : PagedListAdapter<SearchUser, SearchUsersAdapter.UserH
         if (user != null) userHolder.bind(user)
     }
 
-    inner class UserHolder(private var binding: SearchUserItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class UserHolder(private var binding: SearchUserItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(user: SearchUser) {
             binding.user = user
             // Используется для того, что бы биндинг выполинлся как можно скорее

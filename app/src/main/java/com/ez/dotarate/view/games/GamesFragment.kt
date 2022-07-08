@@ -6,8 +6,9 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
-import androidx.paging.PagedList
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ez.domain.model.Game
 import com.ez.dotarate.R
@@ -20,6 +21,7 @@ import com.ez.dotarate.databinding.FragmentGamesBinding
 import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener
 import com.ez.dotarate.view.BaseFragment
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
 
@@ -27,7 +29,7 @@ class GamesFragment : BaseFragment<GamesViewModel, FragmentGamesBinding>(GamesVi
 
     val adapter: GamesAdapter by inject()
 
-    private lateinit var pagedList: PagedList<Game>
+    private lateinit var pagedList: List<Game>
 
     override fun layout() = R.layout.fragment_games
 
@@ -104,16 +106,18 @@ class GamesFragment : BaseFragment<GamesViewModel, FragmentGamesBinding>(GamesVi
         // LiveData<PagedList<Game>> subscriber
         vm.liveGame.observe(this) {
             Log.d("MyLogs", "GamesFragment.  LiveData с PagedList")
-            if (it != null && it.size > 0) {
+            val games = adapter.snapshot().items
+
+            if (games != null && games.isNotEmpty()) {
                 vm.isGamesEmpty.set(false)
                 Log.d("MyLogs", "GamesFragment. PagedList = $it")
-                pagedList = it
+                pagedList = games
             } else {
                 vm.isGamesEmpty.set(true)
                 Log.d("MyLogs", "GamesFragment. PagedList пустой = $it")
             }
             // Need to use submitList to set the PagedListAdapter value
-            adapter.submitList(it)
+            vm.viewModelScope.launch { adapter.submitData(it) }
             vm.isDataReceived.set(true)
         }
 

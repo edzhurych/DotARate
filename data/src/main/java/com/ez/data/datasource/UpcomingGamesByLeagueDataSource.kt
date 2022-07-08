@@ -1,54 +1,51 @@
 package com.ez.data.datasource
 
 import android.util.Log
-import androidx.paging.PageKeyedDataSource
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import com.ez.domain.model.UpcomingGame
 import com.ez.domain.repository.PandaScoreRepository
 
 class UpcomingGamesByLeagueDataSource(
     private val repository: PandaScoreRepository,
     private val leagueId: Int,
-) : PageKeyedDataSource<Int, UpcomingGame>() {
+) : PagingSource<Int, UpcomingGame>() {
 
-    // Первая загрузка данных
-    override fun loadInitial(
-        params: LoadInitialParams<Int>,
-        callback: LoadInitialCallback<Int, UpcomingGame>
-    ) {
-        Log.d("MyLogs", "UpcomingGamesByLeagueDataSource. loadInitial")
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UpcomingGame> {
+        try {
+            Log.d("MyLogs", "UpcomingGamesByLeagueDataSource. loadInitial")
 
-        val listUpcomingGames =
-            repository.fetchUpcomingMatchesByLeague(leagueId = leagueId, page = 1, loadSize = params.requestedLoadSize)
+            val nextPageNumber = params.key ?: 1
 
-        if (listUpcomingGames.isNotEmpty()) {
+            val listUpcomingGames =
+                repository.fetchUpcomingMatchesByLeague(
+                    leagueId = leagueId,
+                    page = nextPageNumber,
+                    loadSize = params.loadSize
+                )
+
             Log.d(
                 "MyLogs",
                 "UpcomingGamesByLeagueDataSource. loadInitial. Response = $listUpcomingGames"
             )
-            callback.onResult(listUpcomingGames, null, 2)
-        }
 
-    }
-
-    // Загрузка следующих порций данных
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, UpcomingGame>) {
-        Log.d("MyLogs", "UpcomingGamesByLeagueDataSource. loadAfter")
-        val listUpcomingGames = repository.fetchUpcomingMatchesByLeague(
-            leagueId = leagueId,
-            page = params.key,
-            loadSize = params.requestedLoadSize
-        )
-        if (listUpcomingGames.isNotEmpty()) {
-            Log.d(
-                "MyLogs",
-                "UpcomingGamesByLeagueDataSource. loadInitial. Response = $listUpcomingGames"
-            )
-            callback.onResult(listUpcomingGames, (params.key + 1))
+            return LoadResult.Page(listUpcomingGames, null, nextPageNumber + 1)
+        } catch (e: Exception) {
+            return LoadResult.Error(e)
         }
     }
 
-    // Вызывается, если указать предыдущий ключ (previousPageKey) в методе loadInitial
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, UpcomingGame>) {
-        Log.d("MyLogs", "UpcomingGamesByLeagueDataSource. loadBefore")
+    override fun getRefreshKey(state: PagingState<Int, UpcomingGame>): Int? {
+        // Try to find the page key of the closest page to anchorPosition, from
+        // either the prevKey or the nextKey, but you need to handle nullability
+        // here:
+        //  * prevKey == null -> anchorPage is the first page.
+        //  * nextKey == null -> anchorPage is the last page.
+        //  * both prevKey and nextKey null -> anchorPage is the initial page, so
+        //    just return null.
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
+        }
     }
 }

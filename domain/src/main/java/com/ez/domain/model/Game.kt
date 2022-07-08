@@ -1,6 +1,17 @@
 package com.ez.domain.model
 
-data class Game(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+/**
+ * Аннотацией Entity нам необходимо пометить объект, который мы хотим хранить в базе данных
+ * Этот класс будет использован для создания таблицы в базе
+ * В качестве имени таблицы будет использовано имя класса
+ * А поля таблицы будут созданы в соответствии с полями класса
+ */
+@Entity(tableName = "games")
+data class Game internal constructor(
+    @field:PrimaryKey
     val match_id: Long,
     val assists: Int,
     val deaths: Int,

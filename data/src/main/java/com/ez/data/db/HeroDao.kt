@@ -1,17 +1,20 @@
 package com.ez.data.db
 
-import androidx.paging.DataSource
-import androidx.room.*
-import com.ez.data.model.HeroDb
+import androidx.paging.PagingSource
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.ez.domain.model.Hero
 
 @Dao
 interface HeroDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertHeroes(list: List<HeroDb>): List<Long>
+    suspend fun insertHeroes(list: List<Hero>): List<Long>
 
     @Query("SELECT * FROM heroes ORDER BY games DESC")
-    fun getHeroes(): DataSource.Factory<Int, HeroDb>
+    fun getHeroes(): PagingSource<Int, Hero>
 
     @Query("DELETE FROM heroes")
     suspend fun deleteHeroes()

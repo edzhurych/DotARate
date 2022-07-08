@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.databinding.ObservableBoolean
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import com.ez.dotarate.databinding.FragmentGamesBinding
 import com.ez.dotarate.listeners.ClickListener
 import com.ez.dotarate.listeners.RecyclerTouchListener
 import com.ez.dotarate.view.BaseFragment
+import kotlinx.coroutines.launch
 
 
 class GamesSearchFragment :
@@ -26,7 +28,7 @@ class GamesSearchFragment :
 
     private val adapter = GamesAdapter()
 
-    private lateinit var pagedList: PagedList<Game>
+    private lateinit var pagedList: List<Game>
 
     override fun layout() = R.layout.fragment_games
 
@@ -82,33 +84,34 @@ class GamesSearchFragment :
 
         // LiveData<PagedList<Game>> subscriber
         vm.liveGame.observe(this) {
+            val gamesSearch = adapter.snapshot().items
             Log.d("MyLogs", "GamesSearchFragment.  LiveData с PagedList")
-            if (it != null && it.size > 0) {
+            if (gamesSearch != null && gamesSearch.isNotEmpty()) {
                 vm.isGamesEmpty.set(false)
                 Log.d("MyLogs", "GamesSearchFragment. PagedList = $it")
             } else {
                 vm.isGamesEmpty.set(true)
                 Log.d("MyLogs", "GamesSearchFragment. PagedList ПУСТОЙ = $it")
             }
-            pagedList = it
+            pagedList = gamesSearch
             // Need to use submitList to set the PagedListAdapter value
-            adapter.submitList(it)
+            vm.viewModelScope.launch { adapter.submitData(it) }
             vm.isDataReceived.set(true)
             // DataSource возвращает пустой список, поэтому добавляем этот Callback
-            it.addWeakCallback(null, object : PagedList.Callback() {
-                override fun onChanged(position: Int, count: Int) {
-                    Log.d("MyLogs", "GamesSearchFragment. onChanged")
-                }
-
-                override fun onInserted(position: Int, count: Int) {
-                    Log.d("MyLogs", "GamesSearchFragment. onInserted")
-                    vm.isGamesEmpty.set(false)
-                }
-
-                override fun onRemoved(position: Int, count: Int) {
-                    Log.d("MyLogs", "GamesSearchFragment. onInserted")
-                }
-            })
+//            it.addWeakCallback(null, object : PagedList.Callback() {
+//                override fun onChanged(position: Int, count: Int) {
+//                    Log.d("MyLogs", "GamesSearchFragment. onChanged")
+//                }
+//
+//                override fun onInserted(position: Int, count: Int) {
+//                    Log.d("MyLogs", "GamesSearchFragment. onInserted")
+//                    vm.isGamesEmpty.set(false)
+//                }
+//
+//                override fun onRemoved(position: Int, count: Int) {
+//                    Log.d("MyLogs", "GamesSearchFragment. onInserted")
+//                }
+//            })
             Log.d(
                 "MyLogs",
                 "GamesSearchFragment. ЗНАЧЕНИЕ isDataReceived = ${vm.isDataReceived.get()}"

@@ -1,11 +1,8 @@
 package com.ez.data.repository
 
 import android.util.Log
-import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import com.ez.data.db.AppDatabase
-import com.ez.data.model.toGamesDb
-import com.ez.data.model.toHeroesDb
-import com.ez.data.model.toSearchUsersDb
 import com.ez.data.network.ServerApi
 import com.ez.domain.model.Game
 import com.ez.domain.model.GameDetail
@@ -22,37 +19,35 @@ class OpenDotaRepositoryImpl(
     /**
      * Database function
      */
-    override fun getGamesDataSourceFactory() = db.gameDao().getGames().map { it.toGame() }
+    override fun getGamesDataSourceFactory() = db.gameDao().getGames()
 
     /**
      * Database function
      */
-    override fun getHeroesDataSourceFactory(): DataSource.Factory<Int, Hero> =
-        db.heroDao().getHeroes().map { it.toHero() }
+    override fun getHeroesDataSourceFactory(): PagingSource<Int, Hero> = db.heroDao().getHeroes()
 
     /**
      * Database function
      */
     override suspend fun saveGames(listGames: List<Game>): List<Long> =
-        db.gameDao().saveGames(listGames.toGamesDb())
+        db.gameDao().saveGames(listGames)
 
     /**
      * Database function
      */
     override suspend fun saveHeroes(listHeroes: List<Hero>) =
-        db.heroDao().insertHeroes(listHeroes.toHeroesDb())
+        db.heroDao().insertHeroes(listHeroes)
 
     /**
      * Database function
      */
     override suspend fun insertSearchUsers(listSearchUsers: List<SearchUser>) =
-        db.searchUserDao().insertLastUsersAndDeleteRecent(listSearchUsers.toSearchUsersDb())
+        db.searchUserDao().insertLastUsersAndDeleteRecent(listSearchUsers)
 
     /**
      * Database function
      */
-    override fun getRecentSearchUsers() =
-        db.searchUserDao().getRecentSearchUsers().map { it.toSearchUser() }
+    override fun getRecentSearchUsers() = db.searchUserDao().getRecentSearchUsers()
 
     /**
      * GET request.

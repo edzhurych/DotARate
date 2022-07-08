@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.HeroesAdapter
@@ -13,6 +14,7 @@ import com.ez.dotarate.constants.REFRESH_OBSERVABLE_BOOLEAN_KEY
 import com.ez.dotarate.constants.USER_ID_KEY
 import com.ez.dotarate.databinding.FragmentMphBinding
 import com.ez.dotarate.view.BaseFragment
+import kotlinx.coroutines.launch
 
 class MphSearchFragment : BaseFragment<MphViewModel, FragmentMphBinding>(MphViewModel::class) {
     private val adapter = HeroesAdapter()
@@ -38,11 +40,13 @@ class MphSearchFragment : BaseFragment<MphViewModel, FragmentMphBinding>(MphView
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
         vm.liveHeroes.observe(this, Observer {
-            if (it != null && it.size > 0) {
+            val heroes = adapter.snapshot().items
+
+            if (heroes != null && heroes.isNotEmpty()) {
                 vm.isHeroesEmpty.set(false)
             } else vm.isHeroesEmpty.set(true)
             // Need to use submitList to set the PagedListAdapter value
-            adapter.submitList(it)
+            vm.viewModelScope.launch { adapter.submitData(it) }
 
             vm.isDataReceivedMph.set(true)
             Log.d("MyLogs", "MphFragment. Observer change = ${vm.isDataReceivedMph.get()}")

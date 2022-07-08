@@ -8,5 +8,6 @@ class SaveSearchUsers(
     val repository: OpenDotaRepository
 ) : SaveSearchUsersUseCase {
 
-    override suspend fun invoke(listSearchUsers: List<SearchUser>) = repository.insertSearchUsers(listSearchUsers)
+    override suspend fun invoke(listSearchUsers: List<SearchUser>) =
+        repository.insertSearchUsers(listSearchUsers)
 }

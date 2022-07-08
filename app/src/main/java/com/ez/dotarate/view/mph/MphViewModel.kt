@@ -5,8 +5,7 @@ import android.util.Log
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.paging.*
 import com.ez.domain.model.Hero
 import com.ez.domain.usecase.GetHeroesDataSourceFactoryUseCase
 import com.ez.domain.usecase.GetHeroesUseCase
@@ -31,21 +30,16 @@ class MphViewModel(
     val isHeroesEmpty = ObservableBoolean(false)
     val isDataReceivedMph = ObservableBoolean(false)
 
-    val liveHeroes: LiveData<PagedList<Hero>> by lazy {
-        val config = PagedList.Config.Builder()
-            .setPageSize(16)
-            .setEnablePlaceholders(false)
-            .setInitialLoadSizeHint(48) // Количество первоначальной загрузки
-            .setPrefetchDistance(10) // Количество до конца списка, при достижении которого происходит следующая подгрузка данных
-            .build()
-
-        LivePagedListBuilder<Int, Hero>(
+    val liveHeroes: LiveData<PagingData<Hero>> by lazy {
+        Pager(
+            PagingConfig(20)
+        ) {
             getHeroesDataSourceFactory(
                 isLocal = isLocal,
                 scope = viewModelScope,
                 id32 = id32
-            ), config
-        ).build()
+            )
+        }.liveData
     }
 
     fun getHeroes(id32: Int) {

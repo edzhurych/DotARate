@@ -4,7 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ez.dotarate.R
@@ -13,7 +13,7 @@ import com.ez.domain.model.UpcomingGame
 
 class UpcomingGamesAdapter(
     private val block: (Int) -> Unit
-) : PagedListAdapter<UpcomingGame, UpcomingGamesAdapter.UpcomingGameHolder>(DIFF_CALLBACK) {
+) : PagingDataAdapter<UpcomingGame, UpcomingGamesAdapter.UpcomingGameHolder>(DIFF_CALLBACK) {
 
     private companion object {
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<UpcomingGame>() {

@@ -1,34 +1,29 @@
 package com.ez.data.datasource
 
-import androidx.paging.PositionalDataSource
-import com.ez.data.model.SearchUserDb
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.ez.domain.model.SearchUser
 
-class TopPlayersDataSource(private val listTopPlayers: ArrayList<SearchUserDb>) :
-    PositionalDataSource<SearchUserDb>() {
+class TopPlayersDataSource(private val listTopPlayers: ArrayList<SearchUser>) :
+    PagingSource<Int, SearchUser>() {
 
-    /**
-     * Первоначальная загрузка данных
-     */
-    override fun loadInitial(params: LoadInitialParams, callback: LoadInitialCallback<SearchUserDb>) {
-        if (listTopPlayers.isNotEmpty()) {
-            val result = listTopPlayers.subList(
-                fromIndex = params.requestedStartPosition,
-                toIndex = params.requestedLoadSize
-            )
-            callback.onResult(result, 0)
+    override fun getRefreshKey(state: PagingState<Int, SearchUser>): Int? =
+        state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1) ?: anchorPage?.nextKey?.minus(1)
         }
-    }
 
-    /**
-     * Подгрузка новой порции данных
-     */
-    override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<SearchUserDb>) {
-        if (listTopPlayers.isNotEmpty()) {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchUser> {
+        return try {
+            val nextPageNumber = params.key ?: 1
+
             val result = listTopPlayers.subList(
-                fromIndex = params.startPosition,
-                toIndex = (params.startPosition + params.loadSize)
+                fromIndex = nextPageNumber,
+                toIndex = nextPageNumber + params.loadSize
             )
-            callback.onResult(result)
+            LoadResult.Page(result, null, nextPageNumber + params.loadSize)
+        } catch (e: Exception) {
+            LoadResult.Error(e)
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.ez.data.di
 
-class LivePagedListUpcomingGames
-class LivePagedListUpcomingGamesByLeague
+class FlowPagedDataUpcomingGames
 
 const val upcomingGamesId = "UpcomingGamesId"
 const val upcomingGamesByLeagueId = "UpcomingGamesByLeagueId"

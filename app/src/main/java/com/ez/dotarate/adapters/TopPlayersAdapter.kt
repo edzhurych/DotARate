@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.ez.dotarate.R
 import com.ez.domain.model.SearchUser
+import com.ez.dotarate.R
 import com.ez.dotarate.databinding.SearchUserItemBinding
 
 class TopPlayersAdapter(private val listTopPlayers: List<SearchUser>) :
@@ -30,7 +30,8 @@ class TopPlayersAdapter(private val listTopPlayers: List<SearchUser>) :
         holder.bind(user)
     }
 
-    inner class TopPlayerHolder(private var binding: SearchUserItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class TopPlayerHolder(private var binding: SearchUserItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(user: SearchUser) {
             binding.user = user
             // Используется для того, что бы биндинг выполинлся как можно скорее

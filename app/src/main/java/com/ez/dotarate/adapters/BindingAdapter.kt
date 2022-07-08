@@ -10,11 +10,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.databinding.ObservableBoolean
 import androidx.recyclerview.widget.RecyclerView
-import com.ez.domain.model.Opponent
-import com.ez.domain.model.Game
-import com.ez.domain.model.Hero
-import com.ez.domain.model.PermanentBuff
-import com.ez.domain.model.User
+import com.ez.domain.model.*
 import com.ez.dotarate.App
 import com.ez.dotarate.R
 import com.ez.dotarate.constants.*

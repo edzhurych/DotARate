@@ -8,5 +8,6 @@ class SaveHeroes(
     val repository: OpenDotaRepository
 ) : SaveHeroesUseCase {
 
-    override suspend fun invoke(listHeroes: List<Hero>): List<Long> = repository.saveHeroes(listHeroes)
+    override suspend fun invoke(listHeroes: List<Hero>): List<Long> =
+        repository.saveHeroes(listHeroes)
 }

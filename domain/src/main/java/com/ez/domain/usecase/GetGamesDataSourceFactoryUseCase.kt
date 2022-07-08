@@ -1,6 +1,7 @@
 package com.ez.domain.usecase
 
 import androidx.paging.DataSource
+import androidx.paging.PagingSource
 import com.ez.domain.model.Game
 import kotlinx.coroutines.CoroutineScope
 
@@ -10,5 +11,5 @@ interface GetGamesDataSourceFactoryUseCase {
         isLocal: Boolean,
         scope: CoroutineScope,
         id32: Int
-    ): DataSource.Factory<Int, Game>
+    ): PagingSource<Int, Game>
 }
