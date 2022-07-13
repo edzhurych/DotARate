@@ -12,6 +12,7 @@ class UpcomingGamesDataSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, UpcomingGame> {
         try {
+            Log.d("mylogs", "UpcomingGamesDataSource. Thread - [${Thread.currentThread().name}]")
             // Start refresh at page 1 if undefined.
             val nextPageNumber = params.key ?: 1
             Log.d("MyLogs", "UpcomingGamesDataSource. load. nextPageNumber - $nextPageNumber")

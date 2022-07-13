@@ -9,6 +9,7 @@ import android.view.View
 import androidx.lifecycle.viewModelScope
 import com.ez.dotarate.Log as log
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
 import androidx.paging.PagedList
 import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +19,9 @@ import com.ez.dotarate.databinding.FragmentUpcomingGamesBinding
 import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.upcominggames.adapters.CategoryUGAdapter
 import com.ez.dotarate.view.upcominggames.adapters.UpcomingGamesAdapter
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcomingGamesBinding>(
@@ -40,23 +43,40 @@ class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcom
     private val observer: (PagingData<UpcomingGame>) -> Unit = {
         log.d("UpcomingGamesFragment. Подписчик livedata. Значение = $it")
         pagedListUpcomingGames = it
-        vm.viewModelScope.launch {
+        vm.viewModelScope.launch(Dispatchers.IO) {
             log.d("UpcomingGamesFragment. Coroutine. Thread - [${Thread.currentThread().name}]")
-
             adapter.submitData(it)
         }
 
-        val upcomingGames = adapter.snapshot()
+        adapter.addLoadStateListener { combinedLoadState -> // TODO: Possible memory leaks
+            log.d("UpcomingGamesFragment. loadStateListener - ${combinedLoadState.source}")
+            if (combinedLoadState.source.refresh == LoadState.NotLoading(false)
+                || combinedLoadState.source.refresh == LoadState.NotLoading(true)
+            ) {
+                val upcomingGames = adapter.snapshot()
 
-        val categories = if (upcomingGames.isNotEmpty()) mutableMapOf(Pair(0, "All")) else mutableMapOf() // TODO: Change to res
-        categories.putAll(upcomingGames.associate { upcomingGame ->
-            upcomingGame?.let {
-                upcomingGame.league.id to upcomingGame.league.name
-            } ?: (0 to "All")
-        })
-        vm.categories.value = categories
+                log.d("UpcomingGamesFragment. upcomingGames - $upcomingGames")
 
-        if (upcomingGames.isNotEmpty()) vm.isDataLoaded.set(true)
+                val categories = if (upcomingGames.isNotEmpty()) mutableMapOf(
+                    Pair(
+                        0,
+                        "All"
+                    )
+                ) else mutableMapOf() // TODO: Change to res
+                log.d("UpcomingGamesFragment. categories - $categories")
+
+                categories.putAll(upcomingGames.associate { upcomingGame ->
+                    upcomingGame?.let {
+                        upcomingGame.league.id to upcomingGame.league.name
+                    } ?: (0 to "All")
+                })
+                log.d("UpcomingGamesFragment. categories - $categories")
+
+                vm.categories.value = categories
+
+                if (upcomingGames.isNotEmpty()) vm.isDataLoaded.set(true)
+            }
+        }
     }
 
     override fun layout() = R.layout.fragment_upcoming_games
@@ -69,7 +89,7 @@ class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcom
         vb.adapter = adapter
         vb.isDataLoaded = vm.isDataLoaded
 
-        vm.liveUpcomingGames.observe(this, observer)
+        vm.liveUpcomingGames.observe(this,  observer)
 
         vm.categories.observe(this) {
             vb.rvCategory.adapter = CategoryUGAdapter(it) { leagueId ->

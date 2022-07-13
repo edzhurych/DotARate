@@ -6,26 +6,30 @@ import com.ez.domain.model.UpcomingGame
 import com.ez.data.network.ServerApi
 import com.ez.domain.model.Filter
 import com.ez.domain.repository.PandaScoreRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class PandaScoreRepositoryImpl(
     private val api: ServerApi
 ) : PandaScoreRepository {
 
-    override fun fetchUpcomingMatches(page: Int, loadSize: Int): List<UpcomingGame> {
+    override suspend fun fetchUpcomingMatches(page: Int, loadSize: Int): List<UpcomingGame> {
         val call = api.fetchUpcomingGames(
             token = PANDASCORE_TOKEN,
             page = page,
             loadSize = loadSize
         )
 
-        val response = call.execute()
+        val response = withContext(Dispatchers.IO) {
+            call.execute()
+        }
 
         return if (response.isSuccessful) {
             response.body() ?: emptyList()
         } else emptyList()
     }
 
-    override fun fetchUpcomingMatchesByLeague(
+    override suspend fun fetchUpcomingMatchesByLeague(
         leagueId: Int,
         page: Int,
         loadSize: Int

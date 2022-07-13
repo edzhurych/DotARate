@@ -34,7 +34,7 @@ val koinViewModelModule = module {
 
     viewModel { GameDetailViewModel(get(), get()) }
 
-    viewModel { UpcomingGamesViewModel(get(), get(), get()) }
+    viewModel { UpcomingGamesViewModel(get(), get()) }
 
     viewModel { ProfileSearchViewModel(get(), get()) }
 
