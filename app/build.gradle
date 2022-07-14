@@ -9,7 +9,7 @@ android {
     compileSdkVersion 33
     buildToolsVersion "30.0.3"
     defaultConfig {
-        applicationId "com.ez.dotarate"
+        applicationId "com.edz.dotarate"
         minSdkVersion 23
         targetSdkVersion 33
         versionCode 1
@@ -36,6 +36,18 @@ android {
     }
     testOptions {
         unitTests.includeAndroidResources = true
+    }
+
+    flavorDimensions "app"
+    productFlavors {
+        free {
+            dimension "app"
+            applicationId "com.edz.dotarate.free"
+        }
+        premium {
+            dimension "app"
+            applicationId "com.edz.dotarate.premium"
+        }
     }
 }
 
