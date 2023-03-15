@@ -3,7 +3,7 @@ name: Build APK
 on: [push]
 
 jobs:
-  Build AAR:
+  Build-AAR:
     runs-on: ubuntu-latest
 
     steps:
@@ -29,7 +29,7 @@ jobs:
           path: |
             **/*.apk
             **/*.aark
-  Build APK:
+  Build-APK:
     runs-on: ubuntu-latest
 
     steps:
