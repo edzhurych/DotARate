@@ -28,3 +28,4 @@ jobs:
           name: apk_aar
           path: |
             **/*.apk
+            **/*.aar
