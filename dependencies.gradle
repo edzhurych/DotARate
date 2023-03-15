@@ -14,12 +14,11 @@ ext {
     def viewpagerktx = "1.4.1"
     def circle_image = '3.1.0'
     def picasso = "2.8"
-    def lifecycle = '2.2.0-rc03'
+    def lifecycle = '2.4.0'
     def databinding = '3.5.0'
     def junit_version = '4.13.2'
     def tatarka = '4.0.0'
-    def koin_version = "3.0.1"
-    def koin_arch = "0.9.3"
+    def koin_version = "2.2.2"
 
     kotlinDependencies = [
             "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlin}",
@@ -37,7 +36,6 @@ ext {
             "io.insert-koin:koin-android:$koin_version",
             "io.insert-koin:koin-android-scope:$koin_version",
             "io.insert-koin:koin-android-viewmodel:$koin_version",
-            "io.insert-koin:koin-android-architecture:$koin_arch",
     ]
 
     networkDependencies = [
@@ -84,7 +82,6 @@ ext {
     ]
 
     lifecycleDependencies = [
-            "androidx.lifecycle:lifecycle-extensions:${lifecycle}",
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifecycle}",
             "androidx.lifecycle:lifecycle-livedata-ktx:${lifecycle}",
             "androidx.lifecycle:lifecycle-runtime-ktx:${lifecycle}"
