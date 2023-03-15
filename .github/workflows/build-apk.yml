@@ -24,11 +24,11 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifacts@v3
         if: always()
-          with:
-            name: apk_aar
-            path: |
-              **/*.apk
-              **/*.aark
+        with:
+          name: apk_aar
+          path: |
+            **/*.apk
+            **/*.aark
   Build APK:
     runs-on: ubuntu-latest
 
