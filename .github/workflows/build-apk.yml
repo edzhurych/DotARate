@@ -22,7 +22,7 @@ jobs:
 
       # Publish artifacts
       - name: Upload APK
-        uses: actions/upload-artifacts@v3
+        uses: actions/upload-artifact@v3
         if: always()
         with:
           name: apk_aar
@@ -48,7 +48,7 @@ jobs:
 
       # Publish artifacts
       - name: Upload APK
-        uses: actions/upload-artifacts@v3
+        uses: actions/upload-artifact@v3
         with:
           name: apk
           path: app/build/outputs/apk/debug/app-debug.apk
