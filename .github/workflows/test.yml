@@ -1,0 +1,31 @@
+name: Test-commit-message
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths-ignore:
+      - "docs/**"
+      - "drz-swagger/**"
+      - ".vscode/**"
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Print head
+        run: |
+          echo "${{ github.event.head_commit.message }}"
+      - name: Get Commit Message
+        run: |
+          MSG=$(git log --format=%B -n 1 ${{github.event.after}})
+          echo "::set-env name=COMMIT_MESSAGE::${MSG}"
+          echo "COMMIT_MESSAGE=MSG" >> $GITHUB_ENV
+      - name: Echo commit message
+        run: |
+          echo "Commit SHA:
+          ${{github.event.after}}, commit message: ${{env.COMMIT_MESSAGE}} (or ${COMMIT_MESSAGE})"
