@@ -1,6 +1,6 @@
 name: Test-commit-message
 
-on: [pull_request]
+on: [push]
 
 jobs:
   Test:
