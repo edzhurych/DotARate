@@ -1,4 +1,4 @@
-name: Test-commit-message
+name: Test commit message
 
 on: [push]
 
