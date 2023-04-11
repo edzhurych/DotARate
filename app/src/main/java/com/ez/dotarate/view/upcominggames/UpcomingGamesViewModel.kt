@@ -3,7 +3,7 @@ package com.ez.dotarate.view.upcominggames
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.switchMap
 import androidx.paging.PagingData
 import com.ez.data.di.upcomingGamesByLeagueId
 import com.ez.data.di.upcomingGamesId
@@ -23,9 +23,7 @@ class UpcomingGamesViewModel(
     val liveLeagueId = MutableLiveData(0)
     val categories = MutableLiveData(mapOf<Int, String>())
 
-    val liveUpcomingGames: LiveData<PagingData<UpcomingGame>> = Transformations.switchMap(
-        liveLeagueId
-    ) { leagueId ->
+    val liveUpcomingGames: LiveData<PagingData<UpcomingGame>> = liveLeagueId.switchMap { leagueId ->
         Log.d("liveUpcomingGames leagueId = $leagueId")
         if (leagueId == null || leagueId == 0) {
             getKoin().get<LiveData<PagingData<UpcomingGame>>>(qualifier = named(upcomingGamesId))

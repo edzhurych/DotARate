@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs'
 apply from: '../dependencies.gradle'
@@ -17,6 +16,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "ru"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -47,6 +47,19 @@ android {
         premium {
             dimension "app"
             applicationId "com.edz.dotarate.premium"
+        }
+    }
+
+    packagingOptions {
+        exclude("META-INF/LICENSE.md")
+        exclude("META-INF/LICENSE-notice.md")
+    }
+
+    testOptions {
+        packagingOptions {
+            jniLibs {
+                useLegacyPackaging true
+            }
         }
     }
 }
@@ -80,6 +93,15 @@ dependencies {
     testImplementation juntDependenciesOnly
     testImplementation robolectricDependencies
     testImplementation mockitoDependencies
+
+    androidTestImplementation androidTestDependencies
+    implementation 'androidx.test.espresso:espresso-idling-resource:3.5.1'
+    androidTestImplementation "io.mockk:mockk-android:1.13.4"
+    androidTestImplementation 'io.mockk:mockk-agent:1.13.4'
+    // debugImplementation is used here so that the empty activity that FragmentScenario
+    // relies on is accessible by the test target process.
+    debugImplementation "androidx.fragment:fragment-testing:1.6.0-alpha09"
+    debugImplementation 'androidx.fragment:fragment-testing-manifest:1.6.0-alpha09'
 
     implementation tatarkaDependencies
 }

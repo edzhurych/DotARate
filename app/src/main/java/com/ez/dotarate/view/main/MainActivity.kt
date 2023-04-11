@@ -120,7 +120,7 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(MainViewMo
         val currentNavController = vm.currentNavController.value as NavController
 
         // Если текущий фрагмент это не стартовый фрагмент в этой вкладке, то
-        if (currentNavController.currentDestination!!.id != currentNavController.graph.startDestination) {
+        if (currentNavController.currentDestination!!.id != currentNavController.graph.startDestinationId) {
             // Если в стеке текущей "вкладки" есть несколько фрагментов - просто переходим вниз по стеку
             // Иначе переходим на предыдущую вкладку, если она есть в стеке вкладок
             currentNavController.popBackStack()

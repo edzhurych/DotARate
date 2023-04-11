@@ -5,21 +5,19 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.test.espresso.idling.CountingIdlingResource
 import com.ez.domain.model.User
 import com.ez.dotarate.R
 import com.ez.dotarate.adapters.ViewPagerAdapter
 import com.ez.dotarate.constants.CONVERTER_NUMBER
 import com.ez.dotarate.constants.USER_ID_KEY
 import com.ez.dotarate.databinding.FragmentProfileBinding
-import com.ez.dotarate.view.BaseFragment
 import com.ez.dotarate.view.games.GamesFragment
 import com.ez.dotarate.view.mph.MphFragment
 import com.ez.dotarate.view.start.StartActivity
@@ -27,15 +25,17 @@ import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class ProfileFragment :
-    BaseFragment<ProfileViewModel, FragmentProfileBinding>(ProfileViewModel::class) {
+class ProfileFragment(private val vm: ProfileViewModel) : Fragment() {
 
     private var mOldVerticalOffset = 0
 
-    override fun layout() = R.layout.fragment_profile
+    private lateinit var vb: FragmentProfileBinding
 
-    override fun afterCreateView(view: View, savedInstanceState: Bundle?) {
-        Log.d("MyLogs", "ProfileFragment. CreateView")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
+        vb = DataBindingUtil.bind(view)!!
+        Log.d("MyLogs", "ProfileFragment. CreateView vm - $vm")
 
         val id32 =
             (requireActivity().intent.getLongExtra(USER_ID_KEY, 0) - CONVERTER_NUMBER).toInt()
@@ -54,8 +54,8 @@ class ProfileFragment :
 //            swipeRefreshLayout.isRefreshing = false
 //        }
 
-        vm.liveUser.observe(this) {
-            Log.d("MyLogs", "ProfileFragment. liveUser.")
+        vm.liveUser.observe(viewLifecycleOwner) {
+            Log.d("MyLogs", "ProfileFragment. liveUser - $it")
             it?.let {
                 Log.d("MyLogs", "ProfileFragment. liveUser. УСТАНОВКА isDataReceived в true")
                 vm.isDataReceived.set(true)
@@ -68,8 +68,8 @@ class ProfileFragment :
             vm.getWinsAndLosses(id32)
         }
 
-        vm.userResponseLiveData.observe(this) {
-            Log.d("MyLogs", "ProfileFragment. userResponseLiveData.")
+        vm.userResponseLiveData.observe(viewLifecycleOwner) {
+            Log.d("MyLogs", "ProfileFragment. userResponseLiveData - $it")
 
             user.name = it.profile.personaname
             user.avatarUrl = it.profile.avatarfull
@@ -79,8 +79,8 @@ class ProfileFragment :
             if (user.wins != null) vm.saveUser(user)
         }
 
-        vm.liveWinsAndLosses.observe(this) {
-            Log.d("MyLogs", "ProfileFragment. wlLiveData.")
+        vm.liveWinsAndLosses.observe(viewLifecycleOwner) {
+            Log.d("MyLogs", "ProfileFragment. wlLiveData - $it")
 
             user.wins = it.win
             user.losses = it.lose
@@ -134,6 +134,8 @@ class ProfileFragment :
             }
             Log.d("MyLogs", "**********  ЗНАЧЕНИЕ verticalOffset = $verticalOffset")
         })
+
+        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

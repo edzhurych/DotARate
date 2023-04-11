@@ -29,27 +29,20 @@ class GameDetailViewModelTest {
     var rule: TestRule = InstantTaskExecutorRule()
 
     private var id: Long = 1
-    lateinit var viewModel: GameDetailViewModel
     private val mApplication = mock(Application::class.java)
     private val mOpenDotaRepository = mock(OpenDotaRepository::class.java)
-    lateinit var gameDetail: GameDetail
+    var viewModel: GameDetailViewModel = GameDetailViewModel(mApplication, mOpenDotaRepository)
+
+    var gameDetail: GameDetail = GameDetail(
+        0, 0, 0, 0,
+        emptyList(), 0, true, 0, 9
+    )
     private val testDispatcher = TestCoroutineDispatcher()
     private val errorMessage = "Проблемы при попытке получить данные"
 
     @Before
     fun setUp() {
         Dispatchers.setMain(testDispatcher)
-
-        viewModel = GameDetailViewModel(mApplication, mOpenDotaRepository)
-        gameDetail = GameDetail(
-            0, 0, 0, 0,
-            emptyList(), 0, true, 0, 9
-        )
-
-        runBlocking(testDispatcher) {
-            println("setUp. Thread - ${Thread.currentThread().name}")
-            `when`(mOpenDotaRepository.fetchGameDetail(id)).thenReturn(gameDetail)
-        }
     }
 
     @After
@@ -61,15 +54,27 @@ class GameDetailViewModelTest {
     @Test
     fun getGameDetail_isValid() {
         println("getGameDetail. Thread - ${Thread.currentThread().name}")
+        runBlocking(testDispatcher) {
+            println("setUp. Thread - ${Thread.currentThread().name}")
+            `when`(mOpenDotaRepository.fetchGameDetail(id)).thenReturn(gameDetail)
+        }
+
         viewModel.getGameDetail(id)
+        Thread.sleep(1000)
         assertThat(viewModel.liveGame.value, `is`(gameDetail))
     }
 
     @Test
     fun getGameDetail_inNotValid() {
-
         println("getGameDetail. Thread - ${Thread.currentThread().name}")
+
+        runBlocking(testDispatcher) {
+            println("setUp. Thread - ${Thread.currentThread().name}")
+            `when`(mOpenDotaRepository.fetchGameDetail(id)).thenReturn(null)
+        }
+
         viewModel.getGameDetail(id)
+        Thread.sleep(1000)
         assertEquals(errorMessage, viewModel.errorLiveData.value)
     }
 }

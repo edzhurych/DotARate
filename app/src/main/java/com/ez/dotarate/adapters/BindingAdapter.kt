@@ -1059,7 +1059,7 @@ object BindingAdapter {
 
             val winRate = (wins * 100.0) / (wins + losses)
 
-            val result = (winRate * 100.0).roundToInt() / 100.0
+            val result = Math.round(winRate * 100.0) / 100.0
 
             val sb = StringBuilder()
 
