@@ -1,9 +1,6 @@
-name: Test-commit-message
+name: Test commit message
 
-on:
-  pull_request:
-    branches:
-      - master
+on: [push]
 
 jobs:
   Test:

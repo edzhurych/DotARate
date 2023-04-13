@@ -5,106 +5,271 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.lifecycle.viewModelScope
-import com.ez.dotarate.Log as log
-import androidx.navigation.fragment.findNavController
+import android.view.ViewGroup
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.paging.LoadState
-import androidx.paging.PagedList
-import androidx.paging.PagingData
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemsIndexed
+import coil.compose.AsyncImage
 import com.ez.domain.model.UpcomingGame
 import com.ez.dotarate.R
-import com.ez.dotarate.databinding.FragmentUpcomingGamesBinding
-import com.ez.dotarate.view.BaseFragment
-import com.ez.dotarate.view.upcominggames.adapters.CategoryUGAdapter
-import com.ez.dotarate.view.upcominggames.adapters.UpcomingGamesAdapter
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.ez.dotarate.adapters.BindingAdapter
+import org.koin.android.viewmodel.ext.android.viewModel
+import com.ez.dotarate.Log as log
 
 
-class UpcomingGamesFragment : BaseFragment<UpcomingGamesViewModel, FragmentUpcomingGamesBinding>(
-    UpcomingGamesViewModel::class
-) {
+class UpcomingGamesFragment : Fragment() {
 
-    private val adapter: UpcomingGamesAdapter by lazy {
-        UpcomingGamesAdapter {
-            findNavController().navigate(
-                UpcomingGamesFragmentDirections.actionUpcomingGamesFragmentToTeamFragment(
-                    it
+    private val vm: UpcomingGamesViewModel by viewModel(clazz = UpcomingGamesViewModel::class)
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        log.d("UpcomingGamesFragment. AfterCreateView")
+
+        return ComposeView(requireContext()).apply {
+            setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
+            setContent {
+                Screen()
+            }
+        }
+    }
+
+    @Composable
+    fun Screen() {
+        Column(modifier = Modifier.padding(top = 48.dp)) {
+            Categories(mapOf(0 to "All", 1 to "Major", 2 to "INTERNATIONAL"))
+            Games()
+        }
+    }
+
+    @Composable
+    fun Categories(categories: Map<Int, String>) {
+        LazyRow {
+            itemsIndexed(categories.values.toList()) { index, name ->
+                Category(name)
+            }
+        }
+    }
+
+    @Composable
+    fun Category(name: String) {
+        Text(
+            text = name,
+            modifier = Modifier
+                .border(
+                    border = BorderStroke(width = 1.dp, color = Color.Black),
+                    shape = RoundedCornerShape(2.dp)
                 )
+                .padding(horizontal = 8.dp)
+        )
+    }
+
+    @Composable
+    fun Games() {
+        val lazyPagingItems = vm.liveUpcomingGames.collectAsLazyPagingItems()
+
+        LazyColumn {
+            if (lazyPagingItems.loadState.refresh == LoadState.Loading) {
+                item {
+                    CircularProgressIndicator()
+                }
+            }
+
+            itemsIndexed(lazyPagingItems) { index, game ->
+                Game(game)
+            }
+        }
+    }
+
+    @Composable
+    fun Game(game: UpcomingGame?) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, top = 8.dp, end = 16.dp, bottom = 8.dp)
+                .border(
+                    border = BorderStroke(width = 1.dp, color = Color.Black),
+                    shape = RoundedCornerShape(4.dp)
+                )
+        ) {
+            val (
+                gameDate,
+                leagueName,
+                leagueImage,
+                firstTeamImage,
+                firstTeamName,
+                gameTime,
+                numberOfGames,
+                secondTeamName,
+                secondTeamImage
+            ) = createRefs()
+
+            Text(
+                text = parseGameDate(game?.begin_at),
+                modifier = Modifier.constrainAs(gameDate) {
+                    start.linkTo(parent.start, margin = 8.dp)
+                    top.linkTo(leagueImage.top)
+                    bottom.linkTo(leagueImage.bottom)
+                },
+                fontSize = 18.sp,
+                color = colorResource(R.color.colorTabsUnSelectedGreen)
+            )
+
+            Text(
+                text = game?.league?.name ?: "",
+                modifier = Modifier.constrainAs(leagueName) {
+                    start.linkTo(gameDate.end, margin = 16.dp)
+                    top.linkTo(leagueImage.top)
+                    end.linkTo(leagueImage.start, margin = 8.dp)
+                    bottom.linkTo(leagueImage.bottom)
+                },
+                fontSize = 18.sp,
+                color = colorResource(R.color.colorTabsUnSelectedGreen),
+                maxLines = 1
+            )
+
+            AsyncImage(
+                model = game?.league?.image_url,
+                contentDescription = null,
+                modifier = Modifier
+                    .constrainAs(leagueImage) {
+                        top.linkTo(parent.top, margin = 8.dp)
+                        end.linkTo(parent.end, margin = 8.dp)
+                    }
+                    .size(width = 30.dp, height = 30.dp)
+            )
+
+            parseTeamLogo(game?.opponents, 0)?.let {
+                AsyncImage(
+                    model = game?.opponents?.get(0)?.opponent?.image_url,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .constrainAs(firstTeamImage) {
+                            start.linkTo(parent.start, margin = 8.dp)
+                            top.linkTo(secondTeamImage.top)
+                            bottom.linkTo(parent.bottom, margin = 8.dp)
+                        }
+                        .size(width = 40.dp, height = 40.dp)
+                )
+            } ?: Image(
+                painterResource(R.drawable.ic_no_logo),
+                null,
+                Modifier
+                    .constrainAs(firstTeamImage) {
+                        start.linkTo(parent.start, margin = 8.dp)
+                        top.linkTo(secondTeamImage.top)
+                        bottom.linkTo(parent.bottom, margin = 8.dp)
+                    }
+                    .size(width = 40.dp, height = 40.dp)
+            )
+
+            Text(
+                text = parseTeamName(game?.opponents, 0) ?: "",
+                modifier = Modifier.constrainAs(firstTeamName) {
+                    start.linkTo(firstTeamImage.end, margin = 8.dp)
+                    top.linkTo(firstTeamImage.top)
+                    end.linkTo(gameTime.start, margin = 16.dp)
+                    bottom.linkTo(firstTeamImage.bottom)
+                },
+                fontSize = 18.sp,
+                color = colorResource(R.color.colorDarkGreen),
+                maxLines = 1
+            )
+
+            Text(
+                text = parseGameTime(game?.begin_at),
+                modifier = Modifier.constrainAs(gameTime) {
+                    start.linkTo(parent.start)
+                    top.linkTo(firstTeamImage.top)
+                    end.linkTo(parent.end)
+//                    bottom.linkTo()
+                },
+                color = colorResource(R.color.colorGreen)
+            )
+
+            Text(
+                text = parseNumberOfGames(game?.number_of_games),
+                modifier = Modifier.constrainAs(numberOfGames) {
+                    start.linkTo(gameTime.start)
+                    top.linkTo(gameTime.bottom)
+                    end.linkTo(gameTime.end)
+                    bottom.linkTo(firstTeamImage.bottom)
+                },
+                color = colorResource(R.color.colorTabsUnSelectedGreen),
+                fontSize = 12.sp
+            )
+
+            Text(
+                text = parseTeamName(game?.opponents, 1) ?: "",
+                modifier = Modifier.constrainAs(secondTeamName) {
+                    start.linkTo(gameTime.end, margin = 16.dp)
+                    top.linkTo(secondTeamImage.top)
+                    end.linkTo(secondTeamImage.start, margin = 8.dp)
+                    bottom.linkTo(secondTeamImage.bottom)
+                },
+                fontSize = 18.sp,
+                color = colorResource(R.color.colorDarkGreen),
+                maxLines = 1
+            )
+
+            parseTeamLogo(game?.opponents, 1)?.let {
+                AsyncImage(
+                    model = parseTeamLogo(game?.opponents, 1),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .constrainAs(secondTeamImage) {
+                            top.linkTo(leagueImage.bottom, margin = 16.dp)
+                            end.linkTo(parent.end, margin = 8.dp)
+                        }
+                        .size(width = 40.dp, height = 40.dp)
+                )
+            } ?: Image(
+                painterResource(R.drawable.ic_no_logo),
+                null,
+                Modifier
+                    .constrainAs(secondTeamImage) {
+                        top.linkTo(leagueImage.bottom, margin = 16.dp)
+                        end.linkTo(parent.end, margin = 8.dp)
+                    }
+                    .size(width = 40.dp, height = 40.dp)
             )
         }
     }
 
-    private lateinit var pagedListUpcomingGames: PagingData<UpcomingGame>
-
-    private val observer: (PagingData<UpcomingGame>) -> Unit = {
-        log.d("UpcomingGamesFragment. Подписчик livedata. Значение = $it")
-        pagedListUpcomingGames = it
-        vm.viewModelScope.launch(Dispatchers.IO) {
-            log.d("UpcomingGamesFragment. Coroutine. Thread - [${Thread.currentThread().name}]")
-            adapter.submitData(it)
-        }
-
-        adapter.addLoadStateListener { combinedLoadState -> // TODO: Possible memory leaks
-            log.d("UpcomingGamesFragment. loadStateListener - ${combinedLoadState.source}")
-            if (combinedLoadState.source.refresh == LoadState.NotLoading(false)
-                || combinedLoadState.source.refresh == LoadState.NotLoading(true)
-            ) {
-                val upcomingGames = adapter.snapshot()
-
-                log.d("UpcomingGamesFragment. upcomingGames - $upcomingGames")
-
-                val categories = if (upcomingGames.isNotEmpty()) mutableMapOf(
-                    Pair(
-                        0,
-                        "All"
-                    )
-                ) else mutableMapOf() // TODO: Change to res
-                log.d("UpcomingGamesFragment. categories - $categories")
-
-                categories.putAll(upcomingGames.associate { upcomingGame ->
-                    upcomingGame?.let {
-                        upcomingGame.league.id to upcomingGame.league.name
-                    } ?: (0 to "All")
-                })
-                log.d("UpcomingGamesFragment. categories - $categories")
-
-                vm.categories.value = categories
-
-                if (upcomingGames.isNotEmpty()) vm.isDataLoaded.set(true)
-            }
-        }
-    }
-
-    override fun layout() = R.layout.fragment_upcoming_games
-
-    override fun afterCreateView(view: View, savedInstanceState: Bundle?) {
-        val categoryHorizontalManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-        vb.rvCategory.layoutManager = categoryHorizontalManager
-
-        vb.adapter = adapter
-        vb.isDataLoaded = vm.isDataLoaded
-
-        vm.liveUpcomingGames.observe(this,  observer)
-
-        vm.categories.observe(this) {
-            vb.rvCategory.adapter = CategoryUGAdapter(it) { leagueId ->
-                log.d("UpcomingGamesFragment. Click on the $leagueId category")
-                if (vm.liveLeagueId.value != leagueId) {
-                    vm.liveUpcomingGames.removeObserver(observer)
-                    vm.liveLeagueId.value = leagueId
-
-                    vm.liveUpcomingGames.observe(this, observer)
-                }
-
-            }
-        }
-
-        log.d("UpcomingGamesFragment. AfterCreateView")
+    @Preview
+    @Composable
+    fun CategoryPreview() {
+        Category("All")
     }
 
     private fun twitchIsInstalled(): Boolean {

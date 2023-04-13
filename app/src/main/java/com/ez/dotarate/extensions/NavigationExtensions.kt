@@ -1,10 +1,8 @@
 package com.ez.dotarate.extensions
 
 import android.content.Intent
-import android.util.Log
 import android.util.SparseArray
 import androidx.core.util.forEach
-import androidx.core.util.set
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
@@ -154,14 +152,14 @@ private fun BottomNavigationView.setupItemReselected(
     fragmentManager: FragmentManager,
     liveNavController: MutableLiveData<NavController>
 ) {
-    setOnNavigationItemReselectedListener { item ->
+    setOnItemReselectedListener { item ->
         val newlySelectedItemTag = graphIdToTagMap[item.itemId]
         val selectedFragment = fragmentManager.findFragmentByTag(newlySelectedItemTag)
                 as NavHostFragment
         val navController = selectedFragment.navController
         // Pop the back stack to the start destination of the current navController graph
         navController.popBackStack(
-            navController.graph.startDestination, false
+            navController.graph.startDestinationId, false
         )
         liveNavController.value = navController
     }

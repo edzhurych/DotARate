@@ -1,20 +1,20 @@
 ext {
-    def kotlin = '1.7.0'
-    def ktx = '1.8.0'
-    def material = '1.5.0'
-    def appcompat = '1.4.2'
+    def kotlin = '1.8.20'
+    def ktx = '1.10.0'
+    def material = '1.8.0'
+    def appcompat = '1.6.1'
     def constraintlayout = '2.1.4'
-    def okhttp = '4.10.0'
+    def okhttp = '5.0.0-alpha.11'
     def retrofit = '2.9.0'
     def coroutines = "1.6.3"
-    def room = '2.5.0-alpha02'
+    def room = '2.5.1'
     def paging = '3.1.1'
-    def nav = '2.3.2'
+    def nav = '2.5.3'
     def viewpager2 = "1.0.0"
-    def viewpagerktx = "1.4.1"
+    def viewpagerktx = '1.5.6'
     def circle_image = '3.1.0'
     def picasso = "2.8"
-    def lifecycle = '2.4.0'
+    def lifecycle = '2.6.1'
     def databinding = '3.5.0'
     def junit_version = '4.13.2'
     def tatarka = '4.0.0'
@@ -100,12 +100,12 @@ ext {
     ]
 
     robolectricDependencies = [
-            "androidx.test:core:1.3.0"
+            'androidx.test:core:1.4.0'
     ]
 
     mockitoDependencies = [
-            "org.mockito:mockito-core:1.10.19",
-            "org.mockito.kotlin:mockito-kotlin:3.2.0",
+            'org.mockito:mockito-core:5.2.0',
+            'org.mockito.kotlin:mockito-kotlin:4.1.0',
     ]
 
     testDependencies = [
@@ -114,23 +114,27 @@ ext {
     ]
 
     androidTestDependencies = [
-            'androidx.test.espresso:espresso-core:3.3.0',
             // Core library
-            'androidx.test:core:1.3.0',
+            'androidx.test:core:1.4.0',
             // AndroidJUnitRunner and JUnit Rules
-            'androidx.test:runner:1.3.0',
-            'androidx.test:rules:1.3.0',
+            'androidx.test:runner:1.5.2',
+            'androidx.test:rules:1.5.0',
             // Assertions
-            'androidx.test.ext:junit:1.1.2',
-            'androidx.test.ext:truth:1.3.0',
-            'com.google.truth:truth:0.42',
+            'androidx.test.ext:junit:1.1.5',
+            'androidx.test.ext:truth:1.5.0',
+            'com.google.truth:truth:1.1.3',
             // Espresso dependencies
-            'androidx.test.espresso:espresso-core:3.3.0',
-            'androidx.test.espresso:espresso-contrib:3.3.0',
-            'androidx.test.espresso:espresso-intents:3.3.0',
-            'androidx.test.espresso:espresso-accessibility:3.3.0',
-            'androidx.test.espresso:espresso-web:3.3.0',
-            'androidx.test.espresso.idling:idling-concurrent:3.3.0',
+            'androidx.test.espresso:espresso-core:3.5.1',
+            'androidx.test.espresso:espresso-contrib:3.5.1',
+            'androidx.test.espresso:espresso-intents:3.5.1',
+            'androidx.test.espresso:espresso-accessibility:3.5.1',
+            'androidx.test.espresso:espresso-web:3.5.1',
+            'androidx.test.espresso.idling:idling-concurrent:3.5.1',
+            // The following Espresso dependency can be either "implementation"
+            // or "androidTestImplementation", depending on whether you want the
+            // dependency to appear on your APK's compile classpath or the test APK
+            // classpath.
+            'androidx.test.espresso:espresso-idling-resource:3.5.1',
     ]
 
     tatarkaDependencies = [

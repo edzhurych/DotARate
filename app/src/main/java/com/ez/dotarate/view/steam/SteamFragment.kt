@@ -57,6 +57,7 @@ class SteamFragment : BaseFragment<SteamViewModel, FragmentSteamBinding>(SteamVi
         val mWebView = vb.webView
         val settings: WebSettings = mWebView.settings
         settings.javaScriptEnabled = true
+        settings.domStorageEnabled = true
 
         mWebView.webViewClient = object : WebViewClient() {
 

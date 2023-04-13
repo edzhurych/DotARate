@@ -2,7 +2,6 @@ plugins {
     id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'kotlin-android-extensions'
 }
 
 apply from: '../dependencies.gradle'
@@ -37,17 +36,10 @@ android {
 dependencies {
     implementation project(path: ':domain')
 
-    // The following Espresso dependency can be either "implementation"
-    // or "androidTestImplementation", depending on whether you want the
-    // dependency to appear on your APK's compile classpath or the test APK
-    // classpath.
-    androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'
     // Required -- JUnit 4 framework
     testImplementation 'junit:junit:4.13.2'
-    // Optional -- Robolectric environment
-    testImplementation 'androidx.test:core:1.4.0'
     // Optional -- Mockito framework
-    testImplementation 'org.mockito:mockito-core:3.9.0'
+    testImplementation 'org.mockito:mockito-core:5.2.0'
     implementation kotlinDependencies
     implementation coreAndroidDependencies
     api databaseDependencies
