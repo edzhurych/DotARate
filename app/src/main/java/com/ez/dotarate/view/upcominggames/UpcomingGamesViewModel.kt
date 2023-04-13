@@ -3,6 +3,7 @@ package com.ez.dotarate.view.upcominggames
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.asFlow
 import androidx.lifecycle.switchMap
 import androidx.paging.PagingData
 import com.ez.data.di.upcomingGamesByLeagueId
@@ -11,6 +12,7 @@ import com.ez.domain.model.UpcomingGame
 import com.ez.dotarate.Log
 import com.ez.dotarate.customclasses.UpcomingGamesDataLoaded
 import com.ez.dotarate.view.BaseViewModel
+import kotlinx.coroutines.flow.Flow
 import org.koin.core.parameter.parametersOf
 import org.koin.core.qualifier.named
 
@@ -23,7 +25,7 @@ class UpcomingGamesViewModel(
     val liveLeagueId = MutableLiveData(0)
     val categories = MutableLiveData(mapOf<Int, String>())
 
-    val liveUpcomingGames: LiveData<PagingData<UpcomingGame>> = liveLeagueId.switchMap { leagueId ->
+    val liveUpcomingGames: Flow<PagingData<UpcomingGame>> = liveLeagueId.switchMap { leagueId ->
         Log.d("liveUpcomingGames leagueId = $leagueId")
         if (leagueId == null || leagueId == 0) {
             getKoin().get<LiveData<PagingData<UpcomingGame>>>(qualifier = named(upcomingGamesId))
@@ -37,7 +39,7 @@ class UpcomingGamesViewModel(
                 }
             )
         }
-    }
+    }.asFlow()
 
     override fun onCleared() {
         super.onCleared()
